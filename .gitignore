@@ -1,0 +1,16 @@
+
+### Yii ###
+assets/*
+!assets/.gitignore
+protected/runtime/*
+!protected/runtime/.gitignore
+protected/data/*.db
+protected/config/*
+
+## questoess ##
+pdfs/*
+pdfs/**
+questoes/*
+questoes/**
+protected/modules/editor/works/*
+protected/modules/editor/works/**
