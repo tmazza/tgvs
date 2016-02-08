@@ -3,8 +3,8 @@ class UpdateController extends MainController {
 	
 	
 	public function actionIndex(){
-		#$this->atualizaSeries();
-		$this->atualizaTemporadas();
+		$this->atualizaSeries();
+		#$this->atualizaTemporadas();
 	}
 
 	/**
@@ -17,6 +17,8 @@ class UpdateController extends MainController {
 	    
 	    $page = 1;
 	    do {
+
+	    	$time = microtime(true);
 
 		    $data = json_decode(Yii::app()->curl->get($url, [
 		    	'api_key'=>Yii::app()->params['tmdb_key'],
@@ -56,11 +58,13 @@ class UpdateController extends MainController {
 
 		    $page++;
 
-		    if($page % 40 == 0){
-		    	sleep(8);
-		    }
+		    echo 'T: ' . number_format((microtime(true)-$time),2) . '<br>';
 
-  	    } while($do && $page < 5000);
+		    // if($page % 80 == 0){
+		    	// sleep(1);
+		    // }
+
+  	    } while($do && $page <= 10);
 
 	}
 
@@ -101,7 +105,7 @@ class UpdateController extends MainController {
 		    $count++;
 
 		    if($count % 40 == 0){
-		    	sleep(9);
+		    	sleep(5);
 		    }
 		}
 
