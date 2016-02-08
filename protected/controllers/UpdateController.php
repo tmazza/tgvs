@@ -56,8 +56,8 @@ class UpdateController extends MainController {
 
 		    $page++;
 
-		    if($page % 10 == 0){
-		    	sleep(2.5);
+		    if($page % 40 == 0){
+		    	sleep(8);
 		    }
 
   	    } while($do && $page < 5000);
@@ -69,19 +69,26 @@ class UpdateController extends MainController {
 	 * as temporadas e o tempo médio dos episódios da temporada
 	 */
 	private function atualizaTemporadas(){
-		$series = Serie::model()->findAll(['limit'=>20]);
+		$series = Serie::model()->findAll([
+			#'limit'=>20
+		]);
 		echo 'QTD: ' . count($series) .  '<hr>';
+		$count=0;
 		foreach ($series as $s) {
 			$url = 'http://api.themoviedb.org/3/tv/'.$s->tmdb_id;
 		    $data = json_decode(Yii::app()->curl->get($url, [
 		    	'api_key'=>Yii::app()->params['tmdb_key'],
 		   	]),true);
 
-		    $s->qtd_episodios = $data['number_of_episodes'];
-		    $s->qtd_temporadas = $data['number_of_seasons'];
+		    $s->qtd_episodios = isset($data['number_of_episodes']) ? $data['number_of_episodes'] : null;
+		    $s->qtd_temporadas = isset($data['number_of_seasons']) ? $data['number_of_seasons'] : null;
 		    $tempo = $data['episode_run_time'];
 		    if(is_array($tempo)){
-		    	$tempo = ceil(array_sum($tempo) / count($tempo));
+		    	if(count($tempo) > 0){
+			    	$tempo = ceil(array_sum($tempo) / count($tempo));
+		    	} else {
+		    		$tempo = 0;
+		    	}
 		    }
 		    $s->tempo_episodios = $tempo;
 		    $s->update(['qtd_episodios','qtd_temporadas','tempo_episodios']);
@@ -91,7 +98,13 @@ class UpdateController extends MainController {
 		    foreach ($temporadas as $t) {
 		    	$this->salvaTemporada($s,$t);
 		    }
+		    $count++;
+
+		    if($count % 40 == 0){
+		    	sleep(9);
+		    }
 		}
+
 
 	}
 

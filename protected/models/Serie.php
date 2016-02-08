@@ -27,7 +27,7 @@ class Serie extends CActiveRecord
 	public function rules()
 	{
 		return array(
-			array('tmdb_id, nome', 'required'),
+			array('tmdb_id', 'required'),
 			array('tmdb_id', 'numerical', 'integerOnly'=>true),
 			array('popularity', 'numerical'),
 			array('backdrop_path', 'safe'),
@@ -40,8 +40,6 @@ class Serie extends CActiveRecord
 	 */
 	public function relations()
 	{
-		// NOTE: you may need to adjust the relation name and the related
-		// class name for the relations automatically generated below.
 		return array(
 		);
 	}
@@ -103,10 +101,14 @@ class Serie extends CActiveRecord
 	}
 
 	public function linkCapa($width='320'){
-		return 'http://image.tmdb.org/t/p/w'.$width.'/'.$this->poster_path;
+		if(is_null($this->poster_path)){
+			return 'http://www.montatudo.com/App_Themes/montatudo/images/not-found.jpg';
+		} else {
+			return 'http://image.tmdb.org/t/p/w'.$width.$this->poster_path;
+		}
 	}
 	public function linkCapa2($width='320'){
-		return 'http://image.tmdb.org/t/p/w'.$width.'/'.$this->backdrop_path;
+		return 'http://image.tmdb.org/t/p/w'.$width.$this->backdrop_path;
 	}
 
 
