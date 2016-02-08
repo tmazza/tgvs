@@ -4,7 +4,7 @@ class UpdateController extends MainController {
 	
 	public function actionIndex(){
 		$this->atualizaSeries();
-		#$this->atualizaTemporadas();
+		$this->atualizaTemporadas();
 	}
 
 	/**
@@ -74,11 +74,11 @@ class UpdateController extends MainController {
 	 */
 	private function atualizaTemporadas(){
 		$series = Serie::model()->findAll([
-			#'limit'=>20
+			'limit'=>120
 		]);
-		echo 'QTD: ' . count($series) .  '<hr>';
 		$count=0;
 		foreach ($series as $s) {
+			$time = microtime(true);
 			$url = 'http://api.themoviedb.org/3/tv/'.$s->tmdb_id;
 		    $data = json_decode(Yii::app()->curl->get($url, [
 		    	'api_key'=>Yii::app()->params['tmdb_key'],
@@ -95,17 +95,18 @@ class UpdateController extends MainController {
 		    	}
 		    }
 		    $s->tempo_episodios = $tempo;
-		    $s->update(['qtd_episodios','qtd_temporadas','tempo_episodios']);
-		   		
+		    
+		    $s->update(['qtd_episodios','qtd_temporadas','tempo_episodios'],false);
 
-		    $temporadas = $data['seasons'];
-		    foreach ($temporadas as $t) {
-		    	$this->salvaTemporada($s,$t);
-		    }
+		    #$temporadas = $data['seasons'];
+		    #foreach ($temporadas as $t) {
+		    #	$this->salvaTemporada($s,$t);
+		    #}
+		   	echo 'T: ' . number_format((microtime(true)-$time),2) . '<br>';
 		    $count++;
 
 		    if($count % 40 == 0){
-		    	sleep(5);
+		    	sleep(1);
 		    }
 		}
 
