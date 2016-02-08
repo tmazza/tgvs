@@ -64,7 +64,7 @@ class UpdateController extends MainController {
 		    	// sleep(1);
 		    // }
 
-  	    } while($do && $page <= 10);
+  	    } while($do && $page <= 2000);
 
 	}
 
