@@ -13,9 +13,10 @@
 		<link rel="stylesheet" href="<?=Yii::app()->baseUrl . '/themes/2016/assets/css/main.css';?>" />
 		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
 		<link rel="stylesheet" href="<?=Yii::app()->baseUrl . '/themes/2016/assets/css/olivi.css';?>" />
+		<script src="http://code.jquery.com/jquery-1.12.0.min.js" ></script>
 	</head>
 	<body id="top">
-
+		
 		<!-- Header -->
 		<header id="header">
 
