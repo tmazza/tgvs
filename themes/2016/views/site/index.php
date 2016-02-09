@@ -1,4 +1,4 @@
-<div id="listArea">
+<div id="list-area">
 	<div class="row">
 		<div id='lista'></div>
 	</div>

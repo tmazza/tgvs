@@ -1,0 +1,111 @@
+$themeColor: #083D56;
+$themeColorLight: #0E5F76;
+$themeColorDark: #0C2233;
+
+$searchFontSize: 26pt;
+
+html, body {
+  padding: 0;
+  margin: 0;
+}
+
+#top {
+  background-color: $themeColor;
+  padding: 0;
+  margin: 0;
+}
+
+#header {
+  background-color: $themeColorLight;
+  background-image: none;
+  padding: 0;
+  margin: 0;
+
+  height: 100%;
+  overflow-y: auto;
+}
+
+#main {
+  padding: 1em 4em 4em 4em;
+}
+
+#title-area {
+  margin-right: 4em;
+}
+
+#timer {
+  border: solid 3px #efefef;
+  border-radius: 0.35em;
+  display: inline-block;
+  padding: 0 1.5em;
+  margin-top: 2em;
+  margin-bottom: 2em;
+  margin-right: 4em;
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+#added-gallery {
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+
+  & > a {
+    display: inline-block;
+  }
+}
+
+#search-area {
+  padding: 8em 4em 4em 4em;
+
+  & > form > input {
+    font-size: $searchFontSize;
+    background-color: $themeColorDark;
+  }
+}
+
+.added-img {
+  position: relative;
+
+  & > img {
+    width: 105px;
+    height: 150px;
+    border-radius: 0.35em;
+
+    opacity: 1;
+    transition: opacity 0.2s ease-in-out;
+    -moz-transition: opacity 0.2s ease-in-out;
+    -webkit-transition: opacity 0.2s ease-in-out;
+    -ms-transition: opacity 0.2s ease-in-out;
+    transition: opacity 0.2s ease-in-out;
+
+    &:hover {
+      opacity: 0.5;
+    }
+  }
+}
+
+.button {
+  color: #efefef !important;
+}
+
+// ???
+// .image {
+//   height: 360px;
+// }
+
+.image.thumb:after {
+  content: 'Adicionar';
+  left: 45%;
+}
+
+.image.thumb2:after {
+  content: 'REMOVER'!important;
+  left: 45%;
+  color: red!important;
+  opacity: 1!important;
+}
+
+.image.fit {
+  margin: 0;
+}
