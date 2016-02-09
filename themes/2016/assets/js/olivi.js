@@ -1,7 +1,7 @@
 $(document).ready(function () {
   $searchArea = $('#search-area');
   $listArea = $('#list-area');
-  $addedShows = $('.added-img');
+  // $addedShows = $('.added-img');
   $areaSwitchBtn = $('#area-switch-btn');
 
   $listArea.hide();
@@ -11,7 +11,7 @@ $(document).ready(function () {
     $searchArea.slideToggle();
   });
 
-  $addedShows.click(function (event) {
-    $(event.target).parent().remove();
-  });
+  // $addedShows.click(function (event) {
+  //   $(event.target).parent().remove();
+  // });
 });

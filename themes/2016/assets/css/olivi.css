@@ -46,6 +46,7 @@ html, body {
     background-color: #0C2233; }
 
 .added-img {
+  border: none;
   position: relative; }
   .added-img > img {
     width: 105px;
