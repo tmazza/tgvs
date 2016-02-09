@@ -3,6 +3,7 @@ $(window).ready(function(){
 	if(typeof(Storage) === "undefined") {
 		alert("Browser não suporta a aplicação.");	
 	}
+	updateMenu();
 	getSeries();
 });
 
@@ -11,16 +12,7 @@ $('#btn-mais').on('click',function(){
 	return false;
 });
 
-var delay = (function(){
-  var timer = 0;
-  return function(callback, ms){
-    clearTimeout (timer);
-    timer = setTimeout(callback, ms);
-  };
-})();
-
-$('#form').keyup(function(){	
-
+$('#search-input').keyup(function(){	
 	text = $(this).val();
 	if(text.length > 0){
 		var elem = $(this);
@@ -34,8 +26,8 @@ $('#form').keyup(function(){
 			'success': function(html) {
 				series = JSON.parse(html);
 				$('#search-results').html('');
-				$.each(series,function(id,serie){
-					$('#search-results').append(htmlSerie(id,serie));
+				$.each(series,function(num,serie){
+					$('#search-results').append(htmlSerie(serie));
 				});
 				elem.data('requestRunning', false);
 			},
@@ -55,8 +47,8 @@ function getSeries(){
 		'beforeSend':function(){ $("#btn-mais").html("<img src=\"http://phette23.github.io/speed-is-a-feature/img/loadingBar.gif\" />"); },
 		'success': function(html) {
 			series = JSON.parse(html);
-			$.each(series,function(id,serie){
-				$('#lista').append(htmlSerie(id,serie));
+			$.each(series,function(num,serie){
+				$('#lista').append(htmlSerie(serie));
 			});
 			$('#btn-mais').attr(
 				'data-o',
@@ -101,6 +93,16 @@ function removeSerie(elem){
 	}
 }
 
+function removeSerieMenu(elem){
+	id = elem.attr('data-id');
+	if($('#s'+id)){
+		nome = $('#s'+id).find('h3').text();
+		img = elem.find('img').attr('src');
+		$('#s'+id).html(htmlAdd(nome,img));
+	}
+	removeSerie(elem);
+}
+
 function updateAdd(elem){
 	elem.html(htmlRemove(elem.find('.nome').text(),elem.find('img').attr('src')));
 }
@@ -112,12 +114,17 @@ function updateRemove(elem){
 function updateMenu(){
 	tempo = getTempo();
 	$('#tempo').html(tempo + ' min<br>' + Math.ceil((tempo/60)) + ' hor<br>' + Math.ceil((tempo/60/24)) + ' dias<br>');
-	// console.log('asdad');
+	lista = getLista();
+	$('#added-gallery').html('');
+	$.each(lista,function(id,serie){
+		$('#added-gallery').append(htmlRemoveMenu(id,serie['time'],serie['img']));
+	});	
 }
 
-function htmlSerie(id,serie){
+function htmlSerie(serie){
+	id = serie['id'];
 	lista = getLista();
-	var html = '<article class="main-img 4u 6u(small) 12u$(xsmall)" data-id="'+id+'" data-time="'+serie['time']+'">';
+	var html = '<article class="main-img 4u 6u(small) 12u$(xsmall)" id="s'+id+'" data-id="'+id+'" data-time="'+serie['time']+'">';
 	if(lista[id] === undefined){
 		html += htmlAdd(serie['nome'],serie['img'])+'<br>';
 	} else {
@@ -141,6 +148,14 @@ function htmlRemove(nome,img){
 	html += '<a href="#!" onclick="removeSerie($(this).parent());" class="image fit thumb thumb2">';
 	html += '<img src="'+img+'" style="width:185px;" />';
 	html += '<h3 class="nome">' + nome + '</h3>';
+	html += '</a>';
+	return html;
+}
+
+function htmlRemoveMenu(id,time,img){
+	var html = '';
+	html += '<a href="#!" onclick="removeSerieMenu($(this));" class="added-img" title="Retirar" data-id="'+id+'" data-time="'+time+'">';
+	html += '<img src="'+img+'" style="" />';
 	html += '</a>';
 	return html;
 }

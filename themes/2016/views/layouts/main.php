@@ -9,9 +9,7 @@
 		<title>Tempo Gasto Vendo Séries</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
 		<link rel="stylesheet" href="<?=Yii::app()->baseUrl . '/themes/2016/assets/css/main.css';?>" />
-		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
 		<link rel="stylesheet" href="<?=Yii::app()->baseUrl . '/themes/2016/assets/css/olivi.css';?>" />
 		<script src="http://code.jquery.com/jquery-1.12.0.min.js" ></script>
 	</head>
@@ -30,38 +28,7 @@
 				<h1>Tempo: <strong id='tempo'>00:00:00</strong></h1>
 			</div>
 
-			<div id="added-gallery">
-				<a href="#!" class="added-img"><img src='images/thumbs/got00.jpg' alt="" /></a>
-				<a href="#!" class="added-img"><img src='images/thumbs/vikings00.jpg' alt="" /></a>
-				<a href="#!" class="added-img"><img src='images/thumbs/prisonbreak00.jpg' alt="" /></a>
-				<a href="#!" class="added-img"><img src='images/thumbs/blacksails00.jpg' alt="" /></a>
-				<a href="#!" class="added-img"><img src='images/thumbs/gotham00.jpg' alt="" /></a>
-				<a href="#!" class="added-img"><img src='images/thumbs/arrow00.jpg' alt="" /></a>
-				<a href="#!" class="added-img"><img src='images/thumbs/breakingbad00.jpg' alt="" /></a>
-				<a href="#!" class="added-img"><img src='images/thumbs/daredevil00.jpg' alt="" /></a>
-				<a href="#!" class="added-img"><img src='images/thumbs/flash00.jpg' alt="" /></a>
-				<a href="#!" class="added-img"><img src='images/thumbs/lot00.jpg' alt="" /></a>
-				<a href="#!" class="added-img"><img src='images/thumbs/jessicajones00.jpg' alt="" /></a>
-				<a href="#!" class="added-img"><img src='images/thumbs/homeland00.jpg' alt="" /></a>
-				<a href="#!" class="added-img"><img src='images/thumbs/siliconvalley00.jpg' alt="" /></a>
-				<a href="#!" class="added-img"><img src='images/thumbs/houseofcards00.jpg' alt="" /></a>
-				<a href="#!" class="added-img"><img src='images/thumbs/orphanblack00.jpg' alt="" /></a>
-				<a href="#!" class="added-img"><img src='images/thumbs/got00.jpg' alt="" /></a>
-				<a href="#!" class="added-img"><img src='images/thumbs/vikings00.jpg' alt="" /></a>
-				<a href="#!" class="added-img"><img src='images/thumbs/prisonbreak00.jpg' alt="" /></a>
-				<a href="#!" class="added-img"><img src='images/thumbs/blacksails00.jpg' alt="" /></a>
-				<a href="#!" class="added-img"><img src='images/thumbs/gotham00.jpg' alt="" /></a>
-				<a href="#!" class="added-img"><img src='images/thumbs/arrow00.jpg' alt="" /></a>
-				<a href="#!" class="added-img"><img src='images/thumbs/breakingbad00.jpg' alt="" /></a>
-				<a href="#!" class="added-img"><img src='images/thumbs/daredevil00.jpg' alt="" /></a>
-				<a href="#!" class="added-img"><img src='images/thumbs/flash00.jpg' alt="" /></a>
-				<a href="#!" class="added-img"><img src='images/thumbs/lot00.jpg' alt="" /></a>
-				<a href="#!" class="added-img"><img src='images/thumbs/jessicajones00.jpg' alt="" /></a>
-				<a href="#!" class="added-img"><img src='images/thumbs/homeland00.jpg' alt="" /></a>
-				<a href="#!" class="added-img"><img src='images/thumbs/siliconvalley00.jpg' alt="" /></a>
-				<a href="#!" class="added-img"><img src='images/thumbs/houseofcards00.jpg' alt="" /></a>
-				<a href="#!" class="added-img"><img src='images/thumbs/orphanblack00.jpg' alt="" /></a>
-			</div>
+			<div id="added-gallery"></div>
 
 		</header>
 
@@ -76,7 +43,7 @@
 
 				<div id="search-area">
 					<form>
-						<input id="search-input" type="text" placeholder="Digite o nome de um seriado">
+						<input id="search-input" type="text" placeholder="Digite o nome de um seriado" autocomplete="off">
 					</form>
 					<div id='search-results'></div>
 				</div>
