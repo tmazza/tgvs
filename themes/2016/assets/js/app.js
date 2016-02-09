@@ -11,16 +11,7 @@ $('#btn-mais').on('click',function(){
 	return false;
 });
 
-var delay = (function(){
-  var timer = 0;
-  return function(callback, ms){
-    clearTimeout (timer);
-    timer = setTimeout(callback, ms);
-  };
-})();
-
-$('#form').keyup(function(){	
-
+$('#search-input').keyup(function(){	
 	text = $(this).val();
 	if(text.length > 0){
 		var elem = $(this);
