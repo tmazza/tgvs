@@ -14,7 +14,6 @@ class SiteController extends MainController {
   }
 
   public function actionNextPage($o,$ps){
-    sleep(5);
     $o = (int) $o;
     echo $this->getSeries($o,$ps);
   }

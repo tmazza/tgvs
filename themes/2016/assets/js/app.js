@@ -1,5 +1,5 @@
 $(window).ready(function(){
-	$('#form').select().focus();
+	$('#search-input').select().focus();
 	if(typeof(Storage) === "undefined") {
 		alert("Browser não suporta a aplicação.");	
 	}
@@ -40,12 +40,12 @@ $('#search-input').keyup(function(){
 });
 
 function getSeries(){
-	pageSize = 30;
+	pageSize = 24;
 	jQuery.ajax({
 		'type':'GET',
 		'data':{'o':parseInt($('#btn-mais').attr('data-o')),'ps':pageSize},
-		'beforeSend':function(){ $("#btn-mais").html("<img style='height:160px;margin-top:-80px;' src=\"http://i.imgur.com/P5ApKIy.gif\" />"); },
-		// 'beforeSend':function(){ $("#btn-mais").html("<img style='height:160px;margin-top:-80px;' src=\"http://phette23.github.io/speed-is-a-feature/img/loadingBar.gif\" />"); },
+		// 'beforeSend':function(){ $("#btn-mais").html("<img style='height:160px;margin-top:-80px;' src=\"http://i.imgur.com/P5ApKIy.gif\" />"); },
+		'beforeSend':function(){ $("#btn-mais").html("<span style='color:#F7C873;'>Carregando...</span>"); },
 		'success': function(html) {
 			series = JSON.parse(html);
 			$.each(series,function(num,serie){
@@ -97,7 +97,7 @@ function removeSerie(elem){
 function removeSerieMenu(elem){
 	id = elem.attr('data-id');
 	if($('#s'+id)){
-		nome = $('#s'+id).find('h3').text();
+		nome = $('#s'+id).find('p').text();
 		img = elem.find('img').attr('src');
 		$('#s'+id).html(htmlAdd(nome,img));
 	}
@@ -105,11 +105,11 @@ function removeSerieMenu(elem){
 }
 
 function updateAdd(elem){
-	elem.html(htmlRemove(elem.find('.nome').text(),elem.find('img').attr('src')));
+	elem.html(htmlRemove(elem.find('p').text(),elem.find('img').attr('src')));
 }
 
 function updateRemove(elem){
-	elem.html(htmlAdd(elem.find('.nome').text(),elem.find('img').attr('src')));
+	elem.html(htmlAdd(elem.find('p').text(),elem.find('img').attr('src')));
 }
 
 function updateMenu(){
@@ -117,8 +117,14 @@ function updateMenu(){
 
 	tempo = minToTime(tempo);
 
-	// $('#tempo').html(tempo + ' min<br>' + Math.ceil((tempo/60)) + ' hor<br>' + Math.ceil((tempo/60/24)) + ' dias<br>');
-	$('#tempo').html(tempo['dias']+'d <b>'+tempo['horas']+'</b>h <b>'+tempo['min']+'min</b>');
+	var html = '';
+	html += '<div>'+tempo['dias']+'<br><small>dias</small></div>';
+	html += '<div>:</div>';
+	html += '<div>'+tempo['horas']+'<br><small>horas</small></div>';
+	html += '<div>:</div>';
+	html += '<div>'+tempo['horas']+'<br><small>minutos</small></div>';
+
+	$('#tempo').html(html);
 	lista = getLista();
 	$('#added-gallery').html('');
 	$.each(lista,function(id,serie){
@@ -146,38 +152,35 @@ function formatMinToTime(tempo){
 function htmlSerie(serie){
 	id = serie['id'];
 	lista = getLista();
-	var html = '<article class="main-img 4u 6u(small) 12u$(xsmall)" id="s'+id+'" data-id="'+id+'" data-time="'+serie['time']+'">';
+	var html = '<div class="div-image" id="s'+id+'" data-id="'+id+'" data-time="'+serie['time']+'">';
 	if(lista[id] === undefined){
 		html += htmlAdd(serie['nome'],serie['img'])+'<br>';
 	} else {
 		html += htmlRemove(serie['nome'],serie['img'])+'<br>';
 	}
-	html += '</article>';
+	html += '</div>';
 	return html;
 }
 
 function htmlAdd(nome,img){
 	var html = '';
-	html += '<a href="#!" onclick="addSerie($(this).parent());" class="image fit thumb">';
-	html += '<img src="'+img+'" style="width:185px;" />';
-	html += '</a>';
-	html += '<h3 class="nome">' + nome + '</h3>';
+	html += '<img src="'+img+'" onclick="addSerie($(this).parent());" />';
+	html += '<p>' + nome + '</p>';
 	return html;
 }
 
+
 function htmlRemove(nome,img){
 	var html = '';
-	html += '<a href="#!" onclick="removeSerie($(this).parent());" class="image fit thumb thumb2">';
-	html += '<img src="'+img+'" style="width:185px;" />';
-	html += '</a>';
-	html += '<h3 class="nome">' + nome + '</h3>';
+	html += '<img src="'+img+'" onclick="removeSerie($(this).parent());" class="added"/>';
+	html += '<p>' + nome + '</p>';
 	return html;
 }
 
 function htmlRemoveMenu(id,time,img){
 	var html = '';
 	html += '<a href="#!" onclick="removeSerieMenu($(this));" class="added-img" title="'+formatMinToTime(time)+'" data-id="'+id+'" data-time="'+time+'">';
-	html += '<img src="'+img+'" style="" />';
+	html += '<img src="'+img+'" />';
 	html += '</a>';
 	return html;
 }

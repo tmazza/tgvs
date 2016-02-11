@@ -18,7 +18,8 @@
 				cursor: pointer;
 				display: inline-block;
 				vertical-align: top;
-				margin-left: 0.5em
+				margin-left: 0.5em;
+		    	border: 2px solid transparent;	
 			}
 			.div-image img {
 			    opacity: 1;
@@ -32,14 +33,37 @@
 			    border-radius: 0.35em;
 			}
 		    .div-image img:hover {
-		    	opacity: 0.5;
+		    	opacity: 0.3;
 		    }
+		    .div-image img.added {
+		    	opacity: 0.5;
+		    	/*border: 2px solid #F7C873;	*/
+		    	border: 2px solid #FFAB00;	
+		    }
+
 		    .div-image p {
 		    	width: 215px;
 		    	margin-bottom: 1em;
 		    	margin-top: -0.5em;
 		    	line-height: 18px;
 		    }
+		    #tempo div {
+		    	font-family: arial;
+		    	color: #ddd;
+		    	font-size: 60px;
+		    	display: inline-block;
+		    	vertical-align: top;
+		    	/*padding: 0px 5px;*/
+		    	margin: 0px 4px;
+		    }
+		    #tempo small{
+		    	color: #888;
+		    	font-size: 12px;
+		    }
+		    #added-gallery > a {
+				margin: 0.1em;		    	
+		    }
+
 		</style>
 
 		<?php if(!YII_DEBUG): ?>
@@ -59,16 +83,11 @@
 		
 		<!-- Header -->
 		<header id="header">
-
-			<div id="title-area">
-				<h1>Quanto <strong>tempo</strong><br/>
-				você <strong>perdeu</strong><br/>
-				assistindo seriados?</h1>
-			</div>
-
-			<div id="timer">
-				<!-- <h1>Tempo: <strong id='tempo'>00:00:00</strong></h1> -->
-				<h1><strong id='tempo'>00:00:00</strong></h1>
+<!-- 			<div id="timer" style="text-align:center;">
+				<strong id='tempo'>00:00:00</strong>
+			</div> -->
+			<div id='tempo' style="text-align:center; padding: 40px 0px; font-size:36px;">
+				00:00:00
 			</div>
 
 			<div id="added-gallery"></div>
@@ -80,7 +99,7 @@
 
 			<!-- Two -->
 			<section id="two">
-				<ul class="actions">
+				<ul class="actions" style="text-align:center;">
 					<li><a id="area-switch-btn" href="#!" class="button">Buscar / Listar</a></li>
 				</ul>
 
@@ -93,12 +112,6 @@
 
 				<?=$content;?>
 
-				<div>
-					<div class="div-image">
-						<img src="<?=Yii::app()->baseUrl . '/themes/2016/assets/001.jpg';?>">
-						<p>Game of Thrones</p>
-					</div>
-				</div>
 			</section>
 
 		</div>
