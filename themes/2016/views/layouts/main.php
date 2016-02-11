@@ -12,6 +12,48 @@
 		<link rel="stylesheet" href="<?=Yii::app()->baseUrl . '/themes/2016/assets/css/main.css';?>" />
 		<link rel="stylesheet" href="<?=Yii::app()->baseUrl . '/themes/2016/assets/css/olivi.css';?>" />
 		<script src="http://code.jquery.com/jquery-1.12.0.min.js" ></script>
+
+		<style type="text/css">
+			.div-image {
+				cursor: pointer;
+				display: inline-block;
+				vertical-align: top;
+				margin-left: 0.5em
+			}
+			.div-image img {
+			    opacity: 1;
+			    transition: opacity 0.2s ease-in-out;
+			    -moz-transition: opacity 0.2s ease-in-out;
+			    -webkit-transition: opacity 0.2s ease-in-out;
+			    -ms-transition: opacity 0.2s ease-in-out;
+			    transition: opacity 0.2s ease-in-out;
+
+			    width: 215px;
+			    border-radius: 0.35em;
+			}
+		    .div-image img:hover {
+		    	opacity: 0.5;
+		    }
+		    .div-image p {
+		    	width: 215px;
+		    	margin-bottom: 1em;
+		    	margin-top: -0.5em;
+		    	line-height: 18px;
+		    }
+		</style>
+
+		<?php if(!YII_DEBUG): ?>
+			<script>
+			  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+			  ga('create', 'UA-73593676-1', 'auto');
+			  ga('send', 'pageview');
+			</script>
+		<?php endif; ?>
+
 	</head>
 	<body id="top">
 		
@@ -50,6 +92,13 @@
 				</div>
 
 				<?=$content;?>
+
+				<div>
+					<div class="div-image">
+						<img src="<?=Yii::app()->baseUrl . '/themes/2016/assets/001.jpg';?>">
+						<p>Game of Thrones</p>
+					</div>
+				</div>
 			</section>
 
 		</div>

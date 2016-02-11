@@ -1,7 +1,5 @@
 <div id="list-area">
-	<div class="row">
-		<div id='lista'></div>
-	</div>
+	<div id='lista'></div>
 
 	<ul class="actions" style="text-align:center;">
 		<li>
