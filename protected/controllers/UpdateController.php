@@ -84,8 +84,9 @@ class UpdateController extends MainController {
 	 * as temporadas e o tempo médio dos episódios da temporada
 	 */
 	private function atualizaTemporadas(){
+		set_time_limit(0);
 		$series = Serie::model()->findAll([
-			#'limit'=>500
+			'condition' => 'nome_org IS NOT NULL',
 		]);
 		$count=0;
 		foreach ($series as $s) {
@@ -95,8 +96,8 @@ class UpdateController extends MainController {
 		    	'api_key'=>Yii::app()->params['tmdb_key'],
 		   	]),true);
 
-		    $s->nome = $data['name'];
-		    $s->nome_org = $data['original_name'];
+		    $s->nome = isset($data['name']) ? $data['name'] : '';
+		    $s->nome_org = isset($data['original_name']) ? $data['original_name'] : '';
 		    $s->qtd_episodios = isset($data['number_of_episodes']) ? $data['number_of_episodes'] : null;
 		    $s->qtd_temporadas = isset($data['number_of_seasons']) ? $data['number_of_seasons'] : null;
 		    $tempo = $data['episode_run_time'];
@@ -115,7 +116,7 @@ class UpdateController extends MainController {
 		    #foreach ($temporadas as $t) {
 		    #	$this->salvaTemporada($s,$t);
 		    #}
-		   	echo 'T: ' . number_format((microtime(true)-$time),2) . '<br>';
+		   	#echo 'T: ' . number_format((microtime(true)-$time),2) . '<br>';
 		    $count++;
 
 		    if($count % 40 == 0){
