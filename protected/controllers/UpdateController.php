@@ -86,7 +86,7 @@ class UpdateController extends MainController {
 	private function atualizaTemporadas(){
 		set_time_limit(0);
 		$series = Serie::model()->findAll([
-			'condition' => 'nome_org IS NOT NULL',
+			'condition' => 'nome_org IS NOT NULL',	
 		]);
 		$count=0;
 		foreach ($series as $s) {
@@ -99,24 +99,21 @@ class UpdateController extends MainController {
 		    $s->nome = isset($data['name']) ? $data['name'] : '';
 		    $s->nome_org = isset($data['original_name']) ? $data['original_name'] : '';
 		    $s->qtd_episodios = isset($data['number_of_episodes']) ? $data['number_of_episodes'] : null;
-		    $s->qtd_temporadas = isset($data['number_of_seasons']) ? $data['number_of_seasons'] : null;
-		    $tempo = $data['episode_run_time'];
-		    if(is_array($tempo)){
-		    	if(count($tempo) > 0){
-			    	$tempo = ceil(array_sum($tempo) / count($tempo));
-		    	} else {
-		    		$tempo = 0;
-		    	}
+		    if(!is_null( $s->qtd_episodios)){
+			    $s->qtd_temporadas = isset($data['number_of_seasons']) ? $data['number_of_seasons'] : null;
+			    $tempo = $data['episode_run_time'];
+			    if(is_array($tempo)){
+			    	if(count($tempo) > 0){
+				    	$tempo = ceil(array_sum($tempo) / count($tempo));
+			    	} else {
+			    		$tempo = 0;
+			    	}
+			    }
+			    $s->tempo_episodios = $tempo;
+			    	
+			    $s->update(['nome','nome_org','qtd_episodios','qtd_temporadas','tempo_episodios'],false);
 		    }
-		    $s->tempo_episodios = $tempo;
 		    
-		    $s->update(['nome','nome_org','qtd_episodios','qtd_temporadas','tempo_episodios'],false);
-
-		    #$temporadas = $data['seasons'];
-		    #foreach ($temporadas as $t) {
-		    #	$this->salvaTemporada($s,$t);
-		    #}
-		   	#echo 'T: ' . number_format((microtime(true)-$time),2) . '<br>';
 		    $count++;
 
 		    if($count % 40 == 0){
