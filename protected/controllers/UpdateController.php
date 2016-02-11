@@ -7,6 +7,13 @@ class UpdateController extends MainController {
 		$this->atualizaTemporadas();
 	}
 
+	public function actionSoSer(){
+		$this->atualizaSeries();
+	}
+	public function actionSoTem(){
+		$this->atualizaTemporadas();
+	}
+
 	/**
 	 * Consulta todas as series disponiveis
 	 * Se a série é nova cria novo registro
@@ -14,7 +21,7 @@ class UpdateController extends MainController {
 	 */
 	private function atualizaSeries(){
 	  	$url = 'http://api.themoviedb.org/3/tv/popular';
-	    
+
 	    $page = 1;
 	    do {
 
@@ -34,9 +41,11 @@ class UpdateController extends MainController {
 			    	$model = Serie::model()->findByAttributes([
 			    		'tmdb_id' => $r['id'],
 			    	]);
+
 			    	if(is_null($model)){
 			    		$model = new Serie();
 			    		$model->nome = $r['name'];
+			    		$model->nome_org = isset($r['original_name']) ? $r['original_name'] : '';
 			    		$model->tmdb_id = $r['id'];
 			    		$model->popularity = $r['popularity'];
 			    		$model->poster_path = $r['poster_path'];
@@ -47,10 +56,12 @@ class UpdateController extends MainController {
 			    			throw new Exception("Erro ao salvar nova serie.");
 			    		}
 			    	} else {
+			    		$model->nome = $r['name'];
+			    		$model->nome_org = isset($r['original_name']) ? $r['original_name'] : '';
 			    		$model->popularity = $r['popularity'];
 			    		$model->poster_path = $r['poster_path'];
 			    		$model->backdrop_path = $r['backdrop_path'];
-			    		$model->update(['popularity','poster_path','backdrop_path'],false);
+			    		$model->update(['popularity','poster_path','backdrop_path','nome_org'],false);
 			    	}
 			    }
 			    echo 'Page ' . $page . ' - ' . count($results) . '<br>';
@@ -64,7 +75,7 @@ class UpdateController extends MainController {
 		    	// sleep(1);
 		    // }
 
-  	    } while($do && $page <= 2000);
+  	    } while($do && $page <= 5000);
 
 	}
 
@@ -73,8 +84,9 @@ class UpdateController extends MainController {
 	 * as temporadas e o tempo médio dos episódios da temporada
 	 */
 	private function atualizaTemporadas(){
+		set_time_limit(0);
 		$series = Serie::model()->findAll([
-			'limit'=>120
+			'condition' => 'nome_org IS NOT NULL',	
 		]);
 		$count=0;
 		foreach ($series as $s) {
@@ -84,25 +96,24 @@ class UpdateController extends MainController {
 		    	'api_key'=>Yii::app()->params['tmdb_key'],
 		   	]),true);
 
+		    $s->nome = isset($data['name']) ? $data['name'] : '';
+		    $s->nome_org = isset($data['original_name']) ? $data['original_name'] : '';
 		    $s->qtd_episodios = isset($data['number_of_episodes']) ? $data['number_of_episodes'] : null;
-		    $s->qtd_temporadas = isset($data['number_of_seasons']) ? $data['number_of_seasons'] : null;
-		    $tempo = $data['episode_run_time'];
-		    if(is_array($tempo)){
-		    	if(count($tempo) > 0){
-			    	$tempo = ceil(array_sum($tempo) / count($tempo));
-		    	} else {
-		    		$tempo = 0;
-		    	}
+		    if(!is_null( $s->qtd_episodios)){
+			    $s->qtd_temporadas = isset($data['number_of_seasons']) ? $data['number_of_seasons'] : null;
+			    $tempo = $data['episode_run_time'];
+			    if(is_array($tempo)){
+			    	if(count($tempo) > 0){
+				    	$tempo = ceil(array_sum($tempo) / count($tempo));
+			    	} else {
+			    		$tempo = 0;
+			    	}
+			    }
+			    $s->tempo_episodios = $tempo;
+			    	
+			    $s->update(['nome','nome_org','qtd_episodios','qtd_temporadas','tempo_episodios'],false);
 		    }
-		    $s->tempo_episodios = $tempo;
 		    
-		    $s->update(['qtd_episodios','qtd_temporadas','tempo_episodios'],false);
-
-		    #$temporadas = $data['seasons'];
-		    #foreach ($temporadas as $t) {
-		    #	$this->salvaTemporada($s,$t);
-		    #}
-		   	echo 'T: ' . number_format((microtime(true)-$time),2) . '<br>';
 		    $count++;
 
 		    if($count % 40 == 0){

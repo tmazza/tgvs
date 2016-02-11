@@ -22,6 +22,7 @@ class SiteController extends MainController {
     $s = addslashes($s);
     $criteria=new CDbCriteria;
     $criteria->compare('nome',$s, true);
+    $criteria->compare('nome_org',$s, true, 'OR');
     $criteria->limit = 3;
     $criteria->order = 'popularity DESC';
     $data = Serie::model()->findAll($criteria);

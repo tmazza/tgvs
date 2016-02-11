@@ -30,8 +30,8 @@ class Serie extends CActiveRecord
 			array('tmdb_id', 'required'),
 			array('tmdb_id', 'numerical', 'integerOnly'=>true),
 			array('popularity', 'numerical'),
-			array('backdrop_path', 'safe'),
-			array('id, tmdb_id, nome, poster_path, backdrop_path, popularity', 'safe', 'on'=>'search'),
+			array('backdrop_path,nome_org', 'safe'),
+			array('id, tmdb_id, nome, poster_path, backdrop_path, popularity, nome_org', 'safe', 'on'=>'search'),
 		);
 	}
 
