@@ -60,9 +60,13 @@
 		    	color: #888;
 		    	font-size: 12px;
 		    }
+			.added-img > img {
+		    	width: 65px!important;
+		    	height: auto!important; /*Retirar do CSS antigo e depos tirar essa linha*/
+			}
 		    #added-gallery > a {
-				margin: 0.1em;		    	
-		    }
+				margin: -0.4em 0.1em 0.1em 0.1em;
+			}
 
 		</style>
 
