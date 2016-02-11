@@ -40,11 +40,12 @@ $('#search-input').keyup(function(){
 });
 
 function getSeries(){
-	pageSize = 10;
+	pageSize = 30;
 	jQuery.ajax({
 		'type':'GET',
 		'data':{'o':parseInt($('#btn-mais').attr('data-o')),'ps':pageSize},
-		'beforeSend':function(){ $("#btn-mais").html("<img src=\"http://phette23.github.io/speed-is-a-feature/img/loadingBar.gif\" />"); },
+		'beforeSend':function(){ $("#btn-mais").html("<img style='height:160px;margin-top:-80px;' src=\"http://i.imgur.com/P5ApKIy.gif\" />"); },
+		// 'beforeSend':function(){ $("#btn-mais").html("<img style='height:160px;margin-top:-80px;' src=\"http://phette23.github.io/speed-is-a-feature/img/loadingBar.gif\" />"); },
 		'success': function(html) {
 			series = JSON.parse(html);
 			$.each(series,function(num,serie){
@@ -113,12 +114,33 @@ function updateRemove(elem){
 
 function updateMenu(){
 	tempo = getTempo();
-	$('#tempo').html(tempo + ' min<br>' + Math.ceil((tempo/60)) + ' hor<br>' + Math.ceil((tempo/60/24)) + ' dias<br>');
+
+	tempo = minToTime(tempo);
+
+	// $('#tempo').html(tempo + ' min<br>' + Math.ceil((tempo/60)) + ' hor<br>' + Math.ceil((tempo/60/24)) + ' dias<br>');
+	$('#tempo').html(tempo['dias']+'d <b>'+tempo['horas']+'</b>h <b>'+tempo['min']+'min</b>');
 	lista = getLista();
 	$('#added-gallery').html('');
 	$.each(lista,function(id,serie){
 		$('#added-gallery').append(htmlRemoveMenu(id,serie['time'],serie['img']));
 	});	
+}
+
+function minToTime(tempo){
+	minDia = 1440;
+	dias = Math.floor(tempo/minDia);
+	horas = Math.floor( (tempo - (dias * minDia)) / 60);
+	min = tempo - (horas*60) - dias*minDia
+	return {
+		'dias': dias,
+		'horas': horas,
+		'min': min,
+	};
+}
+
+function formatMinToTime(tempo){
+	tempo = minToTime(tempo);
+	return tempo['dias']+'d '+tempo['horas']+'h '+tempo['min']+'min';
 }
 
 function htmlSerie(serie){
@@ -138,8 +160,8 @@ function htmlAdd(nome,img){
 	var html = '';
 	html += '<a href="#!" onclick="addSerie($(this).parent());" class="image fit thumb">';
 	html += '<img src="'+img+'" style="width:185px;" />';
-	html += '<h3 class="nome">' + nome + '</h3>';
 	html += '</a>';
+	html += '<h3 class="nome">' + nome + '</h3>';
 	return html;
 }
 
@@ -147,14 +169,14 @@ function htmlRemove(nome,img){
 	var html = '';
 	html += '<a href="#!" onclick="removeSerie($(this).parent());" class="image fit thumb thumb2">';
 	html += '<img src="'+img+'" style="width:185px;" />';
-	html += '<h3 class="nome">' + nome + '</h3>';
 	html += '</a>';
+	html += '<h3 class="nome">' + nome + '</h3>';
 	return html;
 }
 
 function htmlRemoveMenu(id,time,img){
 	var html = '';
-	html += '<a href="#!" onclick="removeSerieMenu($(this));" class="added-img" title="Retirar" data-id="'+id+'" data-time="'+time+'">';
+	html += '<a href="#!" onclick="removeSerieMenu($(this));" class="added-img" title="'+formatMinToTime(time)+'" data-id="'+id+'" data-time="'+time+'">';
 	html += '<img src="'+img+'" style="" />';
 	html += '</a>';
 	return html;

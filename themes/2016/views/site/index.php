@@ -3,7 +3,7 @@
 		<div id='lista'></div>
 	</div>
 
-	<ul class="actions">
+	<ul class="actions" style="text-align:center;">
 		<li>
 		<?php
 		echo CHtml::link("+ Mais",'#!',[
@@ -16,9 +16,3 @@
 		</li>
 	</ul>
 </div>
-<style>
-	.main-img {
-		display:inline-block;
-		width:185px;
-	}
-</style>

@@ -14,16 +14,16 @@ class SiteController extends MainController {
   }
 
   public function actionNextPage($o,$ps){
+    sleep(5);
     $o = (int) $o;
     echo $this->getSeries($o,$ps);
   }
 
   public function actionSearch($s){
     $s = addslashes($s);
-
     $criteria=new CDbCriteria;
     $criteria->compare('nome',$s, true);
-    $criteria->limit = 4;
+    $criteria->limit = 3;
     $criteria->order = 'popularity DESC';
     $data = Serie::model()->findAll($criteria);
     echo $this->output($data);

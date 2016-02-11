@@ -25,7 +25,8 @@
 			</div>
 
 			<div id="timer">
-				<h1>Tempo: <strong id='tempo'>00:00:00</strong></h1>
+				<!-- <h1>Tempo: <strong id='tempo'>00:00:00</strong></h1> -->
+				<h1><strong id='tempo'>00:00:00</strong></h1>
 			</div>
 
 			<div id="added-gallery"></div>
