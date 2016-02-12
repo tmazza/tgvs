@@ -1,14 +1,19 @@
 $themeColor: #083D56;
 $themeColorLight: #0E5F76;
 $themeColorDark: #0C2233;
+$themeColor4: #49bf9d;
 
-$timerFontSizeL: 80px;
+$timerFontSizeL: 75px;
 $timerFontSizeS: 20px;
 $searchInputFontSize: 35px;
 
 html, body {
   padding: 0;
   margin: 0;
+}
+
+.actions {
+  text-align: center;
 }
 
 #top {
@@ -31,11 +36,33 @@ html, body {
   padding: 1em 4em 4em 4em;
 }
 
+// Barra superior.
+#social-menu, #contato-btn {
+  margin-top: 5px;
+}
+
+#social-menu {
+  margin-left: 15px;
+  float: left;
+}
+
+#contato-btn {
+  margin-right: 15px;
+  float: right;
+}
+
+#contato-box {
+  margin-top: 50px;
+  margin-bottom: -50px;
+  text-align: right;
+}
+// -------------------------------------
+
 // Relogio.
 #tempo {
+  margin-top: 50px;
   padding: 40px 0px;
   text-align:center;
-  font-size:36px;
 
   & div {
     display: inline-block;
@@ -43,12 +70,12 @@ html, body {
     margin: 0px 4px;
     font-size: $timerFontSizeL;
     font-family: arial;
-    color: #ddd;
+    color: $themeColorDark;
   }
 
   & small {
     font-size: $timerFontSizeS;
-    color: #888;
+    color: $themeColorDark;
   }
 }
 // -------------------------------------
@@ -94,7 +121,7 @@ html, body {
 
 // Area de busca.
 #search-area {
-  padding: 8em 4em 4em 4em;
+  padding: 4em 4em 4em 4em;
 
   & > form > input {
     font-size: $searchInputFontSize;

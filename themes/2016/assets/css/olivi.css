@@ -2,6 +2,9 @@ html, body {
   padding: 0;
   margin: 0; }
 
+.actions {
+  text-align: center; }
+
 #top {
   background-color: #083D56;
   padding: 0;
@@ -18,20 +21,36 @@ html, body {
 #main {
   padding: 1em 4em 4em 4em; }
 
+#social-menu, #contato-btn {
+  margin-top: 5px; }
+
+#social-menu {
+  margin-left: 15px;
+  float: left; }
+
+#contato-btn {
+  margin-right: 15px;
+  float: right; }
+
+#contato-box {
+  margin-top: 50px;
+  margin-bottom: -50px;
+  text-align: right; }
+
 #tempo {
+  margin-top: 50px;
   padding: 40px 0px;
-  text-align: center;
-  font-size: 36px; }
+  text-align: center; }
   #tempo div {
     display: inline-block;
     vertical-align: top;
     margin: 0px 4px;
-    font-size: 80px;
+    font-size: 75px;
     font-family: arial;
-    color: #ddd; }
+    color: #0C2233; }
   #tempo small {
     font-size: 20px;
-    color: #888; }
+    color: #0C2233; }
 
 #added-gallery {
   padding-left: 0.5em;
@@ -59,7 +78,7 @@ html, body {
   color: #efefef !important; }
 
 #search-area {
-  padding: 8em 4em 4em 4em; }
+  padding: 4em 4em 4em 4em; }
   #search-area > form > input {
     font-size: 35px;
     background-color: #0C2233;

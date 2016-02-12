@@ -32,6 +32,24 @@
 		<!-- Header -->
 		<header id="header">
 
+			<div id="barra-superior">
+				<ul id="social-menu" class="icons">
+					<li><a href="#!" class="icon fa-bitbucket"><span class="label">Bitbucket</span></a></li>
+					<li><a href="#!" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+					<li><a href="#!" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+				</ul>
+
+				<ul id="contato-btn" class="icons">
+					<li><a href="#!" class="icon fa-info"><span class="label">Contato</span></a></li>
+				</ul>
+			</div>
+
+			<div id="contato-box">
+				<spam>Tiago Mazzarollo</spam>
+				<br/>
+				<spam>Oliver Hung Buo Tso</spam>
+			</div>
+
 			<div id='tempo'>00:00:00</div>
 			<div id="added-gallery"></div>
 
@@ -43,14 +61,16 @@
 			<!-- Two -->
 			<section id="two">
 
-				<ul class="actions" style="text-align:center;">
-					<li><a id="area-switch-btn" href="#!" class="button">Buscar / Listar</a></li>
+				<ul class="actions">
+					<!-- <li><a id="area-switch-btn" href="#!" class="button">Buscar / Listar</a></li> -->
+					<li><a id="area-switch-btn" href="#!" class="icon fa-th fa-3x"><span class="label">Github</span></a></li>
 				</ul>
 
 				<div id="search-area">
 					<form>
 						<input id="search-input" type="text" placeholder="Digite o nome do seriado." autocomplete="off">
 					</form>
+					
 					<div id='search-results'></div>
 				</div>
 
