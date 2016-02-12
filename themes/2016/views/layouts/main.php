@@ -32,17 +32,12 @@
 		<!-- Header -->
 		<header id="header">
 
-			<div id="barra-superior">
-				<ul id="social-menu" class="icons">
-					<li><a href="#!" class="icon fa-bitbucket"><span class="label">Bitbucket</span></a></li>
-					<li><a href="#!" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
-					<li><a href="#!" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
-				</ul>
-
-				<ul id="contato-btn" class="icons">
-					<li><a href="#!" class="icon fa-info"><span class="label">Contato</span></a></li>
-				</ul>
-			</div>
+			<ul id="barra-superior" class="icons">
+				<li><a href="#!" class="icon fa-bitbucket"><span class="label">Bitbucket</span></a></li>
+				<li><a href="#!" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+				<li><a href="#!" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+				<li><a id="contato-btn" href="#!" class="icon fa-info"><span class="label">Contato</span></a></li>
+			</ul>
 
 			<div id="contato-box">
 				<spam>Tiago Mazzarollo</spam>
@@ -63,7 +58,7 @@
 
 				<ul class="actions">
 					<!-- <li><a id="area-switch-btn" href="#!" class="button">Buscar / Listar</a></li> -->
-					<li><a id="area-switch-btn" href="#!" class="icon fa-th fa-3x"><span class="label">Github</span></a></li>
+					<li><a id="area-switch-btn" href="#!" class="icon fa-th fa-2x"><span class="label">Github</span></a></li>
 				</ul>
 
 				<div id="search-area">
