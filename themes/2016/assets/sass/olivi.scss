@@ -7,6 +7,13 @@ $timerFontSizeL: 75px;
 $timerFontSizeS: 20px;
 $searchInputFontSize: 35px;
 
+@mixin animate($prop, $time) {
+  transition: $prop $time ease-in-out;
+  -moz-transition: $prop $time ease-in-out;
+  -webkit-transition: $prop $time ease-in-out;
+  -ms-transition: $prop $time ease-in-out;
+}
+
 html, body {
   padding: 0;
   margin: 0;
@@ -37,34 +44,25 @@ html, body {
 }
 
 // Barra superior.
-#social-menu, #contato-btn {
+#barra-superior {
   margin-top: 5px;
-}
-
-#social-menu {
-  margin-left: 15px;
-  float: left;
-}
-
-#contato-btn {
-  margin-right: 15px;
-  float: right;
+  text-align: center;
 }
 
 #contato-box {
-  margin-top: 50px;
-  margin-bottom: -50px;
-  text-align: right;
+  margin-top: -30px;
+  margin-bottom: 30px;
+  text-align: center;
 }
 // -------------------------------------
 
 // Relogio.
 #tempo {
-  margin-top: 50px;
-  padding: 40px 0px;
+  // margin-top: 50px;
+  padding: 0 0 40px 0;
   text-align:center;
 
-  & div {
+  div {
     display: inline-block;
     vertical-align: top;
     margin: 0px 4px;
@@ -73,7 +71,7 @@ html, body {
     color: $themeColorDark;
   }
 
-  & small {
+  small {
     font-size: $timerFontSizeS;
     color: $themeColorDark;
   }
@@ -90,6 +88,7 @@ html, body {
     float: left;
     margin: -0.4em 0.1em 0.1em 0.1em;
     height: 107px;
+    border-bottom: none;
   }
 }
 
@@ -101,10 +100,7 @@ html, body {
     border-radius: 0.35em;
 
     opacity: 1;
-    transition: opacity 0.2s ease-in-out;
-    -moz-transition: opacity 0.2s ease-in-out;
-    -webkit-transition: opacity 0.2s ease-in-out;
-    -ms-transition: opacity 0.2s ease-in-out;
+    @include animate(opacity, 0.2s);
 
     &:hover {
       opacity: 0.5;
@@ -127,10 +123,7 @@ html, body {
     font-size: $searchInputFontSize;
     background-color: $themeColorDark;
 
-    transition: border-color 0.2s ease-in-out;
-    -moz-transition: border-color 0.2s ease-in-out;
-    -webkit-transition: border-color 0.2s ease-in-out;
-    -ms-transition: border-color 0.2s ease-in-out;
+    @include animate(border-color, 0.2s);
   }
 }
 // -------------------------------------
@@ -143,27 +136,24 @@ html, body {
   cursor: pointer;
   border: 2px solid transparent;
 
-  & img {
+  img {
     width: 215px;
     border-radius: 0.35em;
 
     opacity: 1;
-    transition: opacity 0.2s ease-in-out;
-    -moz-transition: opacity 0.2s ease-in-out;
-    -webkit-transition: opacity 0.2s ease-in-out;
-    -ms-transition: opacity 0.2s ease-in-out;
+    @include animate(opacity, 0.2s);
   }
 
-  & img:hover {
+  img:hover {
     opacity: 0.3;
   }
 
-  & img.added {
+  img.added {
     opacity: 0.5;
     border: 2px solid #FFAB00; 
   }
 
-  & p {
+  p {
     width: 215px;
     margin-bottom: 1em;
     margin-top: -0.5em;

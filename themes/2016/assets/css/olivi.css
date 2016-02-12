@@ -21,25 +21,17 @@ html, body {
 #main {
   padding: 1em 4em 4em 4em; }
 
-#social-menu, #contato-btn {
-  margin-top: 5px; }
-
-#social-menu {
-  margin-left: 15px;
-  float: left; }
-
-#contato-btn {
-  margin-right: 15px;
-  float: right; }
+#barra-superior {
+  margin-top: 5px;
+  text-align: center; }
 
 #contato-box {
-  margin-top: 50px;
-  margin-bottom: -50px;
-  text-align: right; }
+  margin-top: -30px;
+  margin-bottom: 30px;
+  text-align: center; }
 
 #tempo {
-  margin-top: 50px;
-  padding: 40px 0px;
+  padding: 0 0 40px 0;
   text-align: center; }
   #tempo div {
     display: inline-block;
@@ -59,7 +51,8 @@ html, body {
     display: inline-block;
     float: left;
     margin: -0.4em 0.1em 0.1em 0.1em;
-    height: 107px; }
+    height: 107px;
+    border-bottom: none; }
 
 .added-img {
   position: relative; }
