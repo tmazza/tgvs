@@ -1,9 +1,5 @@
 <!DOCTYPE HTML>
-<!--
-	Strata by HTML5 UP
-	html5up.net | @n33co
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
+
 <html>
 	<head>
 		<title>Tempo Gasto Vendo Séries</title>
@@ -33,10 +29,9 @@
 		<header id="header">
 
 			<ul id="barra-superior" class="icons">
-				<li><a href="#!" class="icon fa-bitbucket"><span class="label">Bitbucket</span></a></li>
 				<li><a href="#!" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
 				<li><a href="#!" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
-				<li><a id="contato-btn" href="#!" class="icon fa-info"><span class="label">Contato</span></a></li>
+				<li><a id="contato-btn" href="#!" class="icon fa-question-circle"><span class="label">Contato</span></a></li>
 			</ul>
 
 			<div id="contato-box">
@@ -57,7 +52,6 @@
 			<section id="two">
 
 				<ul class="actions">
-					<!-- <li><a id="area-switch-btn" href="#!" class="button">Buscar / Listar</a></li> -->
 					<li><a id="area-switch-btn" href="#!" class="icon fa-th fa-2x"><span class="label">Github</span></a></li>
 				</ul>
 
