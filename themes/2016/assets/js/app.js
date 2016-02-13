@@ -1,3 +1,5 @@
+var resetAdded = false;
+
 $(window).ready(function(){
 	$('#search-input').select().focus();
 	if(typeof(Storage) === "undefined") {
@@ -5,6 +7,8 @@ $(window).ready(function(){
 	}
 	updateMenu();
 	getSeries();
+	addReset();
+
 });
 
 $('#btn-mais').on('click',function(){
@@ -40,7 +44,7 @@ $('#search-input').keyup(function(){
 });
 
 function getSeries(){
-	pageSize = 24;
+	pageSize = 48;
 	jQuery.ajax({
 		'type':'GET',
 		'data':{'o':parseInt($('#btn-mais').attr('data-o')),'ps':pageSize},
@@ -76,6 +80,7 @@ function addSerie(elem){
 	 	setLista(lista);
 	 	updateAdd(elem);
 		updateMenu();
+		addReset();
 	}
 }
 
@@ -130,6 +135,7 @@ function updateMenu(){
 	$.each(lista,function(id,serie){
 		$('#added-gallery').append(htmlRemoveMenu(id,serie['time'],serie['img']));
 	});	
+	$('.tooltip').tooltipster({delay:0});
 }
 
 function minToTime(tempo){
@@ -146,7 +152,16 @@ function minToTime(tempo){
 
 function formatMinToTime(tempo){
 	tempo = minToTime(tempo);
-	return tempo['dias']+'d '+tempo['horas']+'h '+tempo['min']+'min';
+	texto = '';
+	if(tempo['dias'] > 0){
+		texto += tempo['dias']+' dia' + hasPlural(tempo['dias']) + ' ';
+	}
+	if(tempo['horas'] > 0){
+		texto += tempo['horas']+' hora' + hasPlural(tempo['horas']) + ' e ';
+	} else {
+		texto += ' e ';
+	}
+	return texto + tempo['min']+' minuto' + hasPlural(tempo['min']);
 }
 
 function htmlSerie(serie){
@@ -179,7 +194,7 @@ function htmlRemove(nome,img){
 
 function htmlRemoveMenu(id,time,img){
 	var html = '';
-	html += '<a href="#!" onclick="removeSerieMenu($(this));" class="added-img" title="'+formatMinToTime(time)+'" data-id="'+id+'" data-time="'+time+'">';
+	html += '<a href="#!" onclick="removeSerieMenu($(this));" title="'+formatMinToTime(time)+'" class="tooltip added-img" data-id="'+id+'" data-time="'+time+'">';
 	html += '<img src="'+img+'" />';
 	html += '</a>';
 	return html;
@@ -203,6 +218,42 @@ function getTempo(){
  		tempo = JSON.parse(tempo);
  	}
  	return tempo;
+}
+
+function reset(){
+	setLista({});
+	setTempo(0);
+
+	unselect = function() {
+		nome = $(this).find('p').text();
+		img = $(this).find('img').attr('src');
+		$(this).html(htmlAdd(nome,img));
+	};
+
+	$('#lista div').each(unselect);
+	$('#search-results div').each(unselect);
+
+
+	updateMenu();
+	return false;
+}
+
+function addReset(){
+	if(resetAdded === false){
+		lista = getLista();
+		if(Object.keys(lista).length > 1){
+			$('#btn-reset').html('<a href="#!" onclick="return reset();">Remover todos</a>');
+			resetAdded = true;
+		}
+	}
+}
+
+function hasPlural(qtd){
+	if(qtd > 1){
+		return 's';
+	} else {
+		return '';
+	}
 }
 
 function setLista(lista){

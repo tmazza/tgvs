@@ -71,9 +71,6 @@ class UpdateController extends MainController {
 
 		    echo 'T: ' . number_format((microtime(true)-$time),2) . '<br>';
 
-		    // if($page % 80 == 0){
-		    	// sleep(1);
-		    // }
 
   	    } while($do && $page <= 5000);
 
@@ -117,7 +114,7 @@ class UpdateController extends MainController {
 		    $count++;
 
 		    if($count % 40 == 0){
-		    	sleep(1);
+		    	sleep(5);
 		    }
 		}
 
