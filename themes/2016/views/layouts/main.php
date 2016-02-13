@@ -30,7 +30,6 @@
 		<header id="header">
 
 			<ul id="barra-superior" class="icons">
-				<li><a href="#!" class="tooltip icon fa-bitbucket"><span class="label">Bitbucket</span></a></li>
 				<li><a title="Compartilhar no Facebook" href="#!" class="tooltip icon fa-facebook"><span class="label">Facebook</span></a></li>
 				<li><a title="Compartilhar no Twitter" href="#!" class="tooltip icon fa-twitter"><span class="label">Twitter</span></a></li>
 				<li><a id="contato-btn" href="#!" class="icon fa-info"><span class="label">Contato</span></a></li>
@@ -54,7 +53,6 @@
 			<section id="two">
 
 				<ul class="actions">
-					<!-- <li><a id="area-switch-btn" href="#!" class="button">Buscar / Listar</a></li> -->
 					<li><a id="area-switch-btn" href="#!" class="icon fa-th fa-2x"><span class="label">Github</span></a></li>
 				</ul>
 

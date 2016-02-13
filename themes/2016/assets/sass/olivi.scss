@@ -117,8 +117,6 @@ html, body {
 
 // Area de busca.
 #search-area {
-  padding: 4em 4em 4em 4em;
-
   & > form > input {
     font-size: $searchInputFontSize;
     background-color: $themeColorDark;

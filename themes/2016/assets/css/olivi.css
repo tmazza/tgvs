@@ -70,15 +70,13 @@ html, body {
 .button {
   color: #efefef !important; }
 
-#search-area {
-  padding: 4em 4em 4em 4em; }
-  #search-area > form > input {
-    font-size: 35px;
-    background-color: #0C2233;
-    transition: border-color 0.2s ease-in-out;
-    -moz-transition: border-color 0.2s ease-in-out;
-    -webkit-transition: border-color 0.2s ease-in-out;
-    -ms-transition: border-color 0.2s ease-in-out; }
+#search-area > form > input {
+  font-size: 35px;
+  background-color: #0C2233;
+  transition: border-color 0.2s ease-in-out;
+  -moz-transition: border-color 0.2s ease-in-out;
+  -webkit-transition: border-color 0.2s ease-in-out;
+  -ms-transition: border-color 0.2s ease-in-out; }
 
 .div-image {
   display: inline-block;
