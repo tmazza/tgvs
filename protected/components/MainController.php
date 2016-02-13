@@ -11,9 +11,10 @@ class MainController extends CController  {
 
     public $assets;
 
-    public $pageTitle = '#';
-    public $description = '#';
-    public $subTitle = '#';
+    public $pageTitle = 'Tempo Gasto Vendo Séries';
+    public $description = 'Calcule o tempo que você gastou assistindo seriados e animes.';
+    public $keywords = 'calcular,serie,seriados,animes,tempo,gasto,perdido,assitindo,vendo,wasted,time,watching,tv show';
+    public $subTitle = '';
 
     protected function beforeAction($action) {
         $this->addScripts();

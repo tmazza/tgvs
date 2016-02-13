@@ -1,4 +1,7 @@
 var resetAdded = false;
+var facShare = 'http://www.facebook.com/sharer/sharer.php';
+var twtShare = 'http://twitter.com/intent/tweet';
+
 
 $(window).ready(function(){
 	$('#search-input').select().focus();
@@ -8,7 +11,6 @@ $(window).ready(function(){
 	updateMenu();
 	getSeries();
 	addReset();
-
 });
 
 $('#btn-mais').on('click',function(){
@@ -123,11 +125,11 @@ function updateMenu(){
 	tempo = minToTime(tempo);
 
 	var html = '';
-	html += '<div>'+tempo['dias']+'<br><small>dias</small></div>';
+	html += '<div>'+tempo['dias']+'<br><small>dia'+hasPlural(tempo['dias'])+'</small></div>';
 	html += '<div>:</div>';
-	html += '<div>'+tempo['horas']+'<br><small>horas</small></div>';
+	html += '<div>'+tempo['horas']+'<br><small>hora'+hasPlural(tempo['horas'])+'</small></div>';
 	html += '<div>:</div>';
-	html += '<div>'+tempo['horas']+'<br><small>minutos</small></div>';
+	html += '<div>'+tempo['min']+'<br><small>minuto'+hasPlural(tempo['min'])+'</small></div>';
 
 	$('#tempo').html(html);
 	lista = getLista();
@@ -136,6 +138,7 @@ function updateMenu(){
 		$('#added-gallery').append(htmlRemoveMenu(id,serie['time'],serie['img']));
 	});	
 	$('.tooltip').tooltipster({delay:0});
+	setSocialShare();
 }
 
 function minToTime(tempo){
@@ -254,6 +257,14 @@ function hasPlural(qtd){
 	} else {
 		return '';
 	}
+}
+
+function setSocialShare(){
+	var url = 'tempogastovendoseries.com';
+	var title = 'Eu "gastei" ' + formatMinToTime(getTempo()) + ' assistindo seriados';
+	var texto = 'Veja quanto tempo você gastou: tempogastovendoseries.com';
+	$('#fac-share').attr('href',facShare+'?u='+url+'&title='+title+'&description='+texto);
+	$('#twt-share').attr('href',twtShare+'?status='+title+'+'+url);
 }
 
 function setLista(lista){

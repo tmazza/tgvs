@@ -1,15 +1,20 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<title>Tempo Gasto Vendo Séries</title>
+		<title><?=$this->pageTitle;?></title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<script src="http://code.jquery.com/jquery-1.12.0.min.js" ></script>
-		<meta name="description" content="Calcule o tempo que você gastou assistindo seriados e animes." />
-		<meta name="keywords" content="calcular,serie,seriados,animes,tempo,gasto,perdido,assitindo,vendo,wasted,time,watching,tv show" />
+		<meta name="description" content="<?=$this->description;?>" />
+		<meta name="keywords" content="<?=$this->keywords;?>" />
 		<link rel="stylesheet" href="<?=Yii::app()->baseUrl . '/themes/2016/assets/css/main.css';?>" />
 		<link rel="stylesheet" href="<?=Yii::app()->baseUrl . '/themes/2016/assets/css/olivi.css';?>" />
 		<link rel="stylesheet" href="<?=Yii::app()->baseUrl . '/themes/2016/assets/css/tooltipster.css';?>" />
+
+		<meta property="og:url"           content="http://tempogastovendoseries.com" />
+		<meta property="og:type"          content="website" />
+		<meta property="og:title"         content="<?=$this->pageTitle?>" />
+		<meta property="og:description"   content="<?=$this->description?>" />
 
 		<?php if(!YII_DEBUG): ?>
 			<script>
@@ -25,20 +30,28 @@
 
 	</head>
 	<body id="top">
+
+		<div id="fb-root"></div>
+		<script>(function(d, s, id) {
+		  var js, fjs = d.getElementsByTagName(s)[0];
+		  if (d.getElementById(id)) return;
+		  js = d.createElement(s); js.id = id;
+		  js.src = "//connect.facebook.net/pt_BR/sdk.js#xfbml=1&version=v2.5&appId=522006247922558";
+		  fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));</script>
 		
 		<!-- Header -->
 		<header id="header">
 
 			<ul id="barra-superior" class="icons">
-				<li><a title="Compartilhar no Facebook" href="#!" class="tooltip icon fa-facebook"><span class="label">Facebook</span></a></li>
-				<li><a title="Compartilhar no Twitter" href="#!" class="tooltip icon fa-twitter"><span class="label">Twitter</span></a></li>
-				<li><a id="contato-btn" href="#!" class="icon fa-info"><span class="label">Contato</span></a></li>
+				<li><a id='fac-share' target="_blank" title="Compartilhar no Facebook" href="#!" class="tooltip icon fa-facebook"><span class="label">Facebook</span></a></li>
+				<li><a id='twt-share' target="_blank" title="Compartilhar no Twitter"  href="#!" class="tooltip icon fa-twitter"><span class="label">Twitter</span></a></li>
+				<li><a id="contato-btn" href="#!" title="Sobre" class="icon fa-info tooltip"><span class="label">Contato</span></a></li>
 			</ul>
 
-			<div id="contato-box">
-				<spam>Tiago Mazzarollo</spam>
-				<br/>
-				<spam>Oliver Hung Buo Tso</spam>
+			<div title="Sobre" id="contato-box" style="text-align: left;padding:12px;">
+				Desenvolvido por <a href="#!">Oliver Hung Buo Tso</a> e 
+				<a href="mailto:tiagomdepaula@gmail.com">Tiago Mazzarollo</a>. Dados de <a href='https://www.themoviedb.org'>The Movie Database (TMDb)</a>.
 			</div>
 
 			<div id='tempo'>00:00:00</div>
