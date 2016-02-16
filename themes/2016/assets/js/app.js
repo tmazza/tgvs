@@ -133,9 +133,9 @@ function updateMenu(){
 
 	$('#tempo').html(html);
 	lista = getLista();
-	$('#added-gallery').html('');
+	$('#added-show-list').html('');
 	$.each(lista,function(id,serie){
-		$('#added-gallery').append(htmlRemoveMenu(id,serie['time'],serie['img']));
+		$('#added-show-list').append(htmlRemoveMenu(id,serie['time'],serie['img']));
 	});	
 	$('.tooltip').tooltipster({delay:0});
 	setSocialShare();
@@ -170,11 +170,14 @@ function formatMinToTime(tempo){
 function htmlSerie(serie){
 	id = serie['id'];
 	lista = getLista();
-	var html = '<div class="div-image" id="s'+id+'" data-id="'+id+'" data-time="'+serie['time']+'">';
+
+	// div-image -> img-div.
+	var html = '<div class="img-div" id="s'+id+'" data-id="'+id+'" data-time="'+serie['time']+'">';
+
 	if(lista[id] === undefined){
-		html += htmlAdd(serie['nome'],serie['img'])+'<br>';
+		html += htmlAdd(serie['nome'],serie['img']); //+'<br>';
 	} else {
-		html += htmlRemove(serie['nome'],serie['img'])+'<br>';
+		html += htmlRemove(serie['nome'],serie['img']); //+'<br>';
 	}
 	html += '</div>';
 	return html;
@@ -197,9 +200,14 @@ function htmlRemove(nome,img){
 
 function htmlRemoveMenu(id,time,img){
 	var html = '';
-	html += '<a href="#!" onclick="removeSerieMenu($(this));" title="'+formatMinToTime(time)+'" class="tooltip added-img" data-id="'+id+'" data-time="'+time+'">';
+	// html += '<a href="#!" onclick="removeSerieMenu($(this));" title="'+formatMinToTime(time)+'" class="tooltip added-img" data-id="'+id+'" data-time="'+time+'">';
+	// html += '<img src="'+img+'" />';
+	// html += '</a>';
+
+	html += '<div class="added-img-div tooltip" onclick="removeSerieMenu($(this));" title="'+formatMinToTime(time)+'" data-id="'+id+'" data-time="'+time+'">';
 	html += '<img src="'+img+'" />';
-	html += '</a>';
+	html += '</div>';
+
 	return html;
 }
 
@@ -236,6 +244,8 @@ function reset(){
 	$('#lista div').each(unselect);
 	$('#search-results div').each(unselect);
 
+	$('#reset-btn-div').slideUp('fast');
+	resetAdded = false;
 
 	updateMenu();
 	return false;
@@ -245,7 +255,8 @@ function addReset(){
 	if(resetAdded === false){
 		lista = getLista();
 		if(Object.keys(lista).length > 1){
-			$('#btn-reset').html('<a href="#!" onclick="return reset();">Remover todos</a>');
+			$('#reset-btn-div').slideDown('fast');
+			// $('#reset-btn-div').html('<a href="#!" onclick="return reset();" id="reset-btn"><i class="icon fa fa-trash fa-2x"></i></a>');
 			resetAdded = true;
 		}
 	}
