@@ -84,11 +84,6 @@
                     <form>
                         <input id="search-input" type="text" placeholder="Digite o nome do seriado." autocomplete="off">
                     </form>
-<<<<<<< HEAD
-                    
-=======
-
->>>>>>> da829bffa6dcf0d751f48513605f8a8b6fec2385
                     <div id='search-results'></div>
                 </div>
 
@@ -102,7 +97,6 @@
         <!-- Scripts -->
         <script src="http://code.jquery.com/jquery-1.12.0.min.js"></script>
         <script src="<?=Yii::app()->baseUrl . '/themes/2016/assets/js/app.js';?>"></script>
-        <script src="<?=Yii::app()->baseUrl . '/themes/2016/assets/js/olivi.js';?>"></script>
         <script src="<?=Yii::app()->baseUrl . '/themes/2016/assets/js/notify.min.js';?>"></script>
         <script src="<?=Yii::app()->baseUrl . '/themes/2016/assets/js/jquery.tooltipster.min.js';?>"></script>
 
