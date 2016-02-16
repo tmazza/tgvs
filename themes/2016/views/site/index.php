@@ -7,7 +7,7 @@
 			'id'=>'btn-mais',
 			'data-o' => 0,
 			'style' => '',
-			'class' => 'button tooltip',
+			'class' => 'button',
 			'title' => 'Ver mais',
 		]);
 		?>

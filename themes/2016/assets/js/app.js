@@ -98,7 +98,7 @@ function addSerie(elem){
 	 		'img': elem.find('img').attr('src'),
 	 	};
 	 	setLista(lista);
-	 	updateAdd(elem);
+	 	updateAdd(id);
 		updateMenu();
 		addReset();
 	}
@@ -114,7 +114,7 @@ function removeSerie(elem){
 		setTempo(tempo);
 		delete lista[id];
 	 	setLista(lista);
-	 	updateRemove(elem);
+	 	updateRemove(id);
 		updateMenu();
 		addReset();
 	}
@@ -122,20 +122,22 @@ function removeSerie(elem){
 
 function removeSerieMenu(elem){
 	id = elem.attr('data-id');
-	if($('#s'+id)){
-		nome = $('#s'+id).find('p').text();
+	if($('.s'+id)){
+		nome = $('.s'+id).find('p').text();
 		img = elem.find('img').attr('src');
-		$('#s'+id).html(htmlAdd(nome,img));
+		$('.s'+id).html(htmlAdd(nome,img));
 	}
 	removeSerie(elem);
 }
 
-function updateAdd(elem){
-	elem.html(htmlRemove(elem.find('p').text(),elem.find('img').attr('src')));
+function updateAdd(id){
+	elem = $('.s'+id);
+	elem.html(htmlRemove(elem.first('p').text(),elem.find('img').attr('src')));
 }
 
-function updateRemove(elem){
-	elem.html(htmlAdd(elem.find('p').text(),elem.find('img').attr('src')));
+function updateRemove(id){
+	elem = $('.s'+id);
+	elem.html(htmlAdd(elem.first('p').text(),elem.find('img').attr('src')));
 }
 
 function updateMenu(){
@@ -191,7 +193,7 @@ function htmlSerie(serie){
 	lista = getLista();
 
 	// div-image -> img-div.
-	var html = '<div class="img-div" id="s'+id+'" data-id="'+id+'" data-time="'+serie['time']+'">';
+	var html = '<div class="img-div s'+id+'" data-id="'+id+'" data-time="'+serie['time']+'">';
 
 	if(lista[id] === undefined){
 		html += htmlAdd(serie['nome'],serie['img']); //+'<br>';

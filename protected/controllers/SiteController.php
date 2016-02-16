@@ -24,7 +24,7 @@ class SiteController extends MainController {
     $criteria->compare('nome',$s, true);
     $criteria->compare('nome_org',$s, true, 'OR');
     $criteria->limit = 3;
-    $criteria->order = 'popularity DESC';
+    $criteria->order = 'popularity DESC,nome ASC';
     $data = Serie::model()->findAll($criteria);
     echo $this->output($data);
   }

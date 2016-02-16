@@ -1,6 +1,6 @@
 <!DOCTYPE HTML>
 
-<html>
+<html lang="pt-BR">
 
     <head>
 
@@ -77,7 +77,7 @@
             <div id="right-side">
 
                 <div id="switch-btn-div">
-                    <a href="#!" id="switch-btn" class="tooltip" title="Listar/Buscar"><i class="icon fa fa-th-large fa-3x"></i></a>
+                    <a href="#!" id="switch-btn" title="Listar/Buscar"><i class="icon fa fa-th-large fa-3x"></i></a>
                 </div>
 
                 <div id="search-area">
