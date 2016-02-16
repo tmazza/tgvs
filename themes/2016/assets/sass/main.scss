@@ -105,6 +105,7 @@ html {
       display: inline-block;
       vertical-align: top;
       text-align: center;
+      line-height: 25px;
       color: $theme-color-dark;
       font-size: $timer-font-size-l;
     }
@@ -172,43 +173,78 @@ html {
   #list-area {
     text-align: center;
     
-    .img-div {
-      // @include imag-divi(52%);
+    // .img-div {
+    //   // @include imag-divi(52%);
 
-      display: inline-block;
-      vertical-align: top;
-      width: $listed-img-width;
-      cursor: pointer;
-      margin: 0 2px;
+    //   display: inline-block;
+    //   vertical-align: top;
+    //   width: $listed-img-width;
+    //   cursor: pointer;
+    //   margin: 0 2px;
 
-      border: 2px solid transparent;
-      @include animate(border, 0.15s);
+    //   border: 2px solid transparent;
+    //   @include animate(border, 0.15s);
 
-      img {
-        width: 100%;
+    //   img {
+    //     width: 100%;
 
-        opacity: 1;
-        @include animate(opacity, 0.15s);
-      }
+    //     opacity: 1;
+    //     @include animate(opacity, 0.15s);
+    //   }
 
-      img:hover {
-        opacity: 0.5;
-      }
+    //   img:hover {
+    //     opacity: 0.5;
+    //   }
 
-      .added {
-        opacity: 0.3;
-        border: 3px solid #FFAB00;
-      }
+    //   .added {
+    //     opacity: 0.3;
+    //     border: 3px solid #FFAB00;
+    //   }
 
-      p {
-        width: 100%;
-        margin: 0 0 25px;
-        color: $theme-color-4;
-      }
-    }
+    //   p {
+    //     width: 100%;
+    //     margin: 0 0 25px;
+    //     color: $theme-color-4;
+    //   }
+    // }
 
     #more-btn-div {
       @include btn-divi(20px 0 $whole-space-top-bottom)
+    }
+  }
+
+  .img-div {
+    // @include imag-divi(52%);
+
+    display: inline-block;
+    vertical-align: top;
+    width: $listed-img-width;
+    cursor: pointer;
+    margin: 0 2px;
+
+    border: 2px solid transparent;
+    @include animate(border, 0.15s);
+
+    img {
+      width: 100%;
+
+      opacity: 1;
+      @include animate(opacity, 0.15s);
+    }
+
+    img:hover {
+      opacity: 0.5;
+    }
+
+    .added {
+      opacity: 0.3;
+      border: 3px solid #FFAB00;
+    }
+
+    p {
+      width: 100%;
+      margin: 0 0 25px;
+      color: $theme-color-4;
     }
   }
 }

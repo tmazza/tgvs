@@ -84,7 +84,11 @@
                     <form>
                         <input id="search-input" type="text" placeholder="Digite o nome do seriado." autocomplete="off">
                     </form>
+<<<<<<< HEAD
                     
+=======
+
+>>>>>>> da829bffa6dcf0d751f48513605f8a8b6fec2385
                     <div id='search-results'></div>
                 </div>
 
