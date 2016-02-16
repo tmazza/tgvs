@@ -2,19 +2,14 @@
 	<div id='lista'></div>
 
 	<div id="more-btn-div">
-	    <a href="#!" id="btn-mais"><i class="icon fa fa-plus fa-3x"></i></a>
-	</div>
-
-	<ul class="actions" style="text-align:center;">
-		<li>
 		<?php
-		echo CHtml::link("+ Mais",'#!',[
+		echo CHtml::link('<i class="icon fa fa-plus fa-3x"></i>','#!',[
 			'id'=>'btn-mais',
 			'data-o' => 0,
 			'style' => '',
-			'class' => 'button',
+			'class' => 'button tooltip',
+			'title' => 'Ver mais',
 		]);
 		?>
-		</li>
-	</ul>
+	</div>
 </div>

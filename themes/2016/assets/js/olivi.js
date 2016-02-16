@@ -3,10 +3,6 @@ $(document).ready(function () {
   $('#list-area').hide();
   $('#search-input').focus();
 
-  if(Object.keys(lista).length <= 1) {
-    $('#reset-btn-div').hide();
-  }
-
   $('#contact-btn').click(function () {
     $('#contact-box').slideToggle('fast');
   });

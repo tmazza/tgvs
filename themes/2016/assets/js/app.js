@@ -51,7 +51,7 @@ function getSeries(){
 		'type':'GET',
 		'data':{'o':parseInt($('#btn-mais').attr('data-o')),'ps':pageSize},
 		// 'beforeSend':function(){ $("#btn-mais").html("<img style='height:160px;margin-top:-80px;' src=\"http://i.imgur.com/P5ApKIy.gif\" />"); },
-		'beforeSend':function(){ $("#btn-mais").html("<span style='color:#F7C873;'>Carregando...</span>"); },
+		'beforeSend':function(){ $("#btn-mais").html('<i class="icon fa fa-refresh fa-spin fa-3x"></i>'); },
 		'success': function(html) {
 			series = JSON.parse(html);
 			$.each(series,function(num,serie){
@@ -61,7 +61,7 @@ function getSeries(){
 				'data-o',
 				parseInt($('#btn-mais').attr('data-o')) + pageSize
 			);
-			$('#btn-mais').text('+ Mais');
+			$('#btn-mais').html('<i class="icon fa fa-plus fa-3x"></i>');
 		},
 		'url':'/index.php?r=site/nextPage',
 		'cache':false,
@@ -98,6 +98,7 @@ function removeSerie(elem){
 	 	setLista(lista);
 	 	updateRemove(elem);
 		updateMenu();
+		addReset();
 	}
 }
 
@@ -252,13 +253,13 @@ function reset(){
 }
 
 function addReset(){
-	if(resetAdded === false){
-		lista = getLista();
-		if(Object.keys(lista).length > 1){
-			$('#reset-btn-div').slideDown('fast');
-			// $('#reset-btn-div').html('<a href="#!" onclick="return reset();" id="reset-btn"><i class="icon fa fa-trash fa-2x"></i></a>');
-			resetAdded = true;
-		}
+	lista = getLista();
+	if(resetAdded === false && Object.keys(lista).length > 1){
+		$('#reset-btn-div').slideDown('fast');
+		resetAdded = true;
+	} else if(Object.keys(lista).length <= 1) {
+		$('#reset-btn-div').slideUp('fast');
+		resetAdded = false;
 	}
 }
 
