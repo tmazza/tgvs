@@ -63,10 +63,8 @@
                     Dados de <a href="https://www.themoviedb.org">The Movie Database (TMDb)</a>.
                 </div>
 
-                <!-- TODO: tamanho da linha entre os dígitos e as letras. -->
                 <div id='tempo'></div>
 
-                <!-- TODO: quando remove pela lista direita até um ou menos seriado, não some o botão. -->
                 <div id='reset-btn-div'>
                     <a href="#!" onclick="return reset();" id="reset-btn"><i class="icon fa fa-trash fa-2x"></i></a>
                 </div>
@@ -86,13 +84,11 @@
                     <form>
                         <input id="search-input" type="text" placeholder="Digite o nome do seriado." autocomplete="off">
                     </form>
-                    
-                    <!-- TODO: deixar os resultados numa linha. -->
+
                     <div id='search-results'></div>
                 </div>
 
                 <!-- list-area -->
-                <!-- TODO: botão mais. -->
                 <?=$content;?>
 
             </div>
