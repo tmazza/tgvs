@@ -3,10 +3,6 @@ class SiteController extends MainController {
 
   public $pageSize = 5;
 
-  protected function beforeAction($action){
-    return parent::beforeAction($action);
-  }
-
   public function actionIndex(){
     $this->render('index',[
     	'series' => $this->getSeries(0),
@@ -39,14 +35,14 @@ class SiteController extends MainController {
   }
 
   private function output($data){
-    return json_encode(array_values(CHtml::listData($data,'id',function($s){
+    return json_encode(array_map(function($s){
       return [
         'id' => $s->id,
         'nome' => $s->nome,
         'time' => $s->qtd_episodios*$s->tempo_episodios,
         'img' => $s->linkCapa('185'),
       ];
-    })));
+    },$data));
   }
 
 

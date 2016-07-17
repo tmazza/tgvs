@@ -58,45 +58,37 @@
                 </div>
 
                 <div id="contact-box">
-                    Desenvolvido por <a href="mailto:tiagomdepaula@gmail.com">Tiago Mazzarollo</a> e <a href="#!">Oliver Hung Buo Tso</a>.
+                    Desenvolvido por <a href="http://github.com/tmazza/">Tiago Mazzarollo</a> 
+                    e 
+                    <a href="http://github.com/olivertso">Oliver Hung Buo Tso</a>.
                     <br/>
                     Dados de <a href="https://www.themoviedb.org">The Movie Database (TMDb)</a>.
                 </div>
-
                 <div id='tempo'></div>
-
                 <div id='reset-btn-div'>
                     <a href="#!" title="Remover todos" onclick="return reset();" class='tooltip' id="reset-btn"><i class="icon fa fa-trash fa-2x"></i></a>
                 </div>
-
                 <div id="added-show-list"></div>
-
             </div>
 
             <!-- right-side -->
             <div id="right-side">
-
                 <div id="switch-btn-div">
                     <a href="#!" id="switch-btn" title="Listar/Buscar"><i class="icon fa fa-th-large fa-3x"></i></a>
                 </div>
-
                 <div id="search-area">
                     <form>
                         <input id="search-input" type="text" placeholder="Digite o nome do seriado." autocomplete="off">
                     </form>
-
                     <div id='search-results'></div>
                 </div>
-
                 <!-- list-area -->
                 <?=$content;?>
-
             </div>
 
         </main>
 
         <!-- Scripts -->
-        <script src="http://code.jquery.com/jquery-1.12.0.min.js"></script>
         <script src="<?=Yii::app()->baseUrl . '/themes/2016/assets/js/app.js';?>"></script>
         <script src="<?=Yii::app()->baseUrl . '/themes/2016/assets/js/notify.min.js';?>"></script>
         <script src="<?=Yii::app()->baseUrl . '/themes/2016/assets/js/jquery.tooltipster.min.js';?>"></script>

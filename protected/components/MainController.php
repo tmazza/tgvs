@@ -1,8 +1,5 @@
 <?php
 
-/**
- * Utilizado por todos os da aplicação
- */
 class MainController extends CController  {
 
     const fsuc = 'flash-success';
@@ -11,12 +8,15 @@ class MainController extends CController  {
 
     public $assets;
 
-    public $pageTitle = 'Tempo Gasto Vendo Séries';
-    public $description = 'Calcule o tempo que você gastou assistindo seriados e animes.';
-    public $keywords = 'calcular,serie,seriados,animes,tempo,gasto,perdido,assitindo,vendo,wasted,time,watching,tv show';
-    public $subTitle = '';
+    public $pageTitle = null;
+    public $description = null;
+    public $keywords = null;
+    public $subTitle = null;
 
     protected function beforeAction($action) {
+        $this->pageTitle = 'Tempo Gasto Vendo Séries';
+        $this->description = 'Calcule o tempo que você gastou assistindo seriados e animes.';
+        $this->keywords = 'calcular,serie,seriados,animes,tempo,gasto,perdido,assitindo,vendo,wasted,time,watching,tv show';
         $this->addScripts();
         return parent::beforeAction($action);
     }
@@ -24,7 +24,6 @@ class MainController extends CController  {
     private function addScripts(){
       if (!Yii::app()->request->isAjaxRequest) {
           Yii::app()->clientScript->registerCoreScript('jquery');
-          #$this->assets = Yii::app()->assetManager->publish(Yii::getPathOfAlias('application.webroot'), false, -1, YII_DEBUG ? true : null);
       } else {
           Yii::app()->clientScript->scriptMap['jquery.js'] = false;
           Yii::app()->clientScript->scriptMap['jquery.min.js'] = false;
