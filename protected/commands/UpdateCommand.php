@@ -24,7 +24,7 @@ class UpdateCommand extends CConsoleCommand {
 	 * Se a série ja existe, atualiza a popularidade e as imagens
 	 */
 	private function atualizaSeries(){
-	   	$time = time();
+	   	$tempo = time();
 	
 	  	$url = 'http://api.themoviedb.org/3/tv/popular';
 	    $page = 1;
