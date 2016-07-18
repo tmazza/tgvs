@@ -1,15 +1,19 @@
 <?php
-class UpdateController extends MainController {
+class UpdateCommand extends CConsoleCommand {
 	
 	
 	public function actionIndex(){
+		$this->saveLog("start update");
 		$this->atualizaSeries();
+		$this->saveLog("finish update series");
 		$this->atualizaTemporadas();
+		$this->saveLog("finish update temporadas");
 	}
 
 	public function actionSoSer(){
 		$this->atualizaSeries();
 	}
+
 	public function actionSoTem(){
 		$this->atualizaTemporadas();
 	}
@@ -20,19 +24,18 @@ class UpdateController extends MainController {
 	 * Se a série ja existe, atualiza a popularidade e as imagens
 	 */
 	private function atualizaSeries(){
+	   	$time = time();
+	
 	  	$url = 'http://api.themoviedb.org/3/tv/popular';
-
 	    $page = 1;
-	    do {
-
-	    	$time = microtime(true);
+		do {
 
 		    $data = json_decode(Yii::app()->curl->get($url, [
 		    	'api_key'=>Yii::app()->params['tmdb_key'],
 		    	'page'=>$page,
 		    	'language'=>'utf-8',
 		   	]),true);
-
+	
 		    $do = false;
 		    if(isset($data['results']) && $data['results'] > 0){
 			    $do = true;
@@ -41,7 +44,6 @@ class UpdateController extends MainController {
 			    	$model = Serie::model()->findByAttributes([
 			    		'tmdb_id' => $r['id'],
 			    	]);
-
 			    	if(is_null($model)){
 			    		$model = new Serie();
 			    		$model->nome = $r['name'];
@@ -64,24 +66,21 @@ class UpdateController extends MainController {
 			    		$model->update(['popularity','poster_path','backdrop_path','nome_org'],false);
 			    	}
 			    }
-			    echo 'Page ' . $page . ' - ' . count($results) . '<br>';
 		    }
-
 		    $page++;
-
-		    echo 'T: ' . number_format((microtime(true)-$time),2) . '<br>';
-
-
   	    } while($do && $page <= 5000);
+
+		$this->saveLog(" tempo update series" . (time() - $tempo));
 
 	}
 
-	/**10583
+	/**
 	 * Para cada registro de série busca/atualiza 
 	 * as temporadas e o tempo médio dos episódios da temporada
 	 */
 	private function atualizaTemporadas(){
 		set_time_limit(0);
+		$tempo = time();
 		$series = Serie::model()->findAll([
 			'condition' => 'nome_org IS NOT NULL',	
 		]);
@@ -114,9 +113,12 @@ class UpdateController extends MainController {
 		    $count++;
 
 		    if($count % 40 == 0){
-		    	sleep(5);
+		    	sleep(2);
 		    }
 		}
+
+
+		$this->saveLog(" tempo update series" . (time() - $tempo));
 
 
 	}
@@ -140,5 +142,15 @@ class UpdateController extends MainController {
 		}
 	}
 
+	/**
+	 * Salva mensagem em arquivo de log
+	 */
+	protected function saveLog($msg){
+	    if(!is_dir(__DIR__.'/../runtime/commands'))
+    		mkdir(__DIR__.'/../runtime/commands',0777);
+		$handle = fopen(__DIR__.'/../runtime/commands/log-update.txt','a+');
+		fwrite($handle,date("d/m/Y H:i:s") . ' ' . $msg . "\n");
+		fclose($handle);
+	}
 
 }
