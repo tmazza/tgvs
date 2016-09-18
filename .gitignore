@@ -8,7 +8,7 @@ protected/data/*.db
 */.DS_Store
 #protected/config/*
 
-## questoess ##
+## questoes ##
 pdfs/*
 pdfs/**
 questoes/*
