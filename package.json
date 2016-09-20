@@ -1,0 +1,16 @@
+{
+    "name": "tgvs",
+    "devDependencies": {
+        "gulp": "*",
+        "gulp-clean-css": "*",
+        "gulp-concat": "*",
+        "gulp-load-plugins": "*",
+        "gulp-ng-annotate": "*",
+        "gulp-plumber": "*",
+        "gulp-sass": "*",
+        "gulp-sourcemaps": "*",
+        "gulp-uglify": "*",
+        "gulp-watch": "*"
+    }
+}
+

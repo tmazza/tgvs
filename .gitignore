@@ -1,17 +1,2 @@
-
-### Yii ###
-assets/*
-!assets/.gitignore
-protected/runtime/*
-!protected/runtime/.gitignore
-protected/data/*.db
-*/.DS_Store
-#protected/config/*
-
-## questoess ##
-pdfs/*
-pdfs/**
-questoes/*
-questoes/**
-protected/modules/editor/works/*
-protected/modules/editor/works/**
+assets
+node_modules
