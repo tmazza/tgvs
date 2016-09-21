@@ -1,11 +1,11 @@
 var paths = {
     'src': {
         'js': [
-            './project/js/*.module.js',
-            './project/js/*.config.js',
-            './project/js/*.service.js',
-            './project/js/*.directive.js',
-            './project/js/*.controller.js'
+            './project/app/*.module.js',
+            './project/app/*.config.js',
+            './project/app/*.service.js',
+            './project/app/*.directive.js',
+            './project/app/*.controller.js'
         ],
         'css': [
             './project/css/!(_)*.scss'
@@ -48,7 +48,6 @@ gulp.task('css', function () {
         .pipe(plugins.sourcemaps.write('./'))
         .pipe(gulp.dest(paths.dest.css));
 });
-
 
 gulp.task('watch', function () {
     var js = paths.src.js;

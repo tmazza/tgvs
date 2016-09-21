@@ -1,0 +1,1 @@
+Tempo Gasto Vendo Séries
