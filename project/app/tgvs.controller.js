@@ -8,7 +8,7 @@
             tgvsController,
         ]);
 
-    function tgvsController(){
+    function tgvsController() {
         var vm = this;
 
         vm.content = '\\o/';

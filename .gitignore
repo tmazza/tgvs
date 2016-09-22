@@ -1,2 +1,7 @@
+# Sublime
+*.sublime-project
+*.sublime-workspace
+
+# Project
 assets
 node_modules
