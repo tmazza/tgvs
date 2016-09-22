@@ -3,8 +3,8 @@ var paths = {
         'js': [
             './project/app/*.module.js',
             './project/app/*.config.js',
-            './project/app/*.service.js',
-            './project/app/*.directive.js',
+            './project/app/services/*.service.js',
+            './project/app/components/*.directive.js',
             './project/app/*.controller.js'
         ],
         'css': [

@@ -4,6 +4,7 @@
     angular
         .module('tgvs')
         .controller('tgvsController', [
+            'tmdbService',
             tgvsController,
         ]);
 
