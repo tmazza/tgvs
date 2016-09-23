@@ -7,8 +7,8 @@ var paths = {
             './project/app/components/*.directive.js',
             './project/app/*.controller.js'
         ],
-        'css': [
-            './project/css/!(_)*.scss'
+        'sass': [
+            './project/layout/sass/!(_)*.scss'
         ]
     },
     'dest': {
@@ -38,11 +38,11 @@ gulp.task('js', function () {
 
 gulp.task('css', function () {
     return gulp
-        .src(paths.src.css)
+        .src(paths.src.sass)
         .pipe(plugins.plumber())
         .pipe(plugins.sourcemaps.init())
         .pipe(plugins.concat('tgvs.min.css'))
-        .pipe(plugins.sass({includePaths: ['./project/css/']})
+        .pipe(plugins.sass({includePaths: ['./project/layout/sass/']})
         .on('error', plugins.sass.logError))
         .pipe(plugins.cleanCss())
         .pipe(plugins.sourcemaps.write('./'))
@@ -51,13 +51,13 @@ gulp.task('css', function () {
 
 gulp.task('watch', function () {
     var js = paths.src.js;
-    var css = paths.src.css;
+    var sass = paths.src.sass;
 
     plugins.watch(js, function () {
         gulp.start('js');
     });
 
-    plugins.watch(css, function () {
+    plugins.watch(sass, function () {
         gulp.start('css');
     });
 })
