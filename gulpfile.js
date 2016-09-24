@@ -2,7 +2,7 @@ var paths = {
     'src': {
         'js': [
             './project/app/**/*.module.js',
-            './project/app/**/*.js'
+            './project/app/**/!(*.unit).js'
         ],
         'sass': [
             './project/layout/sass/**/!(_)*.scss'

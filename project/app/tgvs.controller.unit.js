@@ -14,7 +14,7 @@ describe('TgvsController', function() {
         });
     });
 
-    it('should exists', function () {
+    it('should be defined', function () {
         expect(controller).toBeDefined();
     });
 

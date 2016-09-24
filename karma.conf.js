@@ -13,9 +13,7 @@ module.exports = function(config) {
 
             'app/**/*.html',
             'app/**/*.module.js',
-            'app/**/*.js',
-
-            'tests/unit/**/*.js'
+            'app/**/*.js'
         ],
 
         browsers: ['Chrome'],
