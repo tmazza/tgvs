@@ -1,14 +1,11 @@
 var paths = {
     'src': {
         'js': [
-            './project/app/*.module.js',
-            './project/app/*.config.js',
-            './project/app/services/*.service.js',
-            './project/app/components/*.directive.js',
-            './project/app/*.controller.js'
+            './project/app/**/*.module.js',
+            './project/app/**/*.js'
         ],
         'sass': [
-            './project/layout/sass/!(_)*.scss'
+            './project/layout/sass/**/!(_)*.scss'
         ]
     },
     'dest': {
@@ -18,11 +15,26 @@ var paths = {
 };
 
 var gulp = require('gulp');
+var Server = require('karma').Server;
 var plugins = require('gulp-load-plugins')();
 
 gulp.task('default', ['build']);
 
 gulp.task('build', ['js', 'css']);
+
+gulp.task('test', function (done) {
+    new Server({
+        configFile: __dirname + '/karma.conf.js',
+        singleRun: true
+    }, done).start();
+});
+
+gulp.task('tdd', function (done) {
+    new Server({
+        configFile: __dirname + '/karma.conf.js',
+        autoWatch: true
+    }, done).start();
+});
 
 gulp.task('js', function () {
     return gulp

@@ -3,12 +3,12 @@
 
     angular
         .module('tgvs')
-        .controller('tgvsController', [
+        .controller('TgvsController', [
             'tmdbService',
-            tgvsController,
+            TgvsController,
         ]);
 
-    function tgvsController() {
+    function TgvsController() {
         var vm = this;
 
         vm.content = '\\o/';
