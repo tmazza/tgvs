@@ -11,6 +11,11 @@ var paths = {
     'dest': {
         'js': './project/assets/js/',
         'css': './project/assets/css/'
+    },
+    'test': {
+        'e2e': [
+            './e2e-tests/**/*.e2e.js'
+        ]
     }
 };
 
@@ -18,22 +23,51 @@ var gulp = require('gulp');
 var Server = require('karma').Server;
 var plugins = require('gulp-load-plugins')();
 
-gulp.task('default', ['build']);
+var port = '8000';
+
+gulp.task('default', ['build'], function () {
+    gulp.start('unit');
+
+    gulp.start('connect');
+    gulp.start('e2e');
+    gulp.start('disconnect');
+});
 
 gulp.task('build', ['js', 'css']);
 
-gulp.task('test', function (done) {
+gulp.task('connect', function() {
+    plugins.connect.server({
+        root: 'project',
+        port: port
+    });
+});
+
+gulp.task('disconnect', ['e2e'],function() {
+    plugins.connect.serverClose();
+});
+
+gulp.task('unit', function (done) {
     new Server({
         configFile: __dirname + '/karma.conf.js',
         singleRun: true
     }, done).start();
 });
 
-gulp.task('tdd', function (done) {
+gulp.task('unit-watch', function (done) {
     new Server({
         configFile: __dirname + '/karma.conf.js',
         autoWatch: true
     }, done).start();
+});
+
+gulp.task('e2e',function (done) {
+    return gulp
+        .src(paths.test.e2e)
+        .pipe(plugins.protractor.protractor({
+            configFile: 'protractor.conf.js',
+            args: ['--baseUrl', 'http://localhost:' + port]
+        }))
+        .on('error', function (e) { throw e; });
 });
 
 gulp.task('js', function () {

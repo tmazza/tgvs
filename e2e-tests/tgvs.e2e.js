@@ -2,9 +2,19 @@
 
 describe('tgvs', function () {
 
-    it('should have a title', function () {
+    var el;
+
+    beforeEach(function () {
         browser.get('');
-        expect(browser.getTitle()).toEqual('');
+    });
+
+    it('should have a title', function () {
+        expect(browser.getTitle()).toEqual('Tempo Gasto Vendo Séries');
+    });
+
+    it('should have content', function () {
+        el = browser.findElement(by.id('content'));
+        expect(el.getText()).toBe('\\o/');
     });
 
 });

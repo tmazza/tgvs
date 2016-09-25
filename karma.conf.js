@@ -1,7 +1,6 @@
 module.exports = function(config) {
     config.set({
         basePath: './project',
-
         files: [
             'https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.5/angular.min.js',
             'https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.5/angular-route.min.js',
@@ -15,8 +14,7 @@ module.exports = function(config) {
             'app/**/*.module.js',
             'app/**/*.js'
         ],
-
-        browsers: ['Chrome'],
+        browsers: ['Chrome', 'Firefox'],
         frameworks: ['jasmine'],
         reporters: ['progress'],
         colors: true,

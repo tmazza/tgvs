@@ -5,14 +5,12 @@ describe('TgvsController', function() {
     var controller;
     var $scope;
 
-    beforeEach(function () {
-        module('tgvs');
+    beforeEach(module('tgvs'));
 
-        inject(function ($rootScope, $controller) {
-            $scope = $rootScope.$new();
-            controller = $controller('TgvsController', {$scope: $scope});
-        });
-    });
+    beforeEach(inject(function ($rootScope, $controller) {
+        $scope = $rootScope.$new();
+        controller = $controller('TgvsController', {$scope: $scope});
+    }));
 
     it('should be defined', function () {
         expect(controller).toBeDefined();
