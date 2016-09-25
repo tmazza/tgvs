@@ -17,21 +17,13 @@ module.exports = function(config) {
         ],
 
         browsers: ['Chrome'],
-
         frameworks: ['jasmine'],
-
         reporters: ['progress'],
-
         colors: true,
-
         logLevel: config.LOG_INFO,
-
         port: 9876,
-
         autoWatch: true,
-
         singleRun: false,
-
         concurrency: Infinity
     });
 }
