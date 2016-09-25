@@ -43,7 +43,7 @@ gulp.task('build', ['js', 'css']);
 /**
  * Start server.
  */
-gulp.task('connect', function() {
+gulp.task('connect', function () {
     plugins.connect.server({
         root: 'project',
         port: port
@@ -53,7 +53,7 @@ gulp.task('connect', function() {
 /**
  * Stop server.
  */
-gulp.task('disconnect', ['e2e'],function() {
+gulp.task('disconnect', ['e2e'], function () {
     plugins.connect.serverClose();
 });
 
