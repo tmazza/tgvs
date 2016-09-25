@@ -25,16 +25,24 @@ var plugins = require('gulp-load-plugins')();
 
 var port = '8000';
 
+/**
+ * Build assests and run all unit/e2e tests.
+ */
 gulp.task('default', ['build'], function () {
-    gulp.start('unit');
-
     gulp.start('connect');
+    gulp.start('unit');
     gulp.start('e2e');
     gulp.start('disconnect');
 });
 
+/**
+ * Build assets.
+ */
 gulp.task('build', ['js', 'css']);
 
+/**
+ * Start server.
+ */
 gulp.task('connect', function() {
     plugins.connect.server({
         root: 'project',
@@ -42,10 +50,16 @@ gulp.task('connect', function() {
     });
 });
 
+/**
+ * Stop server.
+ */
 gulp.task('disconnect', ['e2e'],function() {
     plugins.connect.serverClose();
 });
 
+/**
+ * Run all unit tests.
+ */
 gulp.task('unit', function (done) {
     new Server({
         configFile: __dirname + '/karma.conf.js',
@@ -53,6 +67,9 @@ gulp.task('unit', function (done) {
     }, done).start();
 });
 
+/**
+ * Run all unit tests on file change.
+ */
 gulp.task('unit-watch', function (done) {
     new Server({
         configFile: __dirname + '/karma.conf.js',
@@ -60,6 +77,9 @@ gulp.task('unit-watch', function (done) {
     }, done).start();
 });
 
+/**
+ * Run all e2e tests.
+ */
 gulp.task('e2e',function (done) {
     return gulp
         .src(paths.test.e2e)
@@ -70,6 +90,9 @@ gulp.task('e2e',function (done) {
         .on('error', function (e) { throw e; });
 });
 
+/**
+ * Build javascript.
+ */
 gulp.task('js', function () {
     return gulp
         .src(paths.src.js)
@@ -82,6 +105,9 @@ gulp.task('js', function () {
         .pipe(gulp.dest(paths.dest.js));
 });
 
+/**
+ * Build css.
+ */
 gulp.task('css', function () {
     return gulp
         .src(paths.src.sass)
@@ -95,6 +121,9 @@ gulp.task('css', function () {
         .pipe(gulp.dest(paths.dest.css));
 });
 
+/**
+ * Watch javascript and css.
+ */
 gulp.task('watch', function () {
     var js = paths.src.js;
     var sass = paths.src.sass;
@@ -106,5 +135,4 @@ gulp.task('watch', function () {
     plugins.watch(sass, function () {
         gulp.start('css');
     });
-})
-
+});
