@@ -23,16 +23,13 @@ var gulp = require('gulp');
 var Server = require('karma').Server;
 var plugins = require('gulp-load-plugins')();
 
-var port = '8000';
+var e2ePort = '8001';
 
 /**
  * Build assests and run all unit/e2e tests.
  */
 gulp.task('default', ['build'], function () {
-    gulp.start('connect');
-    gulp.start('unit');
-    gulp.start('e2e');
-    gulp.start('disconnect');
+    gulp.start('test');
 });
 
 /**
@@ -41,21 +38,19 @@ gulp.task('default', ['build'], function () {
 gulp.task('build', ['js', 'css']);
 
 /**
- * Start server.
+ * Run server.
  */
-gulp.task('connect', function () {
+gulp.task('run', function () {
     plugins.connect.server({
         root: 'project',
-        port: port
+        port: e2ePort
     });
 });
 
 /**
- * Stop server.
+ * Run all tests.
  */
-gulp.task('disconnect', ['e2e'], function () {
-    plugins.connect.serverClose();
-});
+gulp.task('test', ['unit', 'e2e']);
 
 /**
  * Run all unit tests.
@@ -81,13 +76,22 @@ gulp.task('unit-watch', function (done) {
  * Run all e2e tests.
  */
 gulp.task('e2e',function (done) {
-    return gulp
+    gulp
+        .start('run')
         .src(paths.test.e2e)
         .pipe(plugins.protractor.protractor({
             configFile: 'protractor.conf.js',
-            args: ['--baseUrl', 'http://localhost:' + port]
+            args: ['--baseUrl', 'http://localhost:' + e2ePort]
         }))
-        .on('error', function (e) { throw e; });
+        .on('error', function (e) {
+            console.log(e);
+            disconnect();
+        })
+        .on('end', disconnect);
+
+    function disconnect() {
+        plugins.connect.serverClose();
+    }
 });
 
 /**
