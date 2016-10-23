@@ -1,0 +1,25 @@
+button:focus, button:active {
+    outline: none;
+}
+
+.gg-tv-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+
+    li {
+        display: inline-block;
+    }
+}
+
+.gg-tv-card {
+    max-width: 280px;
+
+    img {
+        max-width: 100%;
+    }
+}
+
+.gg-selected {
+
+}

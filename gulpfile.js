@@ -1,36 +1,18 @@
 var paths = {
     'src': {
-        'js': [
-            './project/app/**/*.module.js',
-            './project/app/**/!(*.unit).js'
-        ],
-        'sass': [
-            './project/layout/sass/**/!(_)*.scss'
-        ]
+        'js': './project/app/**/*.js',
+        'sass': './project/content/sass/**/!(_)*.scss'
     },
     'dest': {
         'js': './project/assets/js/',
         'css': './project/assets/css/'
-    },
-    'test': {
-        'e2e': [
-            './e2e-tests/**/*.e2e.js'
-        ]
     }
 };
 
 var gulp = require('gulp');
-var Server = require('karma').Server;
 var plugins = require('gulp-load-plugins')();
 
-var e2ePort = '8001';
-
-/**
- * Build assests and run all unit/e2e tests.
- */
-gulp.task('default', ['build'], function () {
-    gulp.start('test');
-});
+var clientPort = '8000';
 
 /**
  * Build assets.
@@ -38,60 +20,13 @@ gulp.task('default', ['build'], function () {
 gulp.task('build', ['js', 'css']);
 
 /**
- * Run server.
+ * Start server.
  */
-gulp.task('run', function () {
+gulp.task('start', function () {
     plugins.connect.server({
-        root: 'project',
-        port: e2ePort
+        root: ['./project'],
+        port: clientPort
     });
-});
-
-/**
- * Run all tests.
- */
-gulp.task('test', ['unit', 'e2e']);
-
-/**
- * Run all unit tests.
- */
-gulp.task('unit', function (done) {
-    new Server({
-        configFile: __dirname + '/karma.conf.js',
-        singleRun: true
-    }, done).start();
-});
-
-/**
- * Run all unit tests on file change.
- */
-gulp.task('unit-watch', function (done) {
-    new Server({
-        configFile: __dirname + '/karma.conf.js',
-        autoWatch: true
-    }, done).start();
-});
-
-/**
- * Run all e2e tests.
- */
-gulp.task('e2e',function (done) {
-    gulp
-        .start('run')
-        .src(paths.test.e2e)
-        .pipe(plugins.protractor.protractor({
-            configFile: 'protractor.conf.js',
-            args: ['--baseUrl', 'http://localhost:' + e2ePort]
-        }))
-        .on('error', function (e) {
-            console.log(e);
-            disconnect();
-        })
-        .on('end', disconnect);
-
-    function disconnect() {
-        plugins.connect.serverClose();
-    }
 });
 
 /**
@@ -102,8 +37,7 @@ gulp.task('js', function () {
         .src(paths.src.js)
         .pipe(plugins.plumber())
         .pipe(plugins.sourcemaps.init())
-        .pipe(plugins.concat('tgvs.min.js'))
-        .pipe(plugins.ngAnnotate())
+        .pipe(plugins.concat('app.min.js'))
         .pipe(plugins.uglify())
         .pipe(plugins.sourcemaps.write('./'))
         .pipe(gulp.dest(paths.dest.js));
@@ -117,9 +51,8 @@ gulp.task('css', function () {
         .src(paths.src.sass)
         .pipe(plugins.plumber())
         .pipe(plugins.sourcemaps.init())
-        .pipe(plugins.concat('tgvs.min.css'))
-        .pipe(plugins.sass({includePaths: ['./project/layout/sass/']})
-        .on('error', plugins.sass.logError))
+        .pipe(plugins.concat('app.min.css'))
+        .pipe(plugins.sass().on('error', plugins.sass.logError))
         .pipe(plugins.cleanCss())
         .pipe(plugins.sourcemaps.write('./'))
         .pipe(gulp.dest(paths.dest.css));
