@@ -8,7 +8,7 @@
             $searchButton = document.getElementById('search-button'),
             $emptyButton = document.getElementById('empty-button'),
             $searchResults = document.getElementById('search-results'),
-            $selected = document.getElementById('selected');
+            $selectedList = document.getElementById('selected-list');
 
         /* Event listeners */
         $searchButton.addEventListener('click', function () {
@@ -26,6 +26,15 @@
 
         $emptyButton.addEventListener('click', function () {
             tvList.empty($searchResults);
+        });
+
+        $searchResults.addEventListener('click', function (event) {
+            var $selected = event.target.closest('li');
+
+            if (!$selected.classList.contains('gg-selected')) {
+                $selectedList.appendChild($selected.cloneNode(true));
+                $selected.classList.add('gg-selected');
+            }
         });
 
     });

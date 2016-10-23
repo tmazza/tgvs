@@ -5,7 +5,6 @@ var tvList = (function () {
         var li = document.createElement('li'),
             card = tvCard.create(tv);
 
-        li.setAttribute('id', tv.id);
         li.appendChild(card);
         list.appendChild(li);
     }
