@@ -10,10 +10,6 @@ var tvList = (function () {
         list.appendChild(li);
     }
 
-    function remove(list, tvId) {
-        // TODO
-    }
-
     function empty(list) {
         if (list.childElementCount > 0) {
             list.innerHTML = '';
@@ -22,7 +18,6 @@ var tvList = (function () {
 
     return {
         add: add,
-        remove: remove,
         empty: empty
     };
 

@@ -46,7 +46,6 @@
             if (!states.getWatchedList().includes(selectedId)) {
                 $watchedList.appendChild($selected.cloneNode(true));
                 $selected.classList.add('gg-watched');
-
                 states.addTo('watchedList', selectedId);
             }
             else {
@@ -54,11 +53,10 @@
 
                 document.querySelector(query).remove();
                 $selected.classList.remove('gg-watched');
-
                 states.removeFrom('watchedList', selectedId)
             }
 
-            console.log(states.getWatchedList());
+            console.log(states.getWatchedList());   // TESTING
         });
 
         $watchedList.addEventListener('click', function (event) {
@@ -71,10 +69,9 @@
             }
 
             $deleted.remove();
-
             states.removeFrom('watchedList', deletedId)
 
-            console.log(states.getWatchedList());
+            console.log(states.getWatchedList());   // TESTING
         });
 
     });
