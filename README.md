@@ -10,4 +10,5 @@ npm install
 gulp build
 gulp start
 gulp watch
+gulp e2e
 ```

@@ -6,6 +6,9 @@ var paths = {
     'dest': {
         'js': './project/assets/js/',
         'css': './project/assets/css/'
+    },
+    'test': {
+        'e2e': './project/tests/e2e.js'
     }
 };
 
@@ -13,11 +16,6 @@ var gulp = require('gulp');
 var plugins = require('gulp-load-plugins')();
 
 var clientPort = '8000';
-
-/**
- * Build assets.
- */
-gulp.task('build', ['js', 'css']);
 
 /**
  * Start server.
@@ -28,6 +26,26 @@ gulp.task('start', function () {
         port: clientPort
     });
 });
+
+/**
+ * Run e2e tests (start server first).
+ */
+gulp.task('e2e',function (done) {
+    return gulp
+        .src(paths.test.e2e)
+        .pipe(plugins.protractor.protractor({
+            configFile: 'protractor.conf.js',
+            args: ['--baseUrl', 'http://localhost:' + clientPort]
+        }))
+        .on('error', function (e) {
+            console.log(e);
+        });
+});
+
+/**
+ * Build assets.
+ */
+gulp.task('build', ['js', 'css']);
 
 /**
  * Build javascript.

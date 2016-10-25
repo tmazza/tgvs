@@ -19,7 +19,7 @@
                     query: $tv.value
                 },
                 success: function (response) {
-                    tvList.addCards($resultList, response.results);
+                    tvList.addCards($resultList, response.results, 'result');
                 }
             });
         });
@@ -39,7 +39,11 @@
                 $selected.classList.remove('gg-watched');
             }
             else {
-                $watchedList.appendChild($selected.cloneNode(true));
+                var $newWatched = $selected.cloneNode(true),
+                    newId = selectedId.replace('result', 'watched');
+
+                $newWatched.setAttribute('id', newId);
+                $watchedList.appendChild($newWatched);
                 $selected.classList.add('gg-watched');
             }
         });

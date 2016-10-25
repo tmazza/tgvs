@@ -1,22 +1,22 @@
 var tvList = (function () {
     'use strict';
 
-    function addCard($list, tv) {
+    function addCard($list, tv, idPrefix) {
         var li = document.createElement('li'),
             card = tvCard.create(tv);
 
-        li.setAttribute('id', tv.id);
+        li.setAttribute('id', idPrefix + tv.id);
         li.appendChild(card);
         $list.appendChild(li);
     }
 
-    function addCards($resultList, tvs) {
+    function addCards($resultList, tvs, idPrefix) {
         var $lastAdded, lastAddedId, query;
 
         $resultList.innerHTML = '';
 
         for (var i = 0; i < tvs.length; i++) {
-            tvList.addCard($resultList, tvs[i]);
+            tvList.addCard($resultList, tvs[i], idPrefix);
 
             $lastAdded = $resultList.lastChild;
             lastAddedId = $lastAdded.getAttribute('id');
