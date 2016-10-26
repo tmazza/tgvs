@@ -1,6 +1,6 @@
 exports.config = {
     framework: 'jasmine',
-    specs: ['./project/tests/e2e.js'],
+    specs: ['./project/tests/e2e/**/*.js'],
     multiCapabilities: [{
         browserName: 'chrome'
     }, {

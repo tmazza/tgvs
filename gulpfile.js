@@ -8,7 +8,7 @@ var paths = {
         'css': './project/assets/css/'
     },
     'test': {
-        'e2e': './project/tests/e2e.js'
+        'e2e': './project/tests/e2e/**/*.js'
     }
 };
 
