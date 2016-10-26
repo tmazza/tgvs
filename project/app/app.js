@@ -51,7 +51,8 @@
         $watchedList.addEventListener('click', function (event) {
             var $selected = event.target.closest('li'),
                 selectedId = $selected.getAttribute('id'),
-                query = '#result-list ' + '[id="' + selectedId + '"]',
+                queryId = selectedId.replace('watched', 'result'),
+                query = '#result-list ' + '[id="' + queryId + '"]',
                 $queried = document.querySelector(query);
 
             if ($queried) {

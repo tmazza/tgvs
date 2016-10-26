@@ -11,7 +11,7 @@ var tvList = (function () {
     }
 
     function addCards($resultList, tvs, idPrefix) {
-        var $lastAdded, lastAddedId, query;
+        var $lastAdded, lastAddedId, query, queryId;
 
         $resultList.innerHTML = '';
 
@@ -20,7 +20,8 @@ var tvList = (function () {
 
             $lastAdded = $resultList.lastChild;
             lastAddedId = $lastAdded.getAttribute('id');
-            query = '#watched-list ' + '[id="' + lastAddedId + '"]';
+            queryId = lastAddedId.replace('result', 'watched');
+            query = '#watched-list ' + '[id="' + queryId + '"]';
 
             if (document.querySelector(query)) {
                 $lastAdded.classList.add('gg-watched');

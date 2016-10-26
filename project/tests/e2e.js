@@ -49,9 +49,9 @@ describe('tgvs', function () {
         });
     });
 
-    describe('the journey', function () {
+    describe('add impastor', function () {
 
-        it('should show impastor tv card in result-list', function () {
+        it('should insert card in result-list after clicked search button', function () {
             el = element(by.css('#result-list #result62263'));
             tvInput.sendKeys('impastor');
             searchButton.click();
@@ -60,12 +60,12 @@ describe('tgvs', function () {
             expect(el.isPresent()).toBeTruthy();
         });
 
-        it('the impastor tv card should not be selected', function () {
+        it('card should not be selected', function () {
             el = element(by.id('result62263'));
             expect(el.getAttribute('class')).not.toContain('gg-watched');
         });
 
-        it('after clicked, should be selected', function () {
+        it('should be selected after clicked', function () {
             el = element(by.id('result62263'));
             el.click();
             browser.sleep(200);
@@ -73,9 +73,73 @@ describe('tgvs', function () {
             expect(el.getAttribute('class')).toContain('gg-watched');
         });
 
-        it('should add impastor tv card to watched-list with diff. id', function () {
+        it('should add the card to watched-list with diff. id', function () {
             el = element(by.css('#watched-list #watched62263'));
             expect(el.isPresent()).toBeTruthy();
+        });
+
+    });
+
+    describe('add the flash', function () {
+
+        it('search for the flash', function () {
+            el = element(by.css('#result-list #result60735'));
+            tvInput.clear();
+            tvInput.sendKeys('the flash');
+            searchButton.click();
+            browser.sleep(2000);
+
+            expect(el.isPresent()).toBeTruthy();
+        });
+
+        it('the flash tv card should not be selected', function () {
+            el = element(by.id('result60735'));
+            expect(el.getAttribute('class')).not.toContain('gg-watched');
+        });
+
+        it('after clicked, should be selected', function () {
+            el = element(by.id('result60735'));
+            el.click();
+            browser.sleep(200);
+
+            expect(el.getAttribute('class')).toContain('gg-watched');
+        });
+
+        it('should add the flash tv card to watched-list with diff. id', function () {
+            el = element(by.css('#watched-list #watched60735'));
+            expect(el.isPresent()).toBeTruthy();
+        });
+
+    });
+
+    describe('remove impastor', function () {
+
+        it('should insert card in result-list after clicked search button', function () {
+            el = element(by.css('#result-list #result62263'));
+            tvInput.clear();
+            tvInput.sendKeys('impastor');
+            searchButton.click();
+            browser.sleep(2000);
+
+            expect(el.isPresent()).toBeTruthy();
+        });
+
+        it('card should be selected', function () {
+            el = element(by.id('result62263'));
+            expect(el.getAttribute('class')).toContain('gg-watched');
+        });
+
+        it('card in watched-list should be removed after clicked', function () {
+            el = element(by.id('watched62263'));
+            el.click();
+            browser.sleep(200);
+
+            expect(el.isPresent()).not.toBeTruthy();
+        });
+
+        it('card in result-list should not be selected', function () {
+            el = element(by.css('#result-list #result62263'));
+            expect(el.getAttribute('class')).not.toContain('gg-watched');
         });
 
     });
