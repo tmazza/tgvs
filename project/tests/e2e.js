@@ -51,7 +51,7 @@ describe('tgvs', function () {
 
     describe('add impastor', function () {
 
-        it('should insert card in result-list after clicked search button', function () {
+        it('should insert cards in result-list after clicked search button', function () {
             el = element(by.css('#result-list #result62263'));
             tvInput.sendKeys('impastor');
             searchButton.click();
@@ -82,7 +82,7 @@ describe('tgvs', function () {
 
     describe('add the flash', function () {
 
-        it('search for the flash', function () {
+        it('should insert cards in result-list after clicked search button', function () {
             el = element(by.css('#result-list #result60735'));
             tvInput.clear();
             tvInput.sendKeys('the flash');
@@ -114,7 +114,7 @@ describe('tgvs', function () {
 
     describe('remove impastor', function () {
 
-        it('should insert card in result-list after clicked search button', function () {
+        it('should insert cards in result-list after clicked search button', function () {
             el = element(by.css('#result-list #result62263'));
             tvInput.clear();
             tvInput.sendKeys('impastor');
