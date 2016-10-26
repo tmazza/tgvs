@@ -1,7 +1,7 @@
 {
   "name": "tgvs",
   "scripts": {
-    "webdriver-manager-update": "./node_modules/protractor/bin/webdriver-manager update"
+    "update-webdriver-manager": "./node_modules/protractor/bin/webdriver-manager update"
   },
   "devDependencies": {
     "gulp": "^3.9.1",
