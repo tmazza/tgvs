@@ -51,7 +51,7 @@ describe('tgvs', function () {
 
     describe('add impastor', function () {
 
-        it('should insert cards in result-list after clicked search button', function () {
+        it('should insert results to result-list', function () {
             el = element(by.css('#result-list #result62263'));
             tvInput.sendKeys('impastor');
             searchButton.click();
@@ -60,12 +60,12 @@ describe('tgvs', function () {
             expect(el.isPresent()).toBeTruthy();
         });
 
-        it('card should not be selected', function () {
+        it('result should not be selected', function () {
             el = element(by.id('result62263'));
             expect(el.getAttribute('class')).not.toContain('gg-watched');
         });
 
-        it('should be selected after clicked', function () {
+        it('should be selected after being clicked', function () {
             el = element(by.id('result62263'));
             el.click();
             browser.sleep(200);
@@ -73,7 +73,7 @@ describe('tgvs', function () {
             expect(el.getAttribute('class')).toContain('gg-watched');
         });
 
-        it('should add the card to watched-list with diff. id', function () {
+        it('should insert to watched-list with diff. id', function () {
             el = element(by.css('#watched-list #watched62263'));
             expect(el.isPresent()).toBeTruthy();
         });
@@ -82,7 +82,7 @@ describe('tgvs', function () {
 
     describe('add the flash', function () {
 
-        it('should insert cards in result-list after clicked search button', function () {
+        it('should insert results to result-list', function () {
             el = element(by.css('#result-list #result60735'));
             tvInput.clear();
             tvInput.sendKeys('the flash');
@@ -92,12 +92,12 @@ describe('tgvs', function () {
             expect(el.isPresent()).toBeTruthy();
         });
 
-        it('the flash tv card should not be selected', function () {
+        it('result should not be selected', function () {
             el = element(by.id('result60735'));
             expect(el.getAttribute('class')).not.toContain('gg-watched');
         });
 
-        it('after clicked, should be selected', function () {
+        it('should be selected after being clicked', function () {
             el = element(by.id('result60735'));
             el.click();
             browser.sleep(200);
@@ -105,16 +105,33 @@ describe('tgvs', function () {
             expect(el.getAttribute('class')).toContain('gg-watched');
         });
 
-        it('should add the flash tv card to watched-list with diff. id', function () {
+        it('should insert to watched-list with diff. id', function () {
             el = element(by.css('#watched-list #watched60735'));
             expect(el.isPresent()).toBeTruthy();
         });
 
     });
 
-    describe('remove impastor', function () {
+    describe('remove the flash clicking at result-list', function () {
 
-        it('should insert cards in result-list after clicked search button', function () {
+        it('should not be selected in result-list after being clicked', function () {
+            el = element(by.css('#result-list #result60735'));
+            el.click();
+            browser.sleep(200);
+
+            expect(el.getAttribute('class')).not.toContain('gg-watched');
+        });
+
+        it('should be removed from watched-list', function () {
+            el = element(by.css('#watched-list #watched60735'));
+            expect(el.isPresent()).not.toBeTruthy();
+        });
+
+    });
+
+    describe('remove impastor clicking at watched-list', function () {
+
+        it('should insert results to result-list', function () {
             el = element(by.css('#result-list #result62263'));
             tvInput.clear();
             tvInput.sendKeys('impastor');
@@ -124,12 +141,12 @@ describe('tgvs', function () {
             expect(el.isPresent()).toBeTruthy();
         });
 
-        it('card should be selected', function () {
+        it('result should be selected', function () {
             el = element(by.id('result62263'));
             expect(el.getAttribute('class')).toContain('gg-watched');
         });
 
-        it('card in watched-list should be removed after clicked', function () {
+        it('should be removed from watched-list after being clicked', function () {
             el = element(by.id('watched62263'));
             el.click();
             browser.sleep(200);
@@ -137,7 +154,7 @@ describe('tgvs', function () {
             expect(el.isPresent()).not.toBeTruthy();
         });
 
-        it('card in result-list should not be selected', function () {
+        it('result in result-list should not be selected', function () {
             el = element(by.css('#result-list #result62263'));
             expect(el.getAttribute('class')).not.toContain('gg-watched');
         });
