@@ -15,10 +15,10 @@ var pageObject = function () {
     this.watchedList = element(by.id('watched-list'));
     this.watchedListItems = this.watchedList.all(by.css('li'));
 
-    this.impastorResult = element(by.css('#result-list #result62263'));
-    this.impastorWatched = element(by.css('#watched-list #watched62263'));
-    this.theFlashResult = element(by.css('#result-list #result60735'));
-    this.theFlashWatched = element(by.css('#watched-list #watched60735'));
+    this.tvResult1 = element(by.css('#result-list #result62263'));
+    this.tvWatched1 = element(by.css('#watched-list #watched62263'));
+    this.tvResult2 = element(by.css('#result-list #result60735'));
+    this.tvWatched2 = element(by.css('#watched-list #watched60735'));
 
     /* Actions */
     this.search = function (name) {
@@ -85,11 +85,11 @@ describe('tgvs', function () {
         });
 
         it('should contain the result', function () {
-            expect(po.impastorResult.isPresent()).toBeTruthy();
+            expect(po.tvResult1.isPresent()).toBeTruthy();
         });
 
         it('s result should not be selected', function () {
-            expect(po.impastorResult.getAttribute('class')).not.toContain(po.ggWatched);
+            expect(po.tvResult1.getAttribute('class')).not.toContain(po.ggWatched);
         });
 
     });
@@ -97,15 +97,15 @@ describe('tgvs', function () {
     describe('add the show', function () {
 
         beforeAll(function () {
-            po.clickOnCard(po.impastorResult);
+            po.clickOnCard(po.tvResult1);
         });
 
         it('s result should be selected after being clicked', function () {
-            expect(po.impastorResult.getAttribute('class')).toContain(po.ggWatched);
+            expect(po.tvResult1.getAttribute('class')).toContain(po.ggWatched);
         });
 
         it('should contain the selected show in watched-list', function () {
-            expect(po.impastorWatched.isPresent()).toBeTruthy();
+            expect(po.tvWatched1.isPresent()).toBeTruthy();
         });
 
     });
@@ -117,15 +117,15 @@ describe('tgvs', function () {
         });
 
         it('should not contain the old result', function () {
-            expect(po.impastorResult.isPresent()).not.toBeTruthy();
+            expect(po.tvResult1.isPresent()).not.toBeTruthy();
         });
 
         it('should contain the new result', function () {
-            expect(po.theFlashResult.isPresent()).toBeTruthy();
+            expect(po.tvResult2.isPresent()).toBeTruthy();
         });
 
         it('s result should not be selected', function () {
-            expect(po.theFlashResult.getAttribute('class')).not.toContain(po.ggWatched);
+            expect(po.tvResult2.getAttribute('class')).not.toContain(po.ggWatched);
         });
 
     });
@@ -133,19 +133,19 @@ describe('tgvs', function () {
     describe('add the show', function () {
 
         beforeAll(function () {
-            po.clickOnCard(po.theFlashResult);
+            po.clickOnCard(po.tvResult2);
         });
 
         it('s result should be selected after being clicked', function () {
-            expect(po.theFlashResult.getAttribute('class')).toContain(po.ggWatched);
+            expect(po.tvResult2.getAttribute('class')).toContain(po.ggWatched);
         });
 
         it('should contain the selected show in watched-list', function () {
-            expect(po.theFlashWatched.isPresent()).toBeTruthy();
+            expect(po.tvWatched2.isPresent()).toBeTruthy();
         });
 
         it('should still contain the old one in watched-list', function () {
-            expect(po.impastorWatched.isPresent()).toBeTruthy();
+            expect(po.tvWatched1.isPresent()).toBeTruthy();
         });
 
     });
@@ -153,15 +153,15 @@ describe('tgvs', function () {
     describe('remove second tv show by clicking at result-list', function () {
 
         beforeAll(function () {
-            po.clickOnCard(po.theFlashResult);
+            po.clickOnCard(po.tvResult2);
         });
 
         it('s result should not be selected', function () {
-            expect(po.theFlashResult.getAttribute('class')).not.toContain(po.ggWatched);
+            expect(po.tvResult2.getAttribute('class')).not.toContain(po.ggWatched);
         });
 
         it('should be removed', function () {
-            expect(po.theFlashWatched.isPresent()).not.toBeTruthy();
+            expect(po.tvWatched2.isPresent()).not.toBeTruthy();
         });
 
     });
@@ -173,7 +173,7 @@ describe('tgvs', function () {
         });
 
         it('s result should be selected', function () {
-            expect(po.impastorResult.getAttribute('class')).toContain(po.ggWatched);
+            expect(po.tvResult1.getAttribute('class')).toContain(po.ggWatched);
         });
 
     });
@@ -181,15 +181,15 @@ describe('tgvs', function () {
     describe('remove it by clicking at watched-list', function () {
 
         beforeAll(function () {
-            po.clickOnCard(po.impastorWatched);
+            po.clickOnCard(po.tvWatched1);
         });
 
         it('should be removed', function () {
-            expect(po.impastorWatched.isPresent()).not.toBeTruthy();
+            expect(po.tvWatched1.isPresent()).not.toBeTruthy();
         });
 
         it('s result in result-list should not be selected', function () {
-            expect(po.impastorResult.getAttribute('class')).not.toContain(po.ggWatched);
+            expect(po.tvResult1.getAttribute('class')).not.toContain(po.ggWatched);
         });
 
     });

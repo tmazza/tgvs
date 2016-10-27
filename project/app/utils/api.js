@@ -22,12 +22,6 @@ var api = (function () {
         }
     }
 
-    /**
-     * {object} config:
-     *     {string} url
-     *     {object} params
-     *     {function} success
-     */
     function get(config) {
         var xml = new XMLHttpRequest();
 
