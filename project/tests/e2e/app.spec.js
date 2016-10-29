@@ -6,7 +6,7 @@ var pageObject = function () {
     this.ggTvList = 'gg-tv-list';
 
     /* Elements */
-    this.searchInput = element(by.id('tv-name'));
+    this.searchInput = element(by.id('tv-input'));
     this.searchButton = element(by.id('search-button'));
 
     this.resultList = element(by.id('result-list'));
@@ -15,10 +15,10 @@ var pageObject = function () {
     this.watchedList = element(by.id('watched-list'));
     this.watchedListItems = this.watchedList.all(by.css('li'));
 
-    this.tvResult1 = element(by.css('#result-list #result62263'));
-    this.tvWatched1 = element(by.css('#watched-list #watched62263'));
-    this.tvResult2 = element(by.css('#result-list #result60735'));
-    this.tvWatched2 = element(by.css('#watched-list #watched60735'));
+    this.tvResult1 = element(by.css('#result-list #tvid62263'));
+    this.tvWatched1 = element(by.css('#watched-list #tvid62263'));
+    this.tvResult2 = element(by.css('#result-list #tvid60735'));
+    this.tvWatched2 = element(by.css('#watched-list #tvid60735'));
 
     /* Actions */
     this.search = function (name) {

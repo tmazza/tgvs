@@ -1,7 +1,5 @@
 var api = (function () {
-    'use strict';
-
-    function encodeParams(params) {
+    var _encodeParams = function (params) {
         var encodedSring = '';
 
         for (var key in params) {
@@ -16,22 +14,21 @@ var api = (function () {
         return encodedSring;
     }
 
-    function onload(success) {
+    var _onload = function (success) {
         if (this.status === 200) {
             success(JSON.parse(this.response));
         }
     }
 
-    function get(config) {
+    var get = function (config) {
         var xml = new XMLHttpRequest();
 
-        xml.open('GET', config.url + encodeParams(config.params));
-        xml.onload = onload.bind(xml, config.success);
+        xml.open('GET', config.url + _encodeParams(config.params));
+        xml.onload = _onload.bind(xml, config.success);
         xml.send();
     }
 
     return {
         get: get
     };
-
 })();
