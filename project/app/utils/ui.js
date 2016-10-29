@@ -25,7 +25,17 @@ var ui = (function () {
         return li;
     }
 
+    var newOption = function (n) {
+        var option = document.createElement('option');
+
+        option.setAttribute('value', n);
+        option.innerHTML = n;
+
+        return option;
+    }
+
     return {
-        tvListItem: tvListItem
+        tvListItem: tvListItem,
+        newOption: newOption
     };
 })();

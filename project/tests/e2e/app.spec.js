@@ -6,6 +6,7 @@ var pageObject = function () {
     this.ggTvList = 'gg-tv-list';
 
     /* Elements */
+    this.timeCounter = element(by.id('time-counter'));
     this.searchInput = element(by.id('tv-input'));
     this.searchButton = element(by.id('search-button'));
 
@@ -30,7 +31,7 @@ var pageObject = function () {
 
     this.clickOnCard = function (card) {
         card.click();
-        browser.sleep(50);
+        browser.sleep(500);
     }
 }
 
@@ -47,6 +48,11 @@ describe('tgvs', function () {
 
         it('s title should be "Tempo Gasto Vendo Séries"', function () {
             expect(browser.getTitle()).toEqual('Tempo Gasto Vendo Séries');
+        });
+
+        it('should have a time counter', function () {
+            expect(po.timeCounter.isPresent()).toBeTruthy();
+            expect(po.timeCounter.getText()).toEqual('0');
         });
 
         it('should have an empty search input form', function () {
@@ -106,6 +112,10 @@ describe('tgvs', function () {
 
         it('should contain the selected show in watched-list', function () {
             expect(po.tvWatched1.isPresent()).toBeTruthy();
+        });
+
+        it('should add the time to counter', function () {
+            expect(po.timeCounter.getText()).not.toEqual('0');
         });
 
     });

@@ -1,6 +1,6 @@
-var TvList = function function_name(listId) {
-    this._dom = document.getElementById(listId);
-    this._domId = listId;
+var TvList = function (domId) {
+    this._dom = document.getElementById(domId);
+    this._domId = domId;
     this._idList = [];
 };
 

@@ -6,24 +6,36 @@
         var tvInput = document.getElementById('tv-input'),
             searchButton = document.getElementById('search-button'),
             emptyButton = document.getElementById('empty-button'),
+            timeCounter = new TimeCounter('time-counter'),
             resultList = new TvList('result-list'),
-            watchedList = new TvList('watched-list');
+            watchedList = new TvList('watched-list'),
+            modal = new Modal('tv-modal'),
+            tempDom;
+
+        window.addEventListener('click', function (event) {
+            if (event.target === modal.getDom()) {
+                modal.hide();
+            }
+        });
 
         searchButton.addEventListener('click', function () {
-            api.get({
-                url: settings.TMDB_SEARCH_URL,
-                params: {
-                    api_key: settings.TMDB_API_KEY,
-                    query: tvInput.value
-                },
-                success: function (response) {
-                    resultList.insertAll(response.results, watchedList.getList());
-                }
+            tmdb.searchTv(tvInput.value, function (response) {
+                resultList.insertAll(response.results, watchedList.getList());
             });
         });
 
         emptyButton.addEventListener('click', function () {
             resultList.removeAll();
+        });
+
+        modal.getAddButton().addEventListener('click', function () {
+            watchedList.insertOne(tempDom.cloneNode(true));
+            resultList.mark(tempDom);
+            timeCounter.addMinutes({
+                id: modal.getTvId(),
+                mins: modal.getTotalMins()
+            });
+            modal.hide();
         });
 
         resultList.getDom().addEventListener('click', function (event) {
@@ -33,10 +45,11 @@
             if (watchedList.contains(clickedId)) {
                 watchedList.removeOne(clickedId);
                 resultList.unmark(clicked);
+                timeCounter.subMinutes(clickedId);
             }
             else {
-                watchedList.insertOne(clicked.cloneNode(true));
-                resultList.mark(clicked);
+                modal.show(clickedId);
+                tempDom = clicked;
             }
         });
 
@@ -52,6 +65,7 @@
             }
 
             watchedList.removeOne(clicked);
+            timeCounter.subMinutes(clickedId);
         });
     });
 
