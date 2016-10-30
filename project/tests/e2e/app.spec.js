@@ -7,6 +7,9 @@ var pageObject = function () {
 
     /* Elements */
     this.timeCounter = element(by.id('time-counter'));
+    this.days = element(by.css('#time-counter #days'));
+    this.hours = element(by.css('#time-counter #hours'));
+    this.mins = element(by.css('#time-counter #mins'));
 
     this.modal = element(by.id('tv-modal'));
     this.modalAddButton = element(by.css('#tv-modal #add-button'));
@@ -56,7 +59,9 @@ describe('tgvs', function () {
 
         it('should have a time counter', function () {
             expect(po.timeCounter.isPresent()).toBeTruthy();
-            expect(po.timeCounter.getText()).toEqual('0');
+            expect(po.days.getText()).toEqual('0');
+            expect(po.hours.getText()).toEqual('0');
+            expect(po.mins.getText()).toEqual('0');
         });
 
         it('should have an empty search input form', function () {
@@ -135,7 +140,7 @@ describe('tgvs', function () {
         });
 
         it('should add the time to counter', function () {
-            expect(po.timeCounter.getText()).not.toEqual('0');
+            expect(po.mins.getText()).not.toEqual('0');
         });
 
         it('modal should disappear', function () {
