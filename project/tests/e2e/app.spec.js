@@ -7,6 +7,10 @@ var pageObject = function () {
 
     /* Elements */
     this.timeCounter = element(by.id('time-counter'));
+
+    this.modal = element(by.id('tv-modal'));
+    this.modalAddButton = element(by.css('#tv-modal #add-button'));
+
     this.searchInput = element(by.id('tv-input'));
     this.searchButton = element(by.id('search-button'));
 
@@ -29,9 +33,9 @@ var pageObject = function () {
         browser.sleep(1000);
     }
 
-    this.clickOnCard = function (card) {
-        card.click();
-        browser.sleep(500);
+    this.clickOn = function (el) {
+        el.click();
+        browser.sleep(700);
     }
 }
 
@@ -46,7 +50,7 @@ describe('tgvs', function () {
 
     describe('on landing', function () {
 
-        it('s title should be "Tempo Gasto Vendo Séries"', function () {
+        it('title should be "Tempo Gasto Vendo Séries"', function () {
             expect(browser.getTitle()).toEqual('Tempo Gasto Vendo Séries');
         });
 
@@ -82,6 +86,10 @@ describe('tgvs', function () {
             expect(po.watchedListItems.count()).toEqual(0);
         });
 
+        it('modal should not be displayed', function () {
+            expect(po.modal.isDisplayed()).not.toBeTruthy();
+        });
+
     });
 
     describe('search for a show', function () {
@@ -94,8 +102,20 @@ describe('tgvs', function () {
             expect(po.tvResult1.isPresent()).toBeTruthy();
         });
 
-        it('s result should not be selected', function () {
+        it('result should not be selected', function () {
             expect(po.tvResult1.getAttribute('class')).not.toContain(po.ggWatched);
+        });
+
+    });
+
+    describe('click on the show', function () {
+
+        beforeAll(function () {
+            po.clickOn(po.tvResult1);
+        });
+
+        it('modal should be displayed', function () {
+            expect(po.modal.isDisplayed()).toBeTruthy();
         });
 
     });
@@ -103,19 +123,23 @@ describe('tgvs', function () {
     describe('add the show', function () {
 
         beforeAll(function () {
-            po.clickOnCard(po.tvResult1);
+            po.clickOn(po.modalAddButton);
         });
 
-        it('s result should be selected after being clicked', function () {
-            expect(po.tvResult1.getAttribute('class')).toContain(po.ggWatched);
-        });
-
-        it('should contain the selected show in watched-list', function () {
+        it('should add the show in watched-list', function () {
             expect(po.tvWatched1.isPresent()).toBeTruthy();
+        });
+
+        it('result should be selected', function () {
+            expect(po.tvResult1.getAttribute('class')).toContain(po.ggWatched);
         });
 
         it('should add the time to counter', function () {
             expect(po.timeCounter.getText()).not.toEqual('0');
+        });
+
+        it('modal should disappear', function () {
+            expect(po.modal.isDisplayed()).not.toBeTruthy();
         });
 
     });
@@ -134,8 +158,20 @@ describe('tgvs', function () {
             expect(po.tvResult2.isPresent()).toBeTruthy();
         });
 
-        it('s result should not be selected', function () {
+        it('result should not be selected', function () {
             expect(po.tvResult2.getAttribute('class')).not.toContain(po.ggWatched);
+        });
+
+    });
+
+    describe('click on the show', function () {
+
+        beforeAll(function () {
+            po.clickOn(po.tvResult2);
+        });
+
+        it('modal should be displayed', function () {
+            expect(po.modal.isDisplayed()).toBeTruthy();
         });
 
     });
@@ -143,14 +179,14 @@ describe('tgvs', function () {
     describe('add the show', function () {
 
         beforeAll(function () {
-            po.clickOnCard(po.tvResult2);
+            po.clickOn(po.modalAddButton);
         });
 
-        it('s result should be selected after being clicked', function () {
+        it('result should be selected', function () {
             expect(po.tvResult2.getAttribute('class')).toContain(po.ggWatched);
         });
 
-        it('should contain the selected show in watched-list', function () {
+        it('should add the selected show in watched-list', function () {
             expect(po.tvWatched2.isPresent()).toBeTruthy();
         });
 
@@ -163,10 +199,10 @@ describe('tgvs', function () {
     describe('remove second tv show by clicking at result-list', function () {
 
         beforeAll(function () {
-            po.clickOnCard(po.tvResult2);
+            po.clickOn(po.tvResult2);
         });
 
-        it('s result should not be selected', function () {
+        it('result should not be selected', function () {
             expect(po.tvResult2.getAttribute('class')).not.toContain(po.ggWatched);
         });
 
@@ -182,7 +218,7 @@ describe('tgvs', function () {
             po.search('impastor');
         });
 
-        it('s result should be selected', function () {
+        it('result should be selected', function () {
             expect(po.tvResult1.getAttribute('class')).toContain(po.ggWatched);
         });
 
@@ -191,14 +227,14 @@ describe('tgvs', function () {
     describe('remove it by clicking at watched-list', function () {
 
         beforeAll(function () {
-            po.clickOnCard(po.tvWatched1);
+            po.clickOn(po.tvWatched1);
         });
 
         it('should be removed', function () {
             expect(po.tvWatched1.isPresent()).not.toBeTruthy();
         });
 
-        it('s result in result-list should not be selected', function () {
+        it('result in result-list should not be selected', function () {
             expect(po.tvResult1.getAttribute('class')).not.toContain(po.ggWatched);
         });
 

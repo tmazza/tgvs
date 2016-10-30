@@ -68,7 +68,6 @@ TvList.prototype = {
 
     _removeIdFromIdList: function (tvId) {
         var index = this._idList.indexOf(tvId);
-
         if (index >= 0) {
             this._idList.splice(index, 1);
         }

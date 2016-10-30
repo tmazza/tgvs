@@ -29,20 +29,26 @@ Modal.prototype = {
             return this._epRunTime * this._totalEps;
         }
         else {
-            var totalTime = 0;
-
+            var totalMins = 0;
             for (var i = 0; i < seasonsWatched; i++) {
-                totalTime += this._epRunTime * this._seasons[i].episode_count;
+                totalMins += this._epRunTime * this._seasons[i].episode_count;
             }
-
-            return totalTime;
+            return totalMins;
         }
     },
 
-    _setSeasons: function () {
-        if (this._seasons.length > this._totalSeasons) {
-            this._seasons.shift();
+    _setPropsFromResponse: function (response) {
+        this._totalSeasons = response.number_of_seasons;
+        this._totalEps = response.number_of_episodes;
+        this._epRunTime = Math.max.apply(null, response.episode_run_time);
+        this._setSeasons(response.seasons);
+    },
+
+    _setSeasons: function (seasons) {
+        if (seasons.length > this._totalSeasons) {
+            seasons.shift();
         }
+        this._seasons = seasons;
     },
 
     show: function (tvId) {
@@ -51,11 +57,7 @@ Modal.prototype = {
             var option;
 
             this._tvId = tvId;
-            this._seasons = response.seasons;
-            this._totalSeasons = response.number_of_seasons;
-            this._totalEps = response.number_of_episodes;
-            this._epRunTime = response.episode_run_time;
-            this._setSeasons();
+            this._setPropsFromResponse(response);
 
             for (var i = 0; i < this._totalSeasons; i++) {
                 option = ui.newOption(i + 1);
