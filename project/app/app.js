@@ -12,16 +12,27 @@
             modal = new Modal('tv-modal'),
             tempDom;
 
+        var search = function (tvName) {
+            tmdb.searchTv(tvName, function (response) {
+                resultList.insertAll(response.results, watchedList.getList());
+            });
+        };
+
         window.addEventListener('click', function (event) {
             if (event.target === modal.getDom()) {
                 modal.hide();
             }
         });
 
+        tvInput.addEventListener('keypress', function (event) {
+            var key = event.which || event.keyCode;
+            if (key === 13) {
+                search(tvInput.value);
+            }
+        });
+
         searchButton.addEventListener('click', function () {
-            tmdb.searchTv(tvInput.value, function (response) {
-                resultList.insertAll(response.results, watchedList.getList());
-            });
+            search(tvInput.value);
         });
 
         emptyButton.addEventListener('click', function () {
