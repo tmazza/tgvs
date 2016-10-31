@@ -74,7 +74,7 @@ describe('tgvs', function () {
         it('should have a search-button', function () {
             expect(po.searchButton.isPresent()).toBeTruthy();
             expect(po.searchButton.getTagName()).toBe('button');
-            expect(po.searchButton.getText()).toEqual('SEARCH');
+            expect(po.searchButton.getText()).toEqual('BUSCAR');
         });
 
         it('should have an empty result-list', function () {
