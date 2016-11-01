@@ -3,9 +3,15 @@ var ui = (function () {
         var div = document.createElement('div'),
             poster = document.createElement('img'),
             title = document.createElement('span'),
-            posterUrl = settings.TMDB_POSTER_URL + tv.poster_path;
+            posterUrl;
 
-        div.classList.add('gg-tv-card');
+        if (tv.poster_path) {
+            posterUrl = settings.TMDB_POSTER_URL + tv.poster_path;
+        }
+        else {
+            posterUrl = settings.TMDB_NO_POSTER_URL;
+        }
+
         poster.setAttribute('src', posterUrl);
         title.innerHTML = tv.name;
 

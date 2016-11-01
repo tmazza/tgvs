@@ -5,7 +5,6 @@
     w3IncludeHTML(function () {
         var tvInput = document.getElementById('tv-input'),
             searchButton = document.getElementById('search-button'),
-            emptyButton = document.getElementById('empty-button'),
             timeCounter = new TimeCounter('time-counter'),
             resultList = new TvList('result-list'),
             watchedList = new TvList('watched-list'),
@@ -24,6 +23,7 @@
             }
         });
 
+        tvInput.focus();
         tvInput.addEventListener('keypress', function (event) {
             var key = event.which || event.keyCode;
             if (key === 13) {
@@ -33,10 +33,6 @@
 
         searchButton.addEventListener('click', function () {
             search(tvInput.value);
-        });
-
-        emptyButton.addEventListener('click', function () {
-            resultList.removeAll();
         });
 
         modal.getAddButton().addEventListener('click', function () {
@@ -61,6 +57,7 @@
             else {
                 modal.show(clickedId);
                 tempDom = clicked;
+                modal.getAddButton().focus();
             }
         });
 

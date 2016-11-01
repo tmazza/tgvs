@@ -38,9 +38,10 @@ Modal.prototype = {
     },
 
     _setPropsFromResponse: function (response) {
+        this._epRunTime = response.episode_run_time.length > 0 ?
+                          Math.max.apply(null, response.episode_run_time) : 45;
         this._totalSeasons = response.number_of_seasons;
         this._totalEps = response.number_of_episodes;
-        this._epRunTime = Math.max.apply(null, response.episode_run_time);
         this._setSeasons(response.seasons);
     },
 

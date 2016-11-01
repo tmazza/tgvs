@@ -5,11 +5,11 @@ npm install
 npm run update-webdriver-manager  # For e2e tests.
 ```
 
-## Gulp Tasks
+## Tasks
 
 ```
-gulp build  # Build minified js and css.
-gulp start  # Start server at port 8000.
-gulp watch  # Watch js and css.
-gulp e2e    # Run e2e tests (start server first).
+npm run build  # Build minified js and css.
+npm run start  # Start server at port 8000.
+npm run watch  # Watch js and css.
+npm run e2e    # Run e2e tests (start server first).
 ```

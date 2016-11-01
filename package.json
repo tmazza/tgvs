@@ -1,6 +1,10 @@
 {
   "name": "tgvs",
   "scripts": {
+    "build": "gulp build",
+    "start": "gulp start",
+    "watch": "gulp watch",
+    "e2e": "gulp e2e",
     "update-webdriver-manager": "./node_modules/protractor/bin/webdriver-manager update"
   },
   "devDependencies": {

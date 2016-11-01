@@ -3,7 +3,8 @@
 var pageObject = function () {
     /* CSS classes */
     this.ggWatched = 'gg-watched';
-    this.ggTvList = 'gg-tv-list';
+    this.ggWatchedList = 'gg-watched-list';
+    this.ggResultList = 'gg-result-list';
 
     /* Elements */
     this.timeCounter = element(by.id('time-counter'));
@@ -80,14 +81,14 @@ describe('tgvs', function () {
         it('should have an empty result-list', function () {
             expect(po.resultList.isPresent()).toBeTruthy();
             expect(po.resultList.getTagName()).toBe('ul');
-            expect(po.resultList.getAttribute('class')).toContain(po.ggTvList);
+            expect(po.resultList.getAttribute('class')).toContain(po.ggResultList);
             expect(po.resultListItems.count()).toEqual(0);
         });
 
         it('should have an empty watched-list', function () {
             expect(po.watchedList.isPresent()).toBeTruthy();
             expect(po.watchedList.getTagName()).toBe('ul');
-            expect(po.watchedList.getAttribute('class')).toContain(po.ggTvList);
+            expect(po.watchedList.getAttribute('class')).toContain(po.ggWatchedList);
             expect(po.watchedListItems.count()).toEqual(0);
         });
 
