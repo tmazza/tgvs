@@ -25,7 +25,7 @@ var pageObject = function () {
     this.watchedListItems = this.watchedList.all(by.css('li'));
 
     this.rankedList = element(by.id('ranked-list'));
-    this.rankedListItems = this.watchedList.all(by.css('li'));
+    this.rankedListItems = this.rankedList.all(by.css('li'));
     this.rankedAddButton = element(by.id('ranked-list-add-button'));
 
     this.tvResult1 = element(by.css('#result-list #tvid62263'));
@@ -41,9 +41,9 @@ var pageObject = function () {
         browser.sleep(1000);
     }
 
-    this.clickOn = function (el) {
+    this.clickOn = function (el, sleepDuration) {
         el.click();
-        browser.sleep(700);
+        browser.sleep(sleepDuration || 700);
     }
 }
 
@@ -114,7 +114,7 @@ describe('tgvs', function () {
     describe('add more items to ranked-list', function () {
 
         beforeAll(function () {
-            po.clickOn(po.rankedAddButton);
+            po.clickOn(po.rankedAddButton, 1000);
         });
 
         it('should add 20 items', function () {
