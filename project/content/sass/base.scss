@@ -1,6 +1,7 @@
 $bottom-space: 15px;
 $img-width-s: 70px;
 $img-height-s: 105px;
+$img-width-g: 342px;
 $img-height-g: 513px;
 
 button:focus, button:active {
@@ -126,6 +127,7 @@ body {
 
     .gg-result-list {
         img {
+            width: $img-width-g;
             height: $img-height-g;
         }
     }
