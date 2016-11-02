@@ -12,13 +12,13 @@ var api = (function () {
         }
 
         return encodedSring;
-    }
+    };
 
     var _onload = function (success) {
         if (this.status === 200) {
             success(JSON.parse(this.response));
         }
-    }
+    };
 
     var get = function (config) {
         var xml = new XMLHttpRequest();
@@ -26,7 +26,7 @@ var api = (function () {
         xml.open('GET', config.url + _encodeParams(config.params));
         xml.onload = _onload.bind(xml, config.success);
         xml.send();
-    }
+    };
 
     return {
         get: get

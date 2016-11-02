@@ -41,7 +41,6 @@
             else {
                 modal.show(clickedId);
                 tempDom = clicked;
-                modal.getAddButton().focus();
             }
         };
 

@@ -53,6 +53,7 @@ Modal.prototype = {
     },
 
     show: function (tvId) {
+        this._addButton.setAttribute('disabled', 'disabled');
         this._dom.style.display = 'block';
         tmdb.searchTvDetails(tvId, (function (response) {
             var option;
@@ -67,6 +68,9 @@ Modal.prototype = {
                 }
                 this._select.appendChild(option);
             }
+
+            this._addButton.removeAttribute('disabled');
+            this._addButton.focus();
         }).bind(this));
     },
 

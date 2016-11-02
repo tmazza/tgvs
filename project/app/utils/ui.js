@@ -19,7 +19,7 @@ var ui = (function () {
         div.appendChild(title);
 
         return div;
-    }
+    };
 
     var tvListItem = function (tv) {
         var li = document.createElement('li'),
@@ -29,7 +29,7 @@ var ui = (function () {
         li.appendChild(card);
 
         return li;
-    }
+    };
 
     var newOption = function (n) {
         var option = document.createElement('option');
@@ -38,7 +38,7 @@ var ui = (function () {
         option.innerHTML = n;
 
         return option;
-    }
+    };
 
     return {
         tvListItem: tvListItem,
