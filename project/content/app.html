@@ -1,28 +1,16 @@
-<!-- <nav class='navbar navbar-default'>
-    <div class='container-fluid'>
-        <div class='navbar-header'>
-            <a class='navbar-brand' href='javascript:window.location.reload();'>
-                TGVS
-            </a>
-        </div>
-    </div>
-</nav> -->
+<div id="time-counter" class="gg-time-counter">
+    <span id="days">0</span>
+    <span> dias </span>
+
+    <span id="hours">0</span>
+    <span> horas </span>
+
+    <span id="mins">0</span>
+    <span> minutos</span>
+</div>
 
 <div class="container-fluid">
     <div class="row">
-
-        <div class="col-xs-12">
-            <div id="time-counter" class="gg-time-counter">
-                <span id="days">0</span>
-                <span> dias </span>
-
-                <span id="hours">0</span>
-                <span> horas </span>
-
-                <span id="mins">0</span>
-                <span> minutos</span>
-            </div>
-        </div>
 
         <div class="col-xs-12">
             <ul id="watched-list" class="gg-watched-list"></ul>
@@ -37,6 +25,14 @@
 
         <div class="col-xs-12">
             <ul id="result-list" class="gg-result-list"></ul>
+        </div>
+
+        <div class="col-xs-12 text-center">
+            <h2>Mais Votados</h2>
+            <ul id="ranked-list" class="gg-result-list"></ul>
+            <button id="ranked-list-add-button" class="btn btn-primary">
+                MAIS
+            </button>
         </div>
 
     </div>

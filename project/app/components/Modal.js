@@ -1,7 +1,7 @@
 var Modal = function (domId) {
     this._dom = document.getElementById(domId);
     this._select = document.getElementById('seasons-watched');
-    this._addButton = document.getElementById('add-button');
+    this._addButton = document.querySelector('#' + domId + ' #add-button');
     this._tvId = '';
     this._seasons = {};
     this._totalSeasons = 0;

@@ -22,8 +22,6 @@ TvList.prototype = {
     },
 
     insertAll: function (tvs, watchedIds) {
-        this.removeAll();
-
         for (var i = 0; i < tvs.length; i++) {
             var li = ui.tvListItem(tvs[i]),
                 tvId = 'tvid' + tvs[i].id;
@@ -75,11 +73,15 @@ TvList.prototype = {
 
     mark: function (li) {
         li = typeof li === 'string' ? this.getItem(li) : li;
-        li.classList.add('gg-watched');
+        if (li) {
+            li.classList.add('gg-watched');
+        }
     },
 
     unmark: function (li) {
-        li = typeof li === 'string' ? this.getItem(li) : li;
-        li.classList.remove('gg-watched');
+        li = this.getItem(li);
+        if (li) {
+            li.classList.remove('gg-watched');
+        }
     }
 };

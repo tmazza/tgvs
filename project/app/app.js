@@ -6,52 +6,36 @@
         var tvInput = document.getElementById('tv-input'),
             searchButton = document.getElementById('search-button'),
             timeCounter = new TimeCounter('time-counter'),
+            modal = new Modal('tv-modal'),
             resultList = new TvList('result-list'),
             watchedList = new TvList('watched-list'),
-            modal = new Modal('tv-modal'),
+            rankedList = new TvList('ranked-list'),
+            rankedListAddButton = document.getElementById('ranked-list-add-button'),
+            rankedListPage = 1,
             tempDom;
 
-        var search = function (tvName) {
+        /* Helper functions */
+        var searchTv = function (tvName) {
             tmdb.searchTv(tvName, function (response) {
+                resultList.removeAll();
                 resultList.insertAll(response.results, watchedList.getList());
             });
         };
 
-        window.addEventListener('click', function (event) {
-            if (event.target === modal.getDom()) {
-                modal.hide();
-            }
-        });
-
-        tvInput.focus();
-        tvInput.addEventListener('keypress', function (event) {
-            var key = event.which || event.keyCode;
-            if (key === 13) {
-                search(tvInput.value);
-            }
-        });
-
-        searchButton.addEventListener('click', function () {
-            search(tvInput.value);
-        });
-
-        modal.getAddButton().addEventListener('click', function () {
-            watchedList.insertOne(tempDom.cloneNode(true));
-            resultList.mark(tempDom);
-            timeCounter.addMinutes({
-                id: modal.getTvId(),
-                mins: modal.getTotalMins()
+        var searchTvList = function (rankType, page) {
+            tmdb.searchTvList(rankType, page, function (response) {
+                rankedList.insertAll(response.results, watchedList.getList());
             });
-            modal.hide();
-        });
+        };
 
-        resultList.getDom().addEventListener('click', function (event) {
+        var resultListOnClick = function (event) {
             var clicked = event.target.closest('li'),
                 clickedId = clicked.getAttribute('id');
 
             if (watchedList.contains(clickedId)) {
                 watchedList.removeOne(clickedId);
-                resultList.unmark(clicked);
+                resultList.unmark(clickedId);
+                rankedList.unmark(clickedId);
                 timeCounter.subMinutes(clickedId);
             }
             else {
@@ -59,6 +43,56 @@
                 tempDom = clicked;
                 modal.getAddButton().focus();
             }
+        };
+
+        /* Initializations */
+        tvInput.focus();
+
+        searchTvList('top_rated', rankedListPage);
+
+        /* Events */
+        window.addEventListener('click', function (event) {
+            if (event.target === modal.getDom()) {
+                modal.hide();
+            }
+        });
+
+        tvInput.addEventListener('keypress', function (event) {
+            var key = event.which || event.keyCode;
+            if (key === 13) {
+                searchTv(tvInput.value);
+            }
+        });
+
+        tvInput.addEventListener('keyup', function () {
+            if (tvInput.value === '') {
+                resultList.removeAll();
+            }
+        });
+
+        searchButton.addEventListener('click', function () {
+            searchTv(tvInput.value);
+        });
+
+        modal.getAddButton().addEventListener('click', function () {
+            var tempDomId = tempDom.getAttribute('id');
+
+            watchedList.insertOne(tempDom.cloneNode(true));
+            resultList.mark(tempDomId);
+            rankedList.mark(tempDomId);
+            timeCounter.addMinutes({
+                id: modal.getTvId(),
+                mins: modal.getTotalMins()
+            });
+            modal.hide();
+        });
+
+        resultList.getDom().addEventListener('click', resultListOnClick);
+
+        rankedList.getDom().addEventListener('click', resultListOnClick);
+
+        rankedListAddButton.addEventListener('click', function () {
+            searchTvList('top_rated', ++rankedListPage);
         });
 
         watchedList.getDom().addEventListener('click', function (event) {
@@ -67,6 +101,13 @@
 
             try {
                 resultList.unmark(clickedId);
+            }
+            catch (err) {
+                console.log(err);
+            }
+
+            try {
+                rankedList.unmark(clickedId);
             }
             catch (err) {
                 console.log(err);

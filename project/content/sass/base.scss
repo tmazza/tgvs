@@ -7,6 +7,22 @@ button:focus, button:active {
     outline: none !important;
 }
 
+body {
+    margin-top: 70px;
+}
+
+.gg-time-counter {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 999;
+    font-size: 22px;
+    text-align: center;
+    padding: $bottom-space 0;
+    background-color: white;
+    border-bottom: 1px solid #e7e7e7;
+}
+
 .gg-tv-list {
     padding: 0;
     margin: 0;
@@ -45,12 +61,6 @@ button:focus, button:active {
     }
 }
 
-.gg-time-counter {
-    font-size: 22px;
-    text-align: center;
-    margin: $bottom-space 0;
-}
-
 .gg-search-form {
     text-align: center;
     margin-bottom: $bottom-space;
@@ -73,7 +83,7 @@ button:focus, button:active {
 .gg-modal {
     display: none;
     position: fixed;
-    z-index: 99;
+    z-index: 999;
     left: 0;
     top: 0;
     width: 100%;
@@ -95,7 +105,15 @@ button:focus, button:active {
     }
 }
 
+#ranked-list-add-button {
+    margin-bottom: $bottom-space * 2;
+}
+
 @media (min-width: 768px) {
+    body {
+        margin-top: 115px;
+    }
+
     .gg-time-counter {
         font-size: 55px;
     }

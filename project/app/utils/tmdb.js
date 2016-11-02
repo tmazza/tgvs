@@ -9,7 +9,7 @@ var tmdb = (function () {
             },
             success: success
         });
-    }
+    };
 
     var searchTvDetails = function (tvId, success) {
         api.get({
@@ -20,10 +20,23 @@ var tmdb = (function () {
             },
             success: success
         });
-    }
+    };
+
+    var searchTvList = function (rankType, page, success) {
+        api.get({
+            url: settings.TMDB_TV_URL + rankType + '?',
+            params: {
+                api_key: settings.TMDB_API_KEY,
+                language: 'en-US',
+                page: page
+            },
+            success: success
+        });
+    };
 
     return {
         searchTv: searchTv,
-        searchTvDetails: searchTvDetails
+        searchTvDetails: searchTvDetails,
+        searchTvList: searchTvList
     };
 })();

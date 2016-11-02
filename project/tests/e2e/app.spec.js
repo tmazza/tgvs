@@ -24,6 +24,10 @@ var pageObject = function () {
     this.watchedList = element(by.id('watched-list'));
     this.watchedListItems = this.watchedList.all(by.css('li'));
 
+    this.rankedList = element(by.id('ranked-list'));
+    this.rankedListItems = this.watchedList.all(by.css('li'));
+    this.rankedAddButton = element(by.id('ranked-list-add-button'));
+
     this.tvResult1 = element(by.css('#result-list #tvid62263'));
     this.tvWatched1 = element(by.css('#watched-list #tvid62263'));
     this.tvResult2 = element(by.css('#result-list #tvid60735'));
@@ -50,6 +54,7 @@ describe('tgvs', function () {
     beforeAll(function () {
         browser.ignoreSynchronization = true;
         browser.get('');
+        browser.sleep(5000);
     });
 
     describe('on landing', function () {
@@ -92,8 +97,28 @@ describe('tgvs', function () {
             expect(po.watchedListItems.count()).toEqual(0);
         });
 
+        it('should have a ranked-list with 20 items and a button', function () {
+            expect(po.rankedList.isPresent()).toBeTruthy();
+            expect(po.rankedList.getTagName()).toBe('ul');
+            expect(po.rankedList.getAttribute('class')).toContain(po.ggResultList);
+            expect(po.rankedListItems.count()).toEqual(20);
+            expect(po.rankedAddButton.isPresent()).toBeTruthy();
+        });
+
         it('modal should not be displayed', function () {
             expect(po.modal.isDisplayed()).not.toBeTruthy();
+        });
+
+    });
+
+    describe('add more items to ranked-list', function () {
+
+        beforeAll(function () {
+            po.clickOn(po.rankedAddButton);
+        });
+
+        it('should add 20 items', function () {
+            expect(po.rankedListItems.count()).toEqual(40);
         });
 
     });
