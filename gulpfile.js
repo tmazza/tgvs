@@ -1,14 +1,14 @@
 var paths = {
     'src': {
-        'js': './project/app/**/*.js',
-        'sass': './project/content/sass/**/!(_)*.scss'
+        'js': './client/app/**/*.js',
+        'sass': './client/content/sass/**/!(_)*.scss'
     },
     'dest': {
-        'js': './project/assets/js/',
-        'css': './project/assets/css/'
+        'js': './client/assets/js/',
+        'css': './client/assets/css/'
     },
     'test': {
-        'e2e': './project/tests/e2e/**/*.js'
+        'e2e': './client/tests/e2e/**/*.js'
     }
 };
 
@@ -22,7 +22,7 @@ var clientPort = '8000';
  */
 gulp.task('start', function () {
     plugins.connect.server({
-        root: ['./project'],
+        root: ['./client'],
         port: clientPort
     });
 });
