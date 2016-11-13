@@ -5,6 +5,7 @@
     w3IncludeHTML(function () {
         var tvInput = document.getElementById('tv-input'),
             searchButton = document.getElementById('search-button'),
+            searchWarning = document.getElementById('search-warning'),
             timeCounter = new TimeCounter('time-counter'),
             modal = new Modal('tv-modal'),
             resultList = new TvList('result-list'),
@@ -18,7 +19,12 @@
         var searchTv = function (tvName) {
             tmdb.searchTv(tvName, function (response) {
                 resultList.removeAll();
-                resultList.insertAll(response.results, watchedList.getList());
+                if (response.results.length > 0) {
+                    resultList.insertAll(response.results, watchedList.getList());
+                }
+                else {
+                    searchWarning.style.display = 'block';
+                }
             });
         };
 
@@ -46,7 +52,6 @@
 
         /* Initializations */
         tvInput.focus();
-
         searchTvList('top_rated', rankedListPage);
 
         /* Events */
@@ -65,6 +70,7 @@
 
         tvInput.addEventListener('keyup', function () {
             if (tvInput.value === '') {
+                searchWarning.style.display = 'none';
                 resultList.removeAll();
             }
         });

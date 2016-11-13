@@ -12,6 +12,10 @@ body {
     margin-top: 70px;
 }
 
+.alert {
+    display: none;
+}
+
 .gg-time-counter {
     position: fixed;
     top: 0;
@@ -113,6 +117,10 @@ body {
 @media (min-width: 768px) {
     body {
         margin-top: 115px;
+    }
+
+    .alert {
+        width: 60%;
     }
 
     .gg-time-counter {
