@@ -18,9 +18,9 @@ var plugins = require('gulp-load-plugins')();
 var clientPort = '8000';
 
 /**
- * Start server.
+ * Run server.
  */
-gulp.task('start', function () {
+gulp.task('server', function () {
     plugins.connect.server({
         root: ['./client'],
         port: clientPort
@@ -28,7 +28,7 @@ gulp.task('start', function () {
 });
 
 /**
- * Run e2e tests (start server first).
+ * Run e2e tests (run server first).
  */
 gulp.task('e2e',function (done) {
     return gulp
