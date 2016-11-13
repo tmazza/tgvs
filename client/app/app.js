@@ -16,14 +16,24 @@
             tempDom;
 
         /* Helper functions */
+        var toggleSearchWarning = function (state) {
+            if (state === 'show') {
+                searchWarning.style.display = 'block';
+            }
+            else if (state === 'hide') {
+                searchWarning.style.display = 'none';
+            }
+        }
+
         var searchTv = function (tvName) {
             tmdb.searchTv(tvName, function (response) {
                 resultList.removeAll();
                 if (response.results.length > 0) {
+                    toggleSearchWarning('hide');
                     resultList.insertAll(response.results, watchedList.getList());
                 }
                 else {
-                    searchWarning.style.display = 'block';
+                    toggleSearchWarning('show');
                 }
             });
         };
@@ -70,7 +80,7 @@
 
         tvInput.addEventListener('keyup', function () {
             if (tvInput.value === '') {
-                searchWarning.style.display = 'none';
+                toggleSearchWarning('hide');
                 resultList.removeAll();
             }
         });
