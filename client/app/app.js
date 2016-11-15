@@ -13,6 +13,8 @@
             rankedList = new TvList('ranked-list'),
             rankedListAddButton = document.getElementById('ranked-list-add-button'),
             rankedListPage = 1,
+            rankedListTitle = document.getElementById('ranked-list-title').childNodes[0],
+            langOpts = document.getElementsByClassName('gg-lang-opt'),
             tempDom;
 
         /* Helper functions */
@@ -60,8 +62,18 @@
             }
         };
 
+        var renderText = function (lang) {
+            timeCounter.renderText(lang);
+            searchButton.textContent = settings.LANG.SEARCH_BUTTON[lang];
+            rankedListTitle.nodeValue = settings.LANG.RANKED_LIST_TITLE[lang];
+            rankedListAddButton.textContent = settings.LANG.RANKED_LIST_ADD_BUTTON[lang];
+            modal.renderText(lang);
+            searchWarning.textContent = settings.LANG.NO_RESULT_ERROR[lang];
+        };
+
         /* Initializations */
         tvInput.focus();
+        renderText('EN');
         searchTvList('top_rated', rankedListPage);
 
         /* Events */
@@ -70,6 +82,12 @@
                 modal.hide();
             }
         });
+
+        for (var i = 0; i < langOpts.length; i++) {
+            langOpts[i].addEventListener('click', function (event) {
+                renderText(event.target.getAttribute('lang-opt'));
+            });
+        }
 
         tvInput.addEventListener('keypress', function (event) {
             var key = event.which || event.keyCode;

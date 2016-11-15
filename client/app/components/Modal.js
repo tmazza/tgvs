@@ -1,6 +1,7 @@
 var Modal = function (domId) {
     this._dom = document.getElementById(domId);
-    this._select = document.getElementById('seasons-watched');
+    this._label = document.querySelector('#' + domId + ' label');
+    this._select = document.querySelector('#' + domId + ' #seasons-watched');
     this._addButton = document.querySelector('#' + domId + ' #add-button');
     this._tvId = '';
     this._seasons = {};
@@ -35,6 +36,10 @@ Modal.prototype = {
             }
             return totalMins;
         }
+    },
+
+    renderText: function (lang) {
+        this._label.childNodes[0].nodeValue = settings.LANG.MODAL_TEXT[lang];
     },
 
     _setPropsFromResponse: function (response) {

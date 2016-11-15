@@ -1,15 +1,24 @@
-$bottom-space: 15px;
+$space: 15px;
+$search-container-width: 800px;
 $img-width-s: 70px;
 $img-height-s: 105px;
 $img-width-g: 342px;
 $img-height-g: 513px;
 
-button:focus, button:active {
-    outline: none !important;
-}
-
 body {
     margin-top: 70px;
+}
+
+#app button {
+    border-radius: 0;
+}
+
+#app button:focus, button:active {
+    outline: none;
+}
+
+#app input {
+    border-radius: 0;
 }
 
 .alert {
@@ -23,7 +32,7 @@ body {
     z-index: 999;
     font-size: 22px;
     text-align: center;
-    padding: $bottom-space 0;
+    padding: $space 0;
     background-color: white;
     border-bottom: 1px solid #e7e7e7;
 }
@@ -31,7 +40,6 @@ body {
 .gg-tv-list {
     padding: 0;
     margin: 0;
-    margin-bottom: $bottom-space;
     list-style-type: none;
     text-align: center;
 
@@ -42,6 +50,8 @@ body {
 
 .gg-watched-list {
     @extend .gg-tv-list;
+
+    margin: $space 0;
 
     img {
         width: $img-width-s;
@@ -57,7 +67,7 @@ body {
     @extend .gg-tv-list;
 
     li {
-        margin-bottom: $bottom-space;
+        margin-bottom: 10px;
 
         img {
             display: block;
@@ -67,15 +77,16 @@ body {
 }
 
 .gg-search-form {
+    display: flex;
     text-align: center;
-    margin-bottom: $bottom-space;
+    margin-bottom: $space;
 
     input, button {
         display: inline-block;
     }
 
     input {
-        max-width: 65%;
+        flex: 2;
     }
 }
 
@@ -101,17 +112,20 @@ body {
         background-color: #fefefe;
         margin: 15% auto;
         padding: 20px;
-        border: 1px solid #888;
         width: 80%;
 
-        button, label {
+        label, button {
             width: 100%;
         }
     }
 }
 
+#ranked-list-title {
+    margin: $space 0;
+}
+
 #ranked-list-add-button {
-    margin-bottom: $bottom-space * 2;
+    margin: $space*2 0;
 }
 
 @media (min-width: 768px) {
@@ -120,7 +134,11 @@ body {
     }
 
     .alert {
-        width: 60%;
+        max-width: $search-container-width;
+    }
+
+    .gg-lang-opt {
+        cursor: pointer;
     }
 
     .gg-time-counter {
@@ -141,9 +159,7 @@ body {
     }
 
     .gg-search-form {
-        input {
-            max-width: 40%;
-        }
+        max-width: $search-container-width;
     }
 
     .gg-modal {
