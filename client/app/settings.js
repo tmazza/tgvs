@@ -25,7 +25,7 @@ var settings = (function () {
         NO_RESULT_ERROR: {
             CN: '未能搜索到匹配结果 : (',
             EN: 'No result found : (',
-            PT: 'Não foi encontrado nenhum resultado : ('
+            PT: 'Nenhum resultado encontrado : ('
         },
         RANKED_LIST_TITLE: {
             CN: '排行榜',

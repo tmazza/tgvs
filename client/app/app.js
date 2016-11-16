@@ -3,18 +3,20 @@
 (function () {
 
     w3IncludeHTML(function () {
-        var tvInput = document.getElementById('tv-input'),
-            searchButton = document.getElementById('search-button'),
-            searchWarning = document.getElementById('search-warning'),
-            timeCounter = new TimeCounter('time-counter'),
-            modal = new Modal('tv-modal'),
-            resultList = new TvList('result-list'),
+        /* Elements with event listeners */
+        var resultList = new TvList('result-list'),
             watchedList = new TvList('watched-list'),
             rankedList = new TvList('ranked-list'),
+            modal = new Modal('tv-modal'),
+            tvInput = document.getElementById('tv-input'),
+            searchButton = document.getElementById('search-button'),
             rankedListAddButton = document.getElementById('ranked-list-add-button'),
-            rankedListPage = 1,
+            langOpts = document.getElementsByClassName('gg-lang-opt');
+
+        var timeCounter = new TimeCounter('time-counter'),
+            searchWarning = document.getElementById('search-warning'),
             rankedListTitle = document.getElementById('ranked-list-title').childNodes[0],
-            langOpts = document.getElementsByClassName('gg-lang-opt'),
+            rankedListPage = 1,
             tempDom;
 
         /* Helper functions */
@@ -126,6 +128,9 @@
 
         rankedListAddButton.addEventListener('click', function () {
             searchTvList('top_rated', ++rankedListPage);
+            if (rankedListPage === 30) {
+                rankedListAddButton.style.display = 'none';
+            }
         });
 
         watchedList.getDom().addEventListener('click', function (event) {
