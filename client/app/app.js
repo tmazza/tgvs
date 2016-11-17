@@ -79,12 +79,6 @@
         searchTvList('top_rated', rankedListPage);
 
         /* Events */
-        window.addEventListener('click', function (event) {
-            if (event.target === modal.getDom()) {
-                modal.hide();
-            }
-        });
-
         for (var i = 0; i < langOpts.length; i++) {
             langOpts[i].addEventListener('click', function (event) {
                 renderText(event.target.getAttribute('lang-opt'));
@@ -107,6 +101,12 @@
 
         searchButton.addEventListener('click', function () {
             searchTv(tvInput.value);
+        });
+
+        modal.getDom().addEventListener('click', function (event) {
+            if (event.target.getAttribute('class') === 'gg-modal') {
+                modal.hide();
+            }
         });
 
         modal.getAddButton().addEventListener('click', function () {
