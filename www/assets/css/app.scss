@@ -1,0 +1,9 @@
+#app {
+    * { outline: none; }
+
+    #login, #signup {
+        form { max-width: 400px; }
+
+        button { margin-top: 30px; }
+    }
+}

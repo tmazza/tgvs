@@ -1,45 +1,32 @@
 var paths = {
     'src': {
-        'js': './client/app/**/*.js',
-        'sass': './client/content/sass/**/!(_)*.scss'
+        'js': [
+            './www/app/**/*.module.js',
+            './www/app/**/!(*.unit).js'
+        ],
+        'css': [
+            './www/assets/css/**/app.scss'
+        ]
     },
-    'dest': {
-        'js': './client/assets/js/',
-        'css': './client/assets/css/'
-    },
-    'test': {
-        'e2e': './client/tests/e2e/**/*.js'
+    'dst': {
+        'js': './www/assets/js/',
+        'css': './www/assets/css/'
     }
 };
 
+var PORT = '8001';
+
 var gulp = require('gulp');
 var plugins = require('gulp-load-plugins')();
-
-var clientPort = '8000';
 
 /**
  * Run server.
  */
 gulp.task('server', function () {
     plugins.connect.server({
-        root: ['./client'],
-        port: clientPort
+        root: ['./www'],
+        port: PORT
     });
-});
-
-/**
- * Run e2e tests (run server first).
- */
-gulp.task('e2e',function (done) {
-    return gulp
-        .src(paths.test.e2e)
-        .pipe(plugins.protractor.protractor({
-            configFile: 'protractor.conf.js',
-            args: ['--baseUrl', 'http://localhost:' + clientPort]
-        }))
-        .on('error', function (e) {
-            console.log(e);
-        });
 });
 
 /**
@@ -56,9 +43,13 @@ gulp.task('js', function () {
         .pipe(plugins.plumber())
         .pipe(plugins.sourcemaps.init())
         .pipe(plugins.concat('app.min.js'))
+        .pipe(plugins.ngAnnotate({
+            add: true,
+            single_quotes: true
+        }))
         .pipe(plugins.uglify())
         .pipe(plugins.sourcemaps.write('./'))
-        .pipe(gulp.dest(paths.dest.js));
+        .pipe(gulp.dest(paths.dst.js));
 });
 
 /**
@@ -66,14 +57,14 @@ gulp.task('js', function () {
  */
 gulp.task('css', function () {
     return gulp
-        .src(paths.src.sass)
+        .src(paths.src.css)
         .pipe(plugins.plumber())
         .pipe(plugins.sourcemaps.init())
         .pipe(plugins.concat('app.min.css'))
         .pipe(plugins.sass().on('error', plugins.sass.logError))
         .pipe(plugins.cleanCss())
         .pipe(plugins.sourcemaps.write('./'))
-        .pipe(gulp.dest(paths.dest.css));
+        .pipe(gulp.dest(paths.dst.css));
 });
 
 /**
@@ -81,13 +72,13 @@ gulp.task('css', function () {
  */
 gulp.task('watch', function () {
     var js = paths.src.js;
-    var sass = paths.src.sass;
+    var css = paths.src.css;
 
     plugins.watch(js, function () {
         gulp.start('js');
     });
 
-    plugins.watch(sass, function () {
+    plugins.watch(css, function () {
         gulp.start('css');
     });
 });

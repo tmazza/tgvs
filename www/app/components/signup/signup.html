@@ -1,0 +1,38 @@
+<div id="signup">
+    <form ng-submit="vm.signup()" class="center-block">
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" name="email" class="form-control" ng-model="vm.formData.email">
+        </div>
+
+        <div class="form-group">
+            <label for="gender">Gender:</label>
+            <select name="gender" class="form-control" ng-model="vm.formData.gender">
+                <option value="">Undefined</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="nickname">Nickname:</label>
+            <input type="text" name="nickname" class="form-control" ng-model="vm.formData.nickname">
+        </div>
+
+        <div class="form-group">
+            <label for="password1">Password:</label>
+            <input type="password" name="password1" class="form-control" ng-model="vm.formData.password1">
+        </div>
+
+        <div class="form-group">
+            <label for="password2">Password (confirm):</label>
+            <input type="password" name="password2" class="form-control" ng-model="vm.formData.password2">
+        </div>
+
+        <div ng-show="vm.errors" class="alert alert-danger" role="alert">
+            Error
+        </div>
+
+        <button type="submit" class="btn btn-success btn-block">Sign Up</button>
+    </form>
+</div>

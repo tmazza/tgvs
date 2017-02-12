@@ -1,0 +1,19 @@
+<div id="login">
+    <form ng-submit="vm.login()" class="center-block">
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" name="email" class="form-control" ng-model="vm.formData.email">
+        </div>
+
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" name="password" class="form-control" ng-model="vm.formData.password">
+        </div>
+
+        <div ng-show="vm.errors" class="alert alert-danger" role="alert">
+            Error
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block">Log In</button>
+    </form>
+</div>

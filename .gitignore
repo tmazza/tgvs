@@ -1,9 +1,8 @@
-# Sublime
+# sublime
 *.sublime-project
 *.sublime-workspace
 
-# Project
-assets
+www/assets/**/*.min.*
 node_modules
 
 .DS_Store
