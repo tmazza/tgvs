@@ -10,7 +10,7 @@
             restrict: 'E',
             templateUrl: 'app/directives/ggHeader/ggHeader.html',
             controller: 'GgHeaderController',
-            controllerAs: 'vm',
+            controllerAs: 'vm'
         };
         return directive;
     }

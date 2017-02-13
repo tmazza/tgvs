@@ -6,7 +6,7 @@
         .controller('SignupController', SignupController);
 
     /* @ngInject */
-    function SignupController($scope, $location, auth) {
+    function SignupController($scope, $location, auth, user) {
         var vm = this;
         vm.formData = {};
         vm.errors = false;
@@ -15,11 +15,9 @@
         activate();
 
         function activate() {
-            auth.isAuthenticated().then(function (res) {
-                if (res.data.is_authenticated) {
-                    $location.url('/');
-                }
-            });
+            if (user.isAuthenticated) {
+                $location.url('/');
+            }
         }
 
         function signup() {

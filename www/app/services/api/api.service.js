@@ -10,7 +10,8 @@
         var service = {
             get: get,
             post: post,
-            patch: patch
+            patch: patch,
+            delete: del
         };
         return service;
 
@@ -28,6 +29,10 @@
 
         function patch(data, url) {
             return requestWithCsrftoken('PATCH', data, url);
+        }
+
+        function del(data, url) {
+            return requestWithCsrftoken('DELETE', data, url);
         }
 
         function requestWithCsrftoken(method, data, url) {

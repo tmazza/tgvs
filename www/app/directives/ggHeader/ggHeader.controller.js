@@ -9,25 +9,27 @@
     function GgHeaderController($scope, $location, auth, user) {
         var vm = this;
         vm.user = user;
-        vm.isAuthenticated = false;
+        vm.inTopRated = false;
+        vm.inSearch = false;
         vm.logout = logout;
 
         activate();
 
         function activate() {
-            auth.isAuthenticated().then(function (res) {
-                vm.isAuthenticated = res.data.is_authenticated;
-                if (vm.isAuthenticated) {
-                    user.getAll();
-                }
+            $scope.$on('IN_TOP_RATED', function () {
+                vm.inTopRated = true;
             });
 
-            $scope.$on('LOGGED_IN', function () {
-                vm.isAuthenticated = true;
+            $scope.$on('IN_SEARCH', function () {
+                vm.inSearch = true;
             });
 
-            $scope.$on('LOGGED_OUT', function () {
-                vm.isAuthenticated = false;
+            $scope.$on('LEAVE_TOP_RATED', function () {
+                vm.inTopRated = false;
+            });
+
+            $scope.$on('LEAVE_SEARCH', function () {
+                vm.inSearch = false;
             });
         }
 

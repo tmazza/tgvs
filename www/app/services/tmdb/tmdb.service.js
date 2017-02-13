@@ -8,13 +8,13 @@
     /* @ngInject */
     function tmdb(TMDB_API_KEY, TMDB_API_URL, TMDB_LAN, $http, $httpParamSerializer) {
         var service = {
-            getTopRatedListByPage: getTopRatedListByPage,
+            getTopRatedList: getTopRatedList,
             searchByName: searchByName,
             getTvDetailsById: getTvDetailsById
         };
         return service
 
-        function getTopRatedListByPage(page) {
+        function getTopRatedList(page) {
             return $http({
                 method: 'GET',
                 url: TMDB_API_URL + '/tv/top_rated?' + createQueryString({
