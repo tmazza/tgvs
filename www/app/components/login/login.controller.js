@@ -6,19 +6,11 @@
         .controller('LoginController', LoginController);
 
     /* @ngInject */
-    function LoginController($scope, $location, auth, user) {
+    function LoginController($scope, $location, auth) {
         var vm = this;
         vm.formData = {};
         vm.errors = false;
         vm.login = login;
-
-        activate();
-
-        function activate() {
-            if (user.isAuthenticated) {
-                $location.url('/');
-            }
-        }
 
         function login() {
             vm.errors = false;

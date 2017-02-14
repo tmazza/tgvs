@@ -10,7 +10,8 @@
         var service = {
             getTopRatedList: getTopRatedList,
             searchByName: searchByName,
-            getTvDetailsById: getTvDetailsById
+            getTvDetailsById: getTvDetailsById,
+            getMinutesFromRes: getMinutesFromRes
         };
         return service
 
@@ -39,6 +40,12 @@
                 method: 'GET',
                 url: TMDB_API_URL + '/tv/' + id + '?' + createQueryString()
             });
+        }
+
+        function getMinutesFromRes(res) {
+            var ep_minutes = Math.max.apply(null, res.data.episode_run_time);
+            var total_eps = res.data.number_of_episodes;
+            return ep_minutes * total_eps;
         }
 
         function createQueryString(param) {

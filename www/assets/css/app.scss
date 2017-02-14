@@ -3,17 +3,23 @@
 
     * { outline: none; }
 
+    .gg-list {
+        max-width: 500px;
+
+        li { cursor: pointer; }
+    }
+
     #login, #signup {
         form { max-width: 500px; }
 
         button { margin-top: 30px; }
     }
 
-    #top-rated-list {
-        max-width: 500px;
-
-        li { cursor: pointer; }
-    }
-
     #top-rated-btn { margin-bottom: 20px; }
+}
+
+@media (min-width: 1200px) {
+    .container{
+        max-width: 1010px;
+    }
 }

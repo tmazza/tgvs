@@ -9,7 +9,17 @@
     function config($routeProvider) {
         $routeProvider.when('/login', {
             templateUrl: 'app/components/login/login.html',
-            controller: 'LoginController as vm'
+            controller: 'LoginController as vm',
+            resolve: {
+                /* @ngInject */
+                authenticate: function ($location, auth) {
+                    auth.isAuthenticated().then(function (res) {
+                        if (res.data.is_authenticated) {
+                            $location.url('/');
+                        }
+                    });
+                }
+            }
         });
     }
 

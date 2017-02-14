@@ -6,9 +6,9 @@
         .factory('user', user);
 
     /* @ngInject */
-    function user($rootScope, auth, api) {
+    function user($rootScope, auth, api, tmdb) {
         var service = {
-            isAuthenticated: false,
+            isAuthenticated: undefined,
             profile: {},
             cards: [],
             indexOfCard: indexOfCard,
@@ -23,7 +23,9 @@
         function activate() {
             auth.isAuthenticated().then(function (res) {
                 service.isAuthenticated = res.data.is_authenticated;
-                loggedIn();
+                if (service.isAuthenticated) {
+                    loggedIn();
+                }
             });
             $rootScope.$on('LOGGED_IN', loggedIn);
             $rootScope.$on('LOGGED_OUT', loggedOut);
@@ -49,6 +51,7 @@
         function getCards() {
             api.get('/cards').then(function (res) {
                 service.cards = res.data.cards;
+                $rootScope.$broadcast('CARDS_READY');
             });
         }
 
@@ -62,14 +65,19 @@
         }
 
         function addCard(card) {
-            service.cards.push(card);
-            if (service.isAuthenticated) {
-                return api.post(card, '/cards');
-            }
+            tmdb.getTvDetailsById(card.id).then(function (res) {
+                card.minutes = tmdb.getMinutesFromRes(res);
+                service.cards.push(card);
+                $rootScope.$broadcast('UPDATE_CLOCK', card.minutes);
+                if (service.isAuthenticated) {
+                    return api.post(card, '/cards');
+                }
+            });
         }
 
         function removeCard(card) {
             service.cards.splice(indexOfCard(card.id), 1);
+            $rootScope.$broadcast('UPDATE_CLOCK', -card.minutes);
             if (service.isAuthenticated) {
                 return api.delete({id: card.id}, '/cards');
             }

@@ -6,7 +6,7 @@
         .controller('GgHeaderController', GgHeaderController);
 
     /* @ngInject */
-    function GgHeaderController($scope, $location, auth, user) {
+    function GgHeaderController($rootScope, $scope, $location, auth, user) {
         var vm = this;
         vm.user = user;
         vm.inTopRated = false;
@@ -35,7 +35,7 @@
 
         function logout() {
             auth.logout().then(function () {
-                $scope.$broadcast('LOGGED_OUT');
+                $rootScope.$broadcast('LOGGED_OUT');
                 $location.url('/');
             });
         }

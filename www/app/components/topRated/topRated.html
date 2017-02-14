@@ -1,5 +1,7 @@
-<ul id="top-rated-list" class="list-group center-block">
-    <gg-card ng-repeat="card in vm.cards" card="card"></gg-card>
+<gg-clock></gg-clock>
+
+<ul class="list-group center-block gg-list">
+    <gg-card ng-repeat="card in vm.cards" card="card" show-mark="true"></gg-card>
 </ul>
 
 <button id="top-rated-btn" ng-click="vm.get()" type="button" class="btn btn-default center-block">

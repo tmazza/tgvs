@@ -12,7 +12,8 @@
             replace: true,
             templateUrl: 'app/directives/ggCard/ggCard.html',
             scope: {
-                card: '='
+                card: '=',
+                showMark: '='
             },
             link: link
         };
