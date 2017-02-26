@@ -9,6 +9,13 @@
         li { cursor: pointer; }
     }
 
+    .gg-clock {
+        max-width: 500px;
+        margin: 0 auto 20px;
+        text-align: center;
+        font-size: 26px;
+    }
+
     #login, #signup {
         form { max-width: 500px; }
 

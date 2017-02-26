@@ -6,7 +6,8 @@
         .factory('tmdb', tmdb);
 
     /* @ngInject */
-    function tmdb(TMDB_API_KEY, TMDB_API_URL, TMDB_LAN, $http, $httpParamSerializer) {
+    function tmdb(DEFAULT_EP_RUN_TIME, TMDB_API_KEY, TMDB_API_URL, TMDB_LAN,
+                  $http, $httpParamSerializer) {
         var service = {
             getTopRatedList: getTopRatedList,
             searchByName: searchByName,
@@ -46,7 +47,9 @@
         }
 
         function getMinutesFromRes(res) {
-            var ep_minutes = Math.max.apply(null, res.data.episode_run_time);
+            var ep_minutes = res.data.episode_run_time.length > 0 ?
+                                 Math.max.apply(null, res.data.episode_run_time) :
+                                 DEFAULT_EP_RUN_TIME;
             var total_eps = res.data.number_of_episodes;
             return ep_minutes * total_eps;
         }

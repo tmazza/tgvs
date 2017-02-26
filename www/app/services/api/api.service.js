@@ -31,7 +31,10 @@
         }
 
         function del(data, url) {
-            return requestWithData('DELETE', data, url);
+            return $http({
+                method: 'DELETE',
+                url: env.apiEp() + url + data
+            });
         }
 
         function requestWithData(method, data, url) {

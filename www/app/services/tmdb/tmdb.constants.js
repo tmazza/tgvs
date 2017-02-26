@@ -4,6 +4,7 @@
 
     angular
         .module('tgvs')
+        .constant('DEFAULT_EP_RUN_TIME', 45)
         .constant('TMDB_LAN', 'en-US')
         .constant('TMDB_API_KEY', 'cc520153f9a9b1a497c9a854cb7b3200')
         .constant('TMDB_API_URL', 'https://api.themoviedb.org/3')

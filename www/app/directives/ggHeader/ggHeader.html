@@ -15,6 +15,7 @@
             <ul class="nav navbar-nav">
                 <li ng-class="{active: vm.tabs.topRated}"><a href="/">Top Rated</a></li>
                 <li ng-class="{active: vm.tabs.search}"><a href="#search">Search</a></li>
+                <li ng-class="{active: vm.tabs.myList}"><a href="#my_list">My List</a></li>
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
@@ -27,7 +28,6 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li><a href="#profile">Profile</a></li>
-                        <li><a href="#my_list">My List</a></li>
                         <li role="separator" class="divider"></li>
                         <li ng-click="vm.logout()"><a href="">Logout</a></li>
                     </ul>

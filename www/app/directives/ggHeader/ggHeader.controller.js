@@ -16,7 +16,9 @@
         activate();
 
         function activate() {
-            user.get();
+            if (auth.isAuthenticated()) {
+                user.get();
+            }
         }
 
         function logout() {

@@ -6,10 +6,11 @@
         .controller('TopRatedController', TopRatedController);
 
     /* @ngInject */
-    function TopRatedController($scope, tabs, tmdb) {
+    function TopRatedController($scope, clock, tabs, tmdb) {
         var page = 1;
 
         var vm = this;
+        vm.clock = clock;
         vm.cards = [];
         vm.get = get;
 

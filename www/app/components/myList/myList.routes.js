@@ -12,8 +12,8 @@
             controller: 'MyListController as vm',
             resolve: {
                 /* @ngInject */
-                authenticate: function (routing) {
-                    routing.redirectIfNotAuthenticated('/');
+                tab: function (tabs) {
+                    tabs.activate('myList');
                 }
             }
         });

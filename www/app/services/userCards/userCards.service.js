@@ -19,6 +19,9 @@
         return service;
 
         function activate() {
+            if (auth.isAuthenticated()) {
+                get();
+            }
             $rootScope.$on('LOGGED_IN', get);
             $rootScope.$on('LOGGED_OUT', clear);
         }
@@ -26,8 +29,9 @@
         function get() {
             api.get('/cards').then(success);
 
-            function  success(res) {
+            function success(res) {
                 service.data = res.data;
+                $rootScope.$broadcast('CARDS_UPDATED');
             }
         }
 
@@ -59,7 +63,7 @@
 
             /* Update api data. */
             if (auth.isAuthenticated()) {
-                return api.delete({id: card.id}, '/cards');
+                return api.delete(card.id, '/cards/');
             }
         }
 

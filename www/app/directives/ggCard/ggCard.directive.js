@@ -23,8 +23,18 @@
             init();
 
             function init() {
-                scope.card.marked = marked();
+                setMark();
                 element.on('click', update);
+                scope.$on('CARDS_UPDATED', function () {
+                    scope.$apply(setMark);
+                });
+                scope.$on('LOGGED_OUT', function () {
+                    scope.card.marked = false;
+                });
+            }
+
+            function setMark() {
+                scope.card.marked = marked();
             }
 
             function marked() {
@@ -32,15 +42,15 @@
             }
 
             function update() {
-                scope.$apply(function () {
-                    toggleMark();
-                });
-
                 if (scope.card.marked) {
                     userCards.remove(scope.card);
                 } else {
                     userCards.add(scope.card);
                 }
+
+                scope.$apply(function () {
+                    toggleMark();
+                });
             }
 
             function toggleMark() {

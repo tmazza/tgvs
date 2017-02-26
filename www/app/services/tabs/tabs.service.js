@@ -9,7 +9,8 @@
         var service = {
             data: {
                 topRated: false,
-                search: false
+                search: false,
+                myList: false
             },
             activate: activate,
             deactivate: deactivate
