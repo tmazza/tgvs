@@ -6,7 +6,7 @@
         .directive('ggCard', ggCard);
 
     /* @ngInject */
-    function ggCard(user) {
+    function ggCard(userCards) {
         var directive = {
             restrict: 'E',
             replace: true,
@@ -23,36 +23,28 @@
             init();
 
             function init() {
-                scope.card.marked = mark();
+                scope.card.marked = marked();
                 element.on('click', update);
             }
 
-            function mark() {
-                return user.indexOfCard(scope.card.id) > -1;
+            function marked() {
+                return userCards.has(scope.card.id);
+            }
+
+            function update() {
+                scope.$apply(function () {
+                    toggleMark();
+                });
+
+                if (scope.card.marked) {
+                    userCards.remove(scope.card);
+                } else {
+                    userCards.add(scope.card);
+                }
             }
 
             function toggleMark() {
                 scope.card.marked = !scope.card.marked;
-            }
-
-            function update() {
-                var promise;
-
-                if (scope.card.marked) {
-                    promise = user.removeCard(scope.card);
-                } else {
-                    promise = user.addCard(scope.card);
-                }
-
-                if (promise) {
-                    promise.then(function () {
-                        toggleMark();
-                    });
-                } else {
-                    scope.$apply(function () {
-                        toggleMark();
-                    });
-                }
             }
         }
     }

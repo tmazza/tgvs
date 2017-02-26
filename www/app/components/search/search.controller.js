@@ -6,16 +6,17 @@
         .controller('SearchController', SearchController);
 
     /* @ngInject */
-    function SearchController($scope) {
+    function SearchController($scope, tabs) {
         var vm = this;
 
         activate();
 
         function activate() {
-            $scope.$emit('IN_SEARCH');
-            $scope.$on('$destroy', function () {
-                $scope.$emit('LEAVE_SEARCH');
-            });
+            $scope.$on('$destroy', deactivateTab);
+        }
+
+        function deactivateTab() {
+            tabs.deactivate('search');
         }
     }
 

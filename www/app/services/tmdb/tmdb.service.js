@@ -21,7 +21,8 @@
                 url: TMDB_API_URL + '/tv/top_rated?' + createQueryString({
                     name: 'page',
                     value: page
-                })
+                }),
+                skipAuthorization: true
             });
         }
 
@@ -31,14 +32,16 @@
                 url: TMDB_API_URL + '/search/tv?' + createQueryString({
                     name: 'query',
                     value: query
-                })
+                }),
+                skipAuthorization: true
             });
         }
 
         function getTvDetailsById(id) {
             return $http({
                 method: 'GET',
-                url: TMDB_API_URL + '/tv/' + id + '?' + createQueryString()
+                url: TMDB_API_URL + '/tv/' + id + '?' + createQueryString(),
+                skipAuthorization: true
             });
         }
 

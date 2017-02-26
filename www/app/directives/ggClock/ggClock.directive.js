@@ -25,9 +25,9 @@
             }
 
             function get() {
-                for (var i = 0; i < user.cards.length; i++) {
-                    update(null, user.cards[i].minutes);
-                }
+                // for (var i = 0; i < user.cards.length; i++) {
+                //     update(null, user.cards[i].minutes);
+                // }
             }
 
             function update(event, minutes) {

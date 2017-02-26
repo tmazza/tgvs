@@ -9,7 +9,13 @@
     function config($routeProvider) {
         $routeProvider.when('/', {
             templateUrl: 'app/components/topRated/topRated.html',
-            controller: 'TopRatedController as vm'
+            controller: 'TopRatedController as vm',
+            resolve: {
+                /* @ngInject */
+                tab: function (tabs) {
+                    tabs.activate('topRated');
+                }
+            }
         });
     }
 
