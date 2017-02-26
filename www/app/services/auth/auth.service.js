@@ -6,29 +6,26 @@
         .factory('auth', auth);
 
     /* @ngInject */
-    function auth(api) {
+    function auth($rootScope, $auth) {
         var service = {
             isAuthenticated: isAuthenticated,
             login: login,
-            logout: logout,
-            signup: signup
+            logout: logout
         };
         return service;
 
-        function login(data) {
-            return api.post(data, '/accounts/login');
+        function isAuthenticated() {
+            return $auth.isAuthenticated();
         }
 
-        function isAuthenticated() {
-            return api.get('/accounts/is_authenticated');
+        function login(token) {
+            $auth.setToken(token);
+            $rootScope.$broadcast('LOGGED_IN');
         }
 
         function logout() {
-            return api.post({}, '/accounts/logout');
-        }
-
-        function signup(data) {
-            return api.post(data, '/accounts/signup');
+            $auth.logout();
+            $rootScope.$broadcast('LOGGED_OUT');
         }
     }
 

@@ -6,9 +6,9 @@
         .controller('MyListController', MyListController);
 
     /* @ngInject */
-    function MyListController(user) {
+    function MyListController(userCards) {
         var vm = this;
-        vm.user = user;
+        vm.cards = userCards.data;
     }
 
 })();

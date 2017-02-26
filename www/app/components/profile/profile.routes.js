@@ -12,12 +12,8 @@
             controller: 'ProfileController as vm',
             resolve: {
                 /* @ngInject */
-                authenticate: function ($location, auth) {
-                    auth.isAuthenticated().then(function (res) {
-                        if (!res.data.is_authenticated) {
-                            $location.url('/');
-                        }
-                    });
+                authenticate: function (routing) {
+                    routing.redirectIfNotAuthenticated('/');
                 }
             }
         });

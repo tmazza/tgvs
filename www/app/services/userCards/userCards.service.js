@@ -3,13 +3,12 @@
 
     angular
         .module('tgvs')
-        .factory('user', user);
+        .factory('userCards', userCards);
 
     /* @ngInject */
-    function user($rootScope, api) {
+    function userCards($rootScope, api) {
         var service = {
-            data: {},
-            get: get
+            data: []
         };
 
         activate();
@@ -23,15 +22,15 @@
         }
 
         function get() {
-            api.get('/accounts/profile').then(success);
+            api.get('/cards').then(success);
 
-            function success(res) {
+            function  success(res) {
                 service.data = res.data;
             }
         }
 
         function clear() {
-            service.data = {};
+            service.data = [];
         }
     }
 

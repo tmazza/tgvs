@@ -6,7 +6,7 @@
         .controller('LoginController', LoginController);
 
     /* @ngInject */
-    function LoginController($scope, $location, auth) {
+    function LoginController($location, api, auth) {
         var vm = this;
         vm.formData = {};
         vm.errors = false;
@@ -14,12 +14,17 @@
 
         function login() {
             vm.errors = false;
-            auth.login(vm.formData).then(function (res) {
-                $scope.$emit('LOGGED_IN');
+
+            api.post(vm.formData, '/accounts/login').then(success).catch(fail);
+
+            function success(res) {
+                auth.login(res.data.token);
                 $location.url('/');
-            }).catch(function (res) {
+            }
+
+            function fail(res) {
                 vm.errors = res.data;
-            });
+            }
         }
     }
 

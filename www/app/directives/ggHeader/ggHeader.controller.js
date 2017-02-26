@@ -6,8 +6,9 @@
         .controller('GgHeaderController', GgHeaderController);
 
     /* @ngInject */
-    function GgHeaderController($rootScope, $scope, $location, auth, user) {
+    function GgHeaderController($scope, auth, user) {
         var vm = this;
+        vm.isAuthenticated = auth.isAuthenticated;
         vm.user = user;
         vm.inTopRated = false;
         vm.inSearch = false;
@@ -16,6 +17,8 @@
         activate();
 
         function activate() {
+            user.get();
+
             $scope.$on('IN_TOP_RATED', function () {
                 vm.inTopRated = true;
             });
@@ -34,10 +37,7 @@
         }
 
         function logout() {
-            auth.logout().then(function () {
-                $rootScope.$broadcast('LOGGED_OUT');
-                $location.url('/');
-            });
+            auth.logout();
         }
     }
 

@@ -3,7 +3,7 @@
 
     angular.module('tgvs', [
         'ngRoute',
-        'ngCookies'
+        'satellizer'
     ]);
 
 })();

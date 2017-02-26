@@ -18,12 +18,12 @@
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
-                <li ng-show="!vm.user.isAuthenticated"><a href="#signup">Signup</a></li>
-                <li ng-show="!vm.user.isAuthenticated"><a href="#login">Login</a></li>
-                <li ng-show="vm.user.isAuthenticated" class="dropdown">
+                <li ng-show="!vm.isAuthenticated()"><a href="#signup">Signup</a></li>
+                <li ng-show="!vm.isAuthenticated()"><a href="#login">Login</a></li>
+                <li ng-show="vm.isAuthenticated()" class="dropdown">
                     <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button"
                        aria-haspopup="true" aria-expanded="false">
-                        {{ vm.user.profile.nickname }} <span class="caret"></span>
+                        {{ vm.user.data.nickname }} <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
                         <li><a href="#profile">Profile</a></li>

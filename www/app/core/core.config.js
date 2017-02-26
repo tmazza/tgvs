@@ -6,7 +6,8 @@
         .config(config);
 
     /* @ngInject */
-    function config($locationProvider, $routeProvider) {
+    function config($authProvider, $locationProvider, $routeProvider) {
+        $authProvider.tokenType = 'JWT';
         $locationProvider.hashPrefix('');
         $routeProvider.otherwise({redirectTo: '/'});
     }

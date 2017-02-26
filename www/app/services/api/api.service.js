@@ -6,7 +6,7 @@
         .factory('api', api);
 
     /* @ngInject */
-    function api($http, $cookies, env) {
+    function api($http, env) {
         var service = {
             get: get,
             post: post,
@@ -18,35 +18,28 @@
         function get(url) {
             return $http({
                 method: 'GET',
-                url: env.apiEp() + url,
-                withCredentials: true
+                url: env.apiEp() + url
             });
         }
 
         function post(data, url) {
-            return requestWithCsrftoken('POST', data, url);
+            return requestWithData('POST', data, url);
         }
 
         function patch(data, url) {
-            return requestWithCsrftoken('PATCH', data, url);
+            return requestWithData('PATCH', data, url);
         }
 
         function del(data, url) {
-            return requestWithCsrftoken('DELETE', data, url);
+            return requestWithData('DELETE', data, url);
         }
 
-        function requestWithCsrftoken(method, data, url) {
+        function requestWithData(method, data, url) {
             return $http({
                 method: method,
                 url: env.apiEp() + url,
-                data: data,
-                headers: {'X-CSRFToken': getCsrftoken()},
-                withCredentials: true
+                data: data
             });
-        }
-
-        function getCsrftoken() {
-            return $cookies.get('csrftoken');
         }
     }
 
